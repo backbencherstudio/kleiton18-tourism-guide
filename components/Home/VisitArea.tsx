@@ -1,0 +1,140 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import HeadingTwo from "../reusable/HeadingTwo";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const VisitArea = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const url = "/area.json";
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url, { signal: controller.signal });
+        const result = await response.json();
+        const latestVisit = result
+          .sort((a: any, b: any) => b.id - a.id)
+          .slice(0, 4);
+        setData(latestVisit);
+      } catch (error: any) {
+        if (error.name !== "AbortError") {
+          console.error("Error fetching area data:", error);
+          setData([]);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+    return () => controller.abort();
+  }, []);
+
+  return (
+    <div className="px-4 py-10 md:py-20">
+      <div className="max-w-[1320px] mx-auto flex flex-col gap-11">
+        <div className="flex items-center justify-between">
+          <HeadingTwo HeadingText={"Must Visit Area's"} />
+          <Link
+            href={"/"}
+            className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
+          >
+            Explore All <ArrowRight />
+          </Link>
+        </div>
+
+        <div className="flex flex-wrap justify-center rounded-[8px] overflow-hidden">
+          {loading ? (
+            <p>Loading areas...</p>
+          ) : (
+            data.map((area, index) => {
+              const isHovered = hoveredIndex === index;
+              const isDefault = hoveredIndex === null && index === 1;
+              const widthClass =
+                isHovered || isDefault ? "w-[420px]" : "w-[300px]";
+
+              return (
+                <div
+                  key={area.id}
+                  className={`group relative transition-all duration-300 ease-in-out bg-cover bg-center bg-no-repeat h-[400px] flex flex-col justify-end p-4 ${widthClass}`}
+                  style={{ backgroundImage: `url(${area.image_link})` }}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/50 z-0" />
+
+                  {/* Content */}
+                  <div className="relative z-10 w-full flex flex-col gap-3">
+                    {/* Location */}
+                    <div
+                      className={`flex items-center gap-2 transform transition-all duration-300 ease-in-out ${
+                        isDefault
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                      }`}
+                    >
+                      <img
+                        src="/images/icons/locationwhite.png"
+                        alt="Location"
+                      />
+                      <p className="text-white text-[14px] font-normal leading-[150%]">
+                        {area.location}
+                      </p>
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                      className={`text-white text-[24px] font-medium leading-[140%] transform transition-all duration-300 ease-in-out ${
+                        isDefault
+                          ? "translate-y-0"
+                          : "translate-y-[80px] group-hover:translate-y-0"
+                      }`}
+                    >
+                      {area.name}
+                    </h3>
+
+                    {/* Details */}
+                    <p
+                      className={`text-white text-[14px] leading-[160%] tracking-[0.5px] transform transition-all duration-300 ease-in-out ${
+                        isDefault
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                      }`}
+                    >
+                      {area.details}
+                    </p>
+
+                    {/* Actions */}
+                    <div className="flex justify-between items-center mt-2">
+                      <Link
+                        href={area.details_link}
+                        className="flex items-center gap-2 text-[16px] font-normal leading-[130%] text-white"
+                      >
+                        View Details <ArrowRight size={18} />
+                      </Link>
+                      <Link
+                        href={area.details_link}
+                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                      >
+                        <img src="/images/icons/heart.png" alt="Heart" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VisitArea;

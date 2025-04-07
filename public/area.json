@@ -3,32 +3,32 @@
       "id": 1,
       "name": "Grand Canyon",
       "location": "Arizona, USA",
-      "details": "A breathtaking natural wonder carved by the Colorado River, offering hiking, views, and photography opportunities.",
-      "image_link": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "details": "A breathtaking natural wonder carved by the Colorado River and photography.",
+      "image_link": "https://images.unsplash.com/photo-1517713982677-4b66332f98de?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "details_link": "https://example.com/visit/grand-canyon"
     },
     {
       "id": 2,
       "name": "Santorini",
       "location": "Cyclades Islands, Greece",
-      "details": "A famous island known for its whitewashed buildings, blue domes, sunset views, and cliffside towns.",
-      "image_link": "https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "details": "A famous island known for its whitewashed buildings and cliffside towns.",
+      "image_link": "https://images.unsplash.com/photo-1549877452-9c387954fbc2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "details_link": "https://example.com/visit/santorini"
     },
     {
       "id": 3,
       "name": "Kyoto Temples",
       "location": "Kyoto, Japan",
-      "details": "Explore ancient temples, traditional wooden houses, and peaceful gardens in this cultural heart of Japan.",
-      "image_link": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "details": "Explore ancient temples and peaceful gardens in this cultural heart of Japan.",
+      "image_link": "https://images.unsplash.com/photo-1714466330772-097c1f9c43cb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "details_link": "https://example.com/visit/kyoto-temples"
     },
     {
       "id": 4,
       "name": "Eiffel Tower",
       "location": "Paris, France",
-      "details": "The iconic iron tower in Paris offering panoramic views of the city and a romantic atmosphere.",
-      "image_link": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "details": "The iconic iron tower in Paris offering panoramic views of the city.",
+      "image_link": "https://images.unsplash.com/photo-1556905200-279565513a2d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "details_link": "https://example.com/visit/eiffel-tower"
     }
   ]
