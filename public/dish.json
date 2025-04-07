@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Biryani Royale",
+    "rating": 4.8,
+    "total_reviews": 412,
+    "price": "$14.99",
+    "image_link": "https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/dishes/biryani-royale",
+    "booking_link": "https://example.com/book/biryani-royale"
+  },
+  {
+    "id": 2,
+    "name": "Neapolitan Pizza",
+    "rating": 4.6,
+    "total_reviews": 329,
+    "price": "$11.50",
+    "image_link": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/dishes/neapolitan-pizza",
+    "booking_link": "https://example.com/book/neapolitan-pizza"
+  },
+  {
+    "id": 3,
+    "name": "Beef Rendang",
+    "rating": 4.7,
+    "total_reviews": 287,
+    "price": "$13.25",
+    "image_link": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/dishes/beef-rendang",
+    "booking_link": "https://example.com/book/beef-rendang"
+  }
+]

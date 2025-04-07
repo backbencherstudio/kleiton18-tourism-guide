@@ -55,7 +55,7 @@ const RestaurantListing = () => {
           <Swiper
             modules={[Navigation]}
             slidesPerView={2}
-            spaceBetween={20}
+            spaceBetween={24}
             loop={true}
             navigation={{
               prevEl: prevRef.current,
@@ -111,7 +111,7 @@ const RestaurantListing = () => {
                               {restaurant.location}
                             </p>
                           </div>
-                          <h3 className="text-[24px] leading-[140%] font-medium">
+                          <h3 className="text-[32px] leading-[140%] font-medium">
                             {restaurant.name}
                           </h3>
                         </div>

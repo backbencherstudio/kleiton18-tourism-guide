@@ -4,7 +4,7 @@ import HotelListing from "@/components/Home/HotelListing";
 import Navbar from "@/components/Home/Navbar";
 import Advice from "@/components/Home/Advice";
 import RestaurantListing from "@/components/Home/RestaurantListing";
-
+import TraditionalDish from "@/components/Home/TraditionalDish";
 export default function Home() {
   return (
     <div className="">
@@ -14,6 +14,7 @@ export default function Home() {
       <HotelListing />
       <Advice />
       <RestaurantListing />
+      <TraditionalDish />
     </div>
   );
 }
