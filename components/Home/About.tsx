@@ -1,4 +1,5 @@
 import React from 'react';
+import HeadingTwo from '../reusable/HeadingTwo';
 
 const About = () => {
     return (
@@ -10,7 +11,7 @@ const About = () => {
                             <img className='w-full h-full object-cover' src="/images/hs.png" alt="Hill place" />
                         </div>
                         <div className="w-full lg:w-[48%] flex flex-col items-center justify-start">
-                            <h2 className='text-[48px] font-medium leading-[130%] text-[#111111]'>We are always ready to discover our Albania</h2>
+                            <HeadingTwo HeadingText={'We are always ready to discover our Albania'} />
                             <p className="text-[16px] leading-[160%] tracking-[0.5px] font-normal text-[#4A4A4A]">Nestled along the breathtaking Albanian Riviera, Elysian Pearl Resort is a sanctuary of elegance and tranquility. Overlooking crystal-clear turquoise waters and surrounded by lush Mediterranean landscapes,</p>
                         </div>
                     </div>

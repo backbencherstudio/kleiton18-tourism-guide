@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": "Ocean View Resort",
+    "location": "Miami Beach, Florida",
+    "rating": 4.7,
+    "total_reviews": 248,
+    "image_link": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/ocean-view-resort",
+    "booking_link": "https://example.com/book/ocean-view-resort",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 2,
+    "name": "Mountain Escape Lodge",
+    "location": "Aspen, Colorado",
+    "rating": 4.5,
+    "total_reviews": 179,
+    "image_link": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/mountain-escape-lodge",
+    "booking_link": "https://example.com/book/mountain-escape-lodge",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 3,
+    "name": "City Central Inn",
+    "location": "New York City, New York",
+    "rating": 4.2,
+    "total_reviews": 322,
+    "image_link": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/city-central-inn",
+    "booking_link": "https://example.com/book/city-central-inn",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 4,
+    "name": "Desert Mirage Hotel",
+    "location": "Phoenix, Arizona",
+    "rating": 4.0,
+    "total_reviews": 88,
+    "image_link": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+    "details_link": "https://example.com/hotels/desert-mirage",
+    "booking_link": "https://example.com/book/desert-mirage",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 5,
+    "name": "Lakeside Serenity Hotel",
+    "location": "Lake Tahoe, California",
+    "rating": 4.6,
+    "total_reviews": 203,
+    "image_link": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/lakeside-serenity",
+    "booking_link": "https://example.com/book/lakeside-serenity",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 6,
+    "name": "Tropical Haven",
+    "location": "Honolulu, Hawaii",
+    "rating": 4.8,
+    "total_reviews": 312,
+    "image_link": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/tropical-haven",
+    "booking_link": "https://example.com/book/tropical-haven",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 7,
+    "name": "Urban Nest Suites",
+    "location": "Chicago, Illinois",
+    "rating": 4.3,
+    "total_reviews": 167,
+    "image_link": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/urban-nest",
+    "booking_link": "https://example.com/book/urban-nest",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 8,
+    "name": "Forest Retreat Hotel",
+    "location": "Portland, Oregon",
+    "rating": 4.4,
+    "total_reviews": 140,
+    "image_link": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/forest-retreat",
+    "booking_link": "https://example.com/book/forest-retreat",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 9,
+    "name": "Royal Plaza",
+    "location": "Las Vegas, Nevada",
+    "rating": 4.1,
+    "total_reviews": 289,
+    "image_link": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/royal-plaza",
+    "booking_link": "https://example.com/book/royal-plaza",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 10,
+    "name": "Snowy Peaks Inn",
+    "location": "Jackson Hole, Wyoming",
+    "rating": 4.9,
+    "total_reviews": 174,
+    "image_link": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/snowy-peaks",
+    "booking_link": "https://example.com/book/snowy-peaks",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 11,
+    "name": "Harbor Lights Hotel",
+    "location": "Seattle, Washington",
+    "rating": 4.3,
+    "total_reviews": 120,
+    "image_link": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "details_link": "https://example.com/hotels/harbor-lights",
+    "booking_link": "https://example.com/book/harbor-lights",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  },
+  {
+    "id": 12,
+    "name": "Sunset Boulevard Inn",
+    "location": "Los Angeles, California",
+    "rating": 4.0,
+    "total_reviews": 260,
+    "image_link": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+    "details_link": "https://example.com/hotels/sunset-inn",
+    "booking_link": "https://example.com/book/sunset-inn",
+    "amenities": {
+      "pool": true,
+      "free_wifi": true,
+      "restaurant": true,
+      "spa": true
+    }
+  }
+]
