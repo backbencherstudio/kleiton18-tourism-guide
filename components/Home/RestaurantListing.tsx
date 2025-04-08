@@ -51,40 +51,48 @@ const RestaurantListing = () => {
           </Link>
         </div>
 
-        <div className="relative">
+        <div className="relative w-full">
           <Swiper
             modules={[Navigation]}
-            slidesPerView={2}
+            slidesPerView={1}
             spaceBetween={24}
             loop={true}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              1280: {
+                slidesPerView: 2,
+              },
+            }}
             navigation={{
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
             onInit={(swiper) => {
-              if (typeof swiper.params.navigation !== 'boolean') {
+              if (typeof swiper.params.navigation !== "boolean") {
                 swiper.params.navigation.prevEl = prevRef.current;
                 swiper.params.navigation.nextEl = nextRef.current;
               }
               swiper.navigation.init();
               swiper.navigation.update();
             }}
-            className="pb-16"
+            className="pb-16 w-full"
           >
             {loading ? (
               <p>Loading restaurants...</p>
             ) : (
               data.map((restaurant) => (
-                <SwiperSlide key={restaurant.id}>
+                <SwiperSlide key={restaurant.id} className="w-full">
                   <div className="flex gap-5 h-full p-5 border border-[#E0E0E0] rounded-[12px] bg-[#FAFAFA] overflow-hidden">
-                    <div className="max-w-[260px]">
+                    <div className="min-w-[260px] max-w-[260px]">
                       <img
                         src={restaurant.image_link}
                         alt={restaurant.name}
                         className="w-full h-full object-cover rounded-[8px]"
                       />
                     </div>
-                    <div className="flex flex-col gap-10">
+                    <div className="flex flex-col gap-10 w-full">
                       <div className="flex flex-col gap-3">
                         <div className="flex flex-col items-start gap-2">
                           <div className="flex items-center gap-2 text-yellow-500">
@@ -115,7 +123,7 @@ const RestaurantListing = () => {
                             {restaurant.name}
                           </h3>
                         </div>
-                        <p className="text-[16px] leading-[160%] text-[#4A4A4A]">
+                        <p className="text-[16px] leading-[160%] text-[#4A4A4A] line-clamp-2">
                           {restaurant.details}
                         </p>
                         <div className="flex items-center justify-between">
@@ -155,7 +163,6 @@ const RestaurantListing = () => {
             )}
           </Swiper>
 
-          {/* Custom bottom-right arrows */}
           <div className="absolute -bottom-10 right-0 z-10 flex gap-2">
             <button
               ref={prevRef}

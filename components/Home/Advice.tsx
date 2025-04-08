@@ -29,7 +29,7 @@ const Advice = () => {
         </div>
         <div className="relative w-full lg:w-1/2">
           <img src="/images/hv.png" className="ms-auto rounded-[8px]" alt="" />
-          <img src="/images/np.png" className="absolute top-1/2 -translate-y-1/2 border-[2px] border-white rounded-[8px]" alt="" />
+          <img src="/images/np.png" className="absolute top-1/2 -translate-y-1/2 max-w-1/2 lg:w-full border-[2px] border-white rounded-[8px]" alt="" />
         </div>
       </div>
     </div>

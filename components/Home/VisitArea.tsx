@@ -9,6 +9,7 @@ const VisitArea = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isXL, setIsXL] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,6 +37,16 @@ const VisitArea = () => {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsXL(window.innerWidth >= 1380);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
     <div className="px-4 py-10 md:py-20">
       <div className="max-w-[1320px] mx-auto flex flex-col gap-11">
@@ -56,28 +67,31 @@ const VisitArea = () => {
             data.map((area, index) => {
               const isHovered = hoveredIndex === index;
               const isDefault = hoveredIndex === null && index === 1;
-              const widthClass =
-                isHovered || isDefault ? "w-[420px]" : "w-[300px]";
+              const showHover = isXL && (isHovered || isDefault);
+              const widthClass = isXL
+                ? showHover
+                  ? "w-[420px]"
+                  : "w-[300px]"
+                : "w-full";
 
               return (
                 <div
                   key={area.id}
                   className={`group relative transition-all duration-300 ease-in-out bg-cover bg-center bg-no-repeat h-[400px] flex flex-col justify-end p-4 ${widthClass}`}
                   style={{ backgroundImage: `url(${area.image_link})` }}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  onMouseEnter={() => isXL && setHoveredIndex(index)}
+                  onMouseLeave={() => isXL && setHoveredIndex(null)}
                 >
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/50 z-0" />
 
-                  {/* Content */}
                   <div className="relative z-10 w-full flex flex-col gap-3">
-                    {/* Location */}
                     <div
                       className={`flex items-center gap-2 transform transition-all duration-300 ease-in-out ${
-                        isDefault
+                        showHover
                           ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                          : isXL
+                          ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                          : "opacity-100 translate-y-0"
                       }`}
                     >
                       <img
@@ -89,29 +103,30 @@ const VisitArea = () => {
                       </p>
                     </div>
 
-                    {/* Title */}
                     <h3
                       className={`text-white text-[24px] font-medium leading-[140%] transform transition-all duration-300 ease-in-out ${
-                        isDefault
+                        showHover
                           ? "translate-y-0"
-                          : "translate-y-[80px] group-hover:translate-y-0"
+                          : isXL
+                          ? "translate-y-[80px] group-hover:translate-y-0"
+                          : "translate-y-0"
                       }`}
                     >
                       {area.name}
                     </h3>
 
-                    {/* Details */}
                     <p
                       className={`text-white text-[14px] leading-[160%] tracking-[0.5px] transform transition-all duration-300 ease-in-out ${
-                        isDefault
+                        showHover
                           ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                          : isXL
+                          ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                          : "opacity-100 translate-y-0"
                       }`}
                     >
                       {area.details}
                     </p>
 
-                    {/* Actions */}
                     <div className="flex justify-between items-center mt-2">
                       <Link
                         href={area.details_link}
