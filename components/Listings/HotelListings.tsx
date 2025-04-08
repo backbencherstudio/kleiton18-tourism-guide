@@ -43,9 +43,9 @@ const HotelListings = () => {
       <div className="flex flex-col gap-12">
         <HeadingTwo HeadingText={"Hotel Listing"} />
 
-        <div className="flex items-start gap-4">
-          <div className="w-[318px] sticky top-[120px] p-4 flex flex-col items-center justify-between gap-5 border border-[#EDEDED] rounded-[12px]">
-            <div className="flex flex-col items-start gap-4">
+        <div className="flex flex-col lg:flex-row items-start gap-4">
+          <div className="w-full lg:w-[318px] sticky top-[120px] p-4 flex flex-col items-start lg:items-center justify-between gap-5 border border-[#EDEDED] rounded-[12px] bg-white">
+            <div className="flex flex-col items-start gap-4 w-full">
               <h4 className="text-[20px] text-[#111111] font-medium leading-[150%]">
                 Filter by Location
               </h4>
@@ -65,7 +65,7 @@ const HotelListings = () => {
             </div>
           </div>
 
-          <div className="w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="w-full lg:w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
               <p>Loading hotels...</p>
             ) : filteredHotels.length === 0 ? (

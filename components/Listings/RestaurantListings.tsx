@@ -43,8 +43,8 @@ const RestaurantListings = () => {
       <div className="flex flex-col gap-12">
         <HeadingTwo HeadingText={"Restaurant Listing"} />
 
-        <div className="flex items-start gap-4">
-          <div className="sticky top-[120px] w-[318px]">
+        <div className="flex flex-col lg:flex-row items-start gap-4">
+          <div className="w-full sticky top-[120px] lg:w-[318px]">
             <div className="max-h-[calc(100vh-140px)] overflow-auto p-4 flex flex-col gap-5 border border-[#EDEDED] rounded-[12px] bg-white">
               <h4 className="text-[20px] text-[#111111] font-medium leading-[150%]">
                 Filter by Location
@@ -64,7 +64,7 @@ const RestaurantListings = () => {
               </div>
             </div>
           </div>
-          <div className="w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="w-full lg:w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
               <p>Loading restaurants...</p>
             ) : filteredRestaurants.length === 0 ? (
@@ -112,7 +112,7 @@ const RestaurantListings = () => {
                       {restaurant.name}
                     </h3>
 
-                    <p className="text-[14px] text-[#4A4A4A] leading-[160%] truncate">
+                    <p className="text-[14px] text-[#4A4A4A] leading-[160%] lg:truncate">
                       {restaurant.details}
                     </p>
 
