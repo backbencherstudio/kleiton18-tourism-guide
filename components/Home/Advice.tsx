@@ -4,7 +4,7 @@ import HeadingTwo from "../reusable/HeadingTwo";
 const Advice = () => {
   return (
     <div className="bg-[#FFF5F5] px-4 py-10 md:py-20">
-      <div className="max-w-[1320px]  mx-auto flex justify-between gap-10">
+      <div className="max-w-[1320px]  mx-auto flex flex-col lg:flex-row justify-between gap-10">
         <div className="w-full lg:w-1/2 flex flex-col items-start gap-8">
           <HeadingTwo
             HeadingText={
