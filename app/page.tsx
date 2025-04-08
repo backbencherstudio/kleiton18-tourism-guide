@@ -7,6 +7,7 @@ import RestaurantListing from "@/components/Home/RestaurantListing";
 import TraditionalDish from "@/components/Home/TraditionalDish";
 import VisitArea from "@/components/Home/VisitArea";
 import FAQ from "@/components/Home/FAQ";
+import Footer from "@/components/Home/Footer";
 export default function Home() {
   return (
     <div className="">
@@ -19,6 +20,7 @@ export default function Home() {
       <TraditionalDish />
       <VisitArea />
       <FAQ />
+      <Footer />
     </div>
   );
 }
