@@ -41,13 +41,13 @@ const TraditionalDish = () => {
   return (
     <div className="bg-[#FAFAFA] px-4 py-10 md:py-20">
       <div className="max-w-[1320px]  mx-auto flex flex-col gap-11">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap gap-4 items-center justify-between">
           <HeadingTwo HeadingText={"Traditional Dish"} />
           <Link
             href={"/"}
-            className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
+            className="flex items-center justify-center gap-3 px-4 lg:px-8 py-2 lg:py-6 rounded-[8px] text-white bg-[#F81E1E]"
           >
-            Explore ALl <ArrowRight />
+            Explore All <ArrowRight />
           </Link>
         </div>
 
@@ -83,10 +83,10 @@ const TraditionalDish = () => {
                       </p>
                     </div>
                     <div className="w-full flex items-center justify-between">
-                      <h3 className="text-[32px] leading-[140%] font-medium">
+                      <h3 className="text-[22px] lg:text-[32px] leading-[140%] font-medium">
                         {dish.name}
                       </h3>
-                      <p className="text-[32px] leading-[140%] font-medium countNumber">
+                      <p className="text-[22px] lg:text-[32px] leading-[140%] font-medium countNumber">
                         {dish.price}
                       </p>
                     </div>
