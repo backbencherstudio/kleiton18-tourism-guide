@@ -44,7 +44,7 @@ const RestaurantListing = () => {
         <div className="flex items-center justify-between">
           <HeadingTwo HeadingText={"Restaurant Listing"} />
           <Link
-            href={"/"}
+            href={"/restaurant"}
             className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
           >
             Explore All <ArrowRight />
