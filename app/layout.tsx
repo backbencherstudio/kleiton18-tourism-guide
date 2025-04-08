@@ -1,6 +1,7 @@
 import { AppConfig } from "@/config/app.config";
 import "./globals.css";
 import type { Metadata } from "next";
+import LenisWrapper from "@/components/reusable/LenisWrapper";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <LenisWrapper>{children}</LenisWrapper>
+      </body>
     </html>
   );
 }

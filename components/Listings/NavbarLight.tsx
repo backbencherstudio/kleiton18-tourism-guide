@@ -32,7 +32,7 @@ const NavbarLight = () => {
           <Link href="/restaurant" className="text-[#111111]">
             Restaurant
           </Link>
-          <Link href="/" className="text-[#111111]">
+          <Link href="/favorites" className="text-[#111111]">
             Favorites
           </Link>
         </div>
@@ -82,7 +82,7 @@ const NavbarLight = () => {
                 <Link href="/restaurant" className="text-[#111111]">
                   Restaurant
                 </Link>
-                <Link href="/" className="text-[#111111]">
+                <Link href="/favorites" className="text-[#111111]">
                   Favorites
                 </Link>
                 <Link

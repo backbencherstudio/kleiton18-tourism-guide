@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link href={'/'} className='text-[#111] text-lg'>Home</Link>
                 <Link href={'/hotel'} className='text-[#111] text-lg'>Hotel</Link>
                 <Link href={'/restaurant'} className='text-[#111] text-lg'>Restaurant</Link>
-                <Link href={'/'} className='text-[#111] text-lg'>Favorites</Link>
+                <Link href={'/favorites'} className='text-[#111] text-lg'>Favorites</Link>
                 <Link href={'/'} className='px-[23px] py-[9px] border border-[#EDEDED] rounded-[8px] text-[#111] text-[16px] font-medium leading-[130%]'>Emergency Contacts</Link>
               </div>
             </SheetContent>
@@ -38,7 +38,7 @@ const Navbar = () => {
           <Link href={'/'} className='text-white'>Home</Link>
           <Link href={'/hotel'} className='text-white'>Hotel</Link>
           <Link href={'/restaurant'} className='text-white'>Restaurant</Link>
-          <Link href={'/'} className='text-white'>Favorites</Link>
+          <Link href={'/favorites'} className='text-white'>Favorites</Link>
         </div>
         <div className="hidden lg:flex items-center justify-center gap-8">
           <Link href={'/'} className='px-[23px] py-[9px] border border-[#EDEDED] rounded-[8px] text-white text-[16px] font-medium leading-[130%]'>Emergency Contacts</Link>
