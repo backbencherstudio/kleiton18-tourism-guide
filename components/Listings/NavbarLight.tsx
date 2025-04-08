@@ -4,13 +4,13 @@ import React from 'react';
 
 const NavbarLight = () => {
     return (
-        <div className='absolute top-0 left-0 right-0 bg-[#FFFFFF1A] backdrop-blur-xs p-4'>
+        <div className='sticky z-50 top-0 left-0 right-0 bg-[#FFFFFF1A] backdrop-blur-xs p-4'>
             <div className="max-w-[1320px] mx-auto flex items-center justify-between">
                 <Link href={'/'} className='text-[40px] font-medium leading-[140%] text-[#111111]'><h1>Logo</h1></Link>
                 <div className="flex items-center justify-center gap-8">
                     <Link href={'/'} className='text-[#111111]'>Home</Link>
-                    <Link href={'/'} className='text-[#111111]'>Hotel</Link>
-                    <Link href={'/'} className='text-[#111111]'>Restaurant</Link>
+                    <Link href={'/hotel'} className='text-[#111111]'>Hotel</Link>
+                    <Link href={'/restaurant'} className='text-[#111111]'>Restaurant</Link>
                     <Link href={'/'} className='text-[#111111]'>Favorites</Link>
                 </div>
                 <div className="flex items-center justify-center gap-4">
