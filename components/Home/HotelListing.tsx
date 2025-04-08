@@ -46,9 +46,9 @@ const HotelListing = () => {
             <HeadingTwo HeadingText={"Hotel Listing"} />
             <Link
               href={"/hotel"}
-              className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
+              className="flex items-center justify-center gap-3 px-4 lg:px-8 py-2 lg:py-6 rounded-[8px] text-white bg-[#F81E1E]"
             >
-              Explore ALl <ArrowRight />
+              Explore All <ArrowRight />
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

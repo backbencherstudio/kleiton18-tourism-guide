@@ -45,7 +45,7 @@ const RestaurantListing = () => {
           <HeadingTwo HeadingText={"Restaurant Listing"} />
           <Link
             href={"/restaurant"}
-            className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
+            className="flex items-center justify-center gap-3 px-4 lg:px-8 py-2 lg:py-6 rounded-[8px] text-white bg-[#F81E1E]"
           >
             Explore All <ArrowRight />
           </Link>
@@ -84,8 +84,8 @@ const RestaurantListing = () => {
             ) : (
               data.map((restaurant) => (
                 <SwiperSlide key={restaurant.id} className="w-full">
-                  <div className="flex gap-5 h-full p-5 border border-[#E0E0E0] rounded-[12px] bg-[#FAFAFA] overflow-hidden">
-                    <div className="min-w-[260px] max-w-[260px]">
+                  <div className="flex flex-col md:flex-row gap-5 h-full p-5 border border-[#E0E0E0] rounded-[12px] bg-[#FAFAFA] overflow-hidden">
+                    <div className="w-full md:min-w-[260px] md:max-w-[260px]">
                       <img
                         src={restaurant.image_link}
                         alt={restaurant.name}
@@ -119,7 +119,7 @@ const RestaurantListing = () => {
                               {restaurant.location}
                             </p>
                           </div>
-                          <h3 className="text-[32px] leading-[140%] font-medium">
+                          <h3 className="text-[22px] lg:text-[32px] leading-[140%] font-medium">
                             {restaurant.name}
                           </h3>
                         </div>
