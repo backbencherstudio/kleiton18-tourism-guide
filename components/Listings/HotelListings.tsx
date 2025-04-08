@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import HeadingTwo from "../reusable/HeadingTwo";
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Search, Star } from "lucide-react";
+import { Input } from "../ui/input";
 
-const HotelListing = () => {
+const HotelListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [locationSearch, setLocationSearch] = useState("");
 
-  // Fetch Hotel Data from API
   useEffect(() => {
     const controller = new AbortController();
     const url = "/hotel.json";
@@ -18,12 +19,7 @@ const HotelListing = () => {
       try {
         const response = await fetch(url, { signal: controller.signal });
         const result = await response.json();
-
-        // Sort by id DESC (latest first), then slice top 4
-        const latestHotels = result
-          .sort((a: any, b: any) => b.id - a.id)
-          .slice(0, 4);
-        setData(latestHotels);
+        setData(result);
       } catch (error: any) {
         if (error.name !== "AbortError") {
           console.error("Error fetching hotel data:", error);
@@ -38,24 +34,44 @@ const HotelListing = () => {
     return () => controller.abort();
   }, []);
 
+  const filteredHotels = data.filter((hotel) =>
+    hotel.location.toLowerCase().includes(locationSearch.toLowerCase())
+  );
+
   return (
-    <>
-      <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
-        <div className="flex flex-col gap-11">
-          <div className="flex items-center justify-between">
-            <HeadingTwo HeadingText={"Hotel Listing"} />
-            <Link
-              href={"/hotel"}
-              className="flex items-center justify-center gap-3 px-8 py-6 rounded-[8px] text-white bg-[#F81E1E]"
-            >
-              Explore ALl <ArrowRight />
-            </Link>
+    <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
+      <div className="flex flex-col gap-12">
+        <HeadingTwo HeadingText={"Hotel Listing"} />
+
+        <div className="flex flex-col lg:flex-row items-start gap-4">
+          <div className="w-full lg:w-[318px] sticky top-[120px] p-4 flex flex-col items-start lg:items-center justify-between gap-5 border border-[#EDEDED] rounded-[12px] bg-white">
+            <div className="flex flex-col items-start gap-4 w-full">
+              <h4 className="text-[20px] text-[#111111] font-medium leading-[150%]">
+                Filter by Location
+              </h4>
+              <div className="relative w-full border border-[#737373] rounded-[8px] bg-white">
+                <Input
+                  placeholder="Search"
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                  className="pl-8 pr-[130px] h-[60px] text-[#111111] placeholder:text-[#737373] text-[16px] leading-[130%] border-none focus:border-none focus:ring-0 focus:outline-none shadow-none focus-visible:ring-0"
+                />
+                <Search
+                  color="#737373"
+                  size={16}
+                  className="absolute right-8 top-1/2 -translate-y-1/2"
+                />
+              </div>
+            </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <div className="w-full lg:w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
               <p>Loading hotels...</p>
+            ) : filteredHotels.length === 0 ? (
+              <p>No hotels match your filter.</p>
             ) : (
-              data.map((hotel) => (
+              filteredHotels.map((hotel) => (
                 <div
                   key={hotel.id}
                   className="flex flex-col gap-5 border border-[#E0E0E0] p-4 rounded-[12px] bg-[#FAFAFA]"
@@ -93,7 +109,7 @@ const HotelListing = () => {
                       </h3>
                     </div>
                     <div className="grid grid-cols-2 gap-3 mb-4">
-                      {hotel.amenities.spa && (
+                      {hotel.amenities?.spa && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/spa.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -101,7 +117,7 @@ const HotelListing = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities.pool && (
+                      {hotel.amenities?.pool && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/wifi.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -109,7 +125,7 @@ const HotelListing = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities.free_wifi && (
+                      {hotel.amenities?.free_wifi && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/wifi.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -117,7 +133,7 @@ const HotelListing = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities.restaurant && (
+                      {hotel.amenities?.restaurant && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/restaurant.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -148,8 +164,8 @@ const HotelListing = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default HotelListing;
+export default HotelListings;

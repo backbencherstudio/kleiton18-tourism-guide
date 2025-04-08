@@ -1,13 +1,11 @@
-import FAQ from "@/components/Home/FAQ";
 import Footer from "@/components/Home/Footer";
+import FavoritesListing from "@/components/Listings/FavoritesListing";
 import NavbarLight from "@/components/Listings/NavbarLight";
-import HotelListings from "@/components/Listings/HotelListings";
 export default function Hotel() {
   return (
     <div className="">
       <NavbarLight />
-      <HotelListings />
-      <FAQ />
+      <FavoritesListing />
       <Footer />
     </div>
   );
