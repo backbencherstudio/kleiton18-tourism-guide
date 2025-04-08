@@ -18,10 +18,7 @@ const FAQ = () => {
           <div className="w-full lg:w-1/2">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger
-                  className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline
- cursor-pointer pb-8"
-                >
+                <AccordionTrigger className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pb-8">
                   What are some must-visit places in Albania?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
@@ -32,10 +29,7 @@ const FAQ = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger
-                  className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline
- cursor-pointer pt-12 pb-8"
-                >
+                <AccordionTrigger className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pt-12 pb-8">
                   What are the key traditions and cultural customs I should
                   know?
                 </AccordionTrigger>
@@ -47,10 +41,7 @@ const FAQ = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger
-                  className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline
- cursor-pointer pt-12 pb-8"
-                >
+                <AccordionTrigger className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pt-12 pb-8">
                   Is Albania safe for tourists?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
@@ -61,10 +52,7 @@ const FAQ = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
-                <AccordionTrigger
-                  className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline
- cursor-pointer pt-12"
-                >
+                <AccordionTrigger className="text-[#111111] text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pt-12">
                   What is the best time of year to visit?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
