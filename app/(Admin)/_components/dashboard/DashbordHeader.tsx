@@ -1,12 +1,13 @@
 import { dashbordSummaryCards } from '@/demoApi/dashbordTotalList'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function DashbordHeader() {
   return (
     <div>
          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
       {dashbordSummaryCards.map((item, index) => (
-        <div
+        <Link href={item?.href}
           key={index}
          className="flex flex-col items-start p-5 gap-3  rounded-[16px] bg-white shadow-[0px_-0.3px_20px_rgba(0,0,0,0.05)]"
         >
@@ -24,7 +25,7 @@ function DashbordHeader() {
             <p className=' text-[#1D1F2C] text-2xl font-medium'> ({item.value})</p>
           </div>
           
-        </div>
+        </Link>
       ))}
     </div>
     </div>

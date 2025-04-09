@@ -58,7 +58,7 @@ console.log(perPageHotel);
     <div className="">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">Hotel List</h2>
-        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Hotel</button>
+        <Link href="/dashboard/hotel/add-hotel" className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Hotel</Link>
       </div>
 
       <div className=" flex flex-col ">
