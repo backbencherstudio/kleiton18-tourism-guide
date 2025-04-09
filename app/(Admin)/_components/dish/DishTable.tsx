@@ -14,21 +14,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-function RestaurantTable() {
+function DishTable() {
       const [page, setPage] = useState<number>(0);
 
   const restaurants = Array.from({ length: 50 }, (_, i) => ({
     sl: i + 1,
-    id: 41256,
-    name: "Elysian Pearl Resort",
+    name: "Taste Saranda",
     review: "95",
     rating:4.8,
-    open:"10:00AM", 
-    close:"11:00pm",
-    location:"Dhaka",
     bookingLink: "bookinglink.org" ,     
     image: "/images/up.png",
-    details: "Here is the details of the restaurant",
+    price:"$25",
   }));
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
@@ -61,9 +57,9 @@ function RestaurantTable() {
         <div>
 <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
-          Restaurant List
+          Traditional Dish List
         </h2>
-        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Hotel</button>
+        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Traditional Dish</button>
       </div>
 
       <div className="">
@@ -72,15 +68,12 @@ function RestaurantTable() {
             <thead className="sticky top-0 bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs ">
               <tr className="!rounded-[16px]">
                 <th className="px-4 py-3 font-normal text-xs">Sl</th>
-                <th className="px-4 py-3 font-normal text-xs">Restaurant Name</th>
+                <th className="px-4 py-3 font-normal text-xs">Traditional Dish Name</th>
                 <th className="px-4 py-3 font-normal text-xs">Image</th>
                 <th className="px-4 py-3 font-normal text-xs">Number of review</th>
                 <th className="px-4 py-3 font-normal text-xs">Rating</th>
-                <th className="px-4 py-3 font-normal text-xs">Open</th>
-                <th className="px-4 py-3 font-normal text-xs">Close</th>
-                <th className="px-4 py-3 font-normal text-xs">Location</th>
                 <th className="px-4 py-3 font-normal text-xs">Booking Link</th>
-                <th className="px-4 py-3 font-normal text-xs">Details</th>
+                <th className="px-4 py-3 font-normal text-xs">Price</th>
                 <th className="px-4 py-3 font-normal text-xs">Action</th>
               </tr>
             </thead>
@@ -101,9 +94,7 @@ function RestaurantTable() {
                   <td className="px-4 py-3 text-sm font-normal">{restaurant.review}</td>
                   
                   <td className="px-4 py-2">{restaurant.rating}</td>
-                  <td className="px-4 py-2">{restaurant.open}</td>
-                  <td className="px-4 py-2">{restaurant.close}</td>
-                  <td className="px-4 py-2">{restaurant.location}</td>
+                 
                   <td className="px-4 py-2">  <Link
                       href={`#`}
                       className="  "
@@ -112,7 +103,10 @@ function RestaurantTable() {
                     >
                       {restaurant.bookingLink}
                     </Link></td>
-                  <td className="px-4 py-2">{restaurant?.details}</td>
+                  
+                   <td className="px-4 py-3 text-sm font-normal">
+                    {restaurant.price}
+                  </td>
                    <td className="px-4 py-3 text-sm font-normal">
                     <div className="flex items-center space-x-2">
                      
@@ -199,4 +193,4 @@ function RestaurantTable() {
   )
 }
 
-export default RestaurantTable
+export default DishTable
