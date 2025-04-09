@@ -39,7 +39,7 @@ export default function AddHotelForm() {
             <input
               {...register('name', { required: 'Hotel Name is required' })}
               placeholder="Type"
-              className="w-full p-3 border rounded-md text-sm"
+              className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.name && <p className="text-primaryColor text-xs mt-1">{errors.name.message}</p>}
           </div>
@@ -50,7 +50,7 @@ export default function AddHotelForm() {
             <input
               {...register('location', { required: 'Location is required' })}
               placeholder="Type"
-              className="w-full p-3 border rounded-md text-sm"
+              className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.location && <p className="text-primaryColor text-xs mt-1">{errors.location.message}</p>}
           </div>
@@ -62,7 +62,7 @@ export default function AddHotelForm() {
               type="number"
               {...register('reviews', { required: 'Review count is required' })}
               placeholder="Type"
-              className="w-full p-3 border rounded-md text-sm"
+              className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.reviews && <p className="text-primaryColor text-xs mt-1">{errors.reviews.message}</p>}
           </div>
@@ -74,7 +74,7 @@ export default function AddHotelForm() {
               type="number"
               {...register('reviews', { required: 'Rating count is required' })}
               placeholder="Type"
-              className="w-full p-3 border rounded-md text-sm"
+              className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.rating && <p className="text-primaryColor text-xs mt-1">{errors.rating.message}</p>}
           </div>
@@ -87,7 +87,7 @@ export default function AddHotelForm() {
                 type="file"
                 accept="image/*"
                 {...register('image', { required: 'Image is required' })}
-                className="w-full cursor-pointer text-sm"
+                className="w-full cursor-pointer outline-0 text-sm"
               />
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">
 <path d="M4.29497 4.90677H5.9142V9.59304C5.9142 10.0685 6.30934 10.4535 6.79619 10.4535H9.20365C9.69046 10.4535 10.0856 10.0685 10.0856 9.59304V4.90677H11.7043C11.9725 4.90677 12.2135 4.74925 12.3166 4.50748C12.4187 4.2667 12.3619 3.98835 12.1724 3.80351L8.46795 0.188934C8.20921 -0.062978 7.79007 -0.062978 7.53078 0.188934L3.82691 3.80351C3.73425 3.89381 3.67113 4.0089 3.64556 4.13422C3.61998 4.25954 3.63309 4.38944 3.68323 4.50748C3.78627 4.74877 4.02681 4.90677 4.29497 4.90677Z" fill="#737373"/>
@@ -103,7 +103,7 @@ export default function AddHotelForm() {
             <input
               {...register('bookingLink', { required: 'Booking link is required' })}
               placeholder="Attach"
-              className="w-full p-3 border rounded-md text-sm"
+              className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.bookingLink && (
               <p className="text-primaryColor text-xs mt-1">{errors.bookingLink.message}</p>
@@ -119,7 +119,7 @@ export default function AddHotelForm() {
           <p className="text-sm text-[#212121] font-normal mb-2">Amenities</p>
           <div className="border rounded-md p-4 space-y-2">
             {amenitiesOptions.map((item) => (
-              <label key={item.title} className="flex items-center space-x-4 text-sm">
+              <label key={item.title} className="flex items-center space-x-4 outline-0 text-sm">
                 <input
                   type="checkbox"
                   value={item.title}

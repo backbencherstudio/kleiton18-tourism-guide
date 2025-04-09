@@ -10,7 +10,7 @@ function Page() {
   const sPath = pathname.split('/').filter(Boolean); // remove empty strings
 
   return (
-    <div className="flex flex-col gap-6 max-h-[calc(100vh-100px)] border border-[#E2E8F0] shadow-[0px_-0.3px_5.5px_0px_rgba(0,0,0,0.02)] rounded-[12px] p-5 bg-white w-full">
+    <div className="flex flex-col gap-6 min-h-[calc(100vh-100px)] border border-[#E2E8F0] shadow-[0px_-0.3px_5.5px_0px_rgba(0,0,0,0.02)] rounded-[12px] p-5 bg-white w-full">
       <div>
         <div className="flex gap-4 items-center">
           {/* Back Button */}
@@ -32,7 +32,7 @@ function Page() {
                       <ChevronRight  className="w-4 h-4 text-[#737373]" />
                     </>
                   ) : (
-                    <span className="capitalize text-[#737373] font-medium">{path}</span>
+                    <span className="capitalize text-[#737373] font-medium">{path.split("-").join(" ")}</span>
                   )}
                 </div>
               );
@@ -41,7 +41,7 @@ function Page() {
           </div>
         </div>
          <div>
-                <h4 className=' text-2xl font-medium text-[#232323] !font-[Poppins] mt-4'>Add Hotel</h4>
+                <h4 className=' text-2xl font-medium text-[#232323] !font-[Poppins] mt-4'>Add Restaurant</h4>
             </div>
       </div>
 

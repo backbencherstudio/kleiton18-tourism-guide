@@ -58,7 +58,7 @@ function VisitedTable() {
                         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
                             Visit Area List
                         </h2>
-                        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Location</button>
+                        <Link href="/dashboard/visited/add-traditional-dish" className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Location</Link>
                     </div>
 
                     <div className="">

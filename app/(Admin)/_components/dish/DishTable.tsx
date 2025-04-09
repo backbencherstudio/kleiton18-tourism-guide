@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -59,7 +59,7 @@ function DishTable() {
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Traditional Dish List
         </h2>
-        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Traditional Dish</button>
+        <Link href="/dashboard/dish/add-traditional-dish" className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Traditional Dish</Link>
       </div>
 
       <div className="">

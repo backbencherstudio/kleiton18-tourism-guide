@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               className={`
                 flex items-center gap-3 px-3 py-3 rounded-lg 
                 transition-colors duration-200 
-                ${item.href == pathname? 'bg-borderColor' : 'hover:bg-borderColor'}
+                ${item.href == pathname ? 'bg-borderColor' : 'hover:bg-borderColor'}
               `}
             >
               <div className="w-[30px] flex justify-center items-center   h-[30px] flex-shrink-0 rounded-[8px] bg-white shadow-[0px_-0.3px_5.5px_rgba(0,0,0,0.04)]">

@@ -13,7 +13,7 @@ type RestaurantFormInputs = {
   bookingLink: string;
 };
 
-export default function AddRestaurantForm() {
+export default function AddAreaForm() {
   const {
     register,
     handleSubmit,
@@ -33,15 +33,14 @@ export default function AddRestaurantForm() {
         <div className="grid md:grid-cols-2 gap-4">
           {/* Restaurant Name */}
           <div>
-            <label className="block text-sm text-[#212121] mb-2">Restaurant Name</label>
+            <label className="block text-sm text-[#212121] mb-2">Visit Area Name</label>
             <input
-              {...register('name', { required: 'Restaurant name is required' })}
+              {...register('name', { required: 'Visit name is required' })}
               placeholder="Type"
               className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.name && <p className="text-primaryColor text-xs mt-1">{errors.name.message}</p>}
           </div>
-
           {/* Location */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Location</label>
@@ -55,28 +54,16 @@ export default function AddRestaurantForm() {
          <div className=' col-span-2 grid grid-cols-3 gap-4'>
  {/* Number of Reviews */}
           <div >
-            <label className="block text-sm text-[#212121] mb-2">Number of Review</label>
+            <label className="block text-sm text-[#212121] mb-2">Description</label>
             <input
-              type="number"
-              {...register('reviews', { required: 'Review count is required' })}
+              type="text"
+              {...register('reviews', { required: 'Description count is required' })}
               placeholder="Type"
               className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.reviews && <p className="text-primaryColor text-xs mt-1">{errors.reviews.message}</p>}
           </div>
 
-          {/* Rating */}
-          <div>
-            <label className="block text-sm text-[#212121] mb-2">Rating</label>
-            <input
-              type="number"
-              step="0.1"
-              {...register('rating', { required: 'Rating is required' })}
-              placeholder="Type"
-              className="w-full p-3 border rounded-md outline-0 text-sm"
-            />
-            {errors.rating && <p className="text-primaryColor text-xs mt-1">{errors.rating.message}</p>}
-          </div>
           {/* Image */}
           <div>
             <label className="block text-sm text-[#212121] font-normal mb-2">Image</label>
@@ -94,51 +81,11 @@ export default function AddRestaurantForm() {
             </div>
             {errors.image && <p className="text-primaryColor text-xs mt-1">{errors.image.message}</p>}
           </div>
-
-         </div>
-         
-
-          {/* Open Time */}
+            {/* Booking Link */}
           <div>
-            <label className="block text-sm text-[#212121] mb-2">Open Time</label>
+            <label className="block text-sm text-[#212121] mb-2">Details Link</label>
             <input
-              type="text"
-              {...register('openTime', { required: 'Open time is required' })}
-              className="w-full p-3 border rounded-md outline-0 text-sm"
-              placeholder='type'
-            />
-            {errors.openTime && <p className="text-primaryColor text-xs mt-1">{errors.openTime.message}</p>}
-          </div>
-
-          {/* Close Time */}
-          <div>
-            <label className="block text-sm text-[#212121] mb-2">Close Time</label>
-            <input
-              type="text"
-               placeholder="Type"
-              {...register('closeTime', { required: 'Close time is required' })}
-              className="w-full p-3 border rounded-md outline-0 text-sm"
-            />
-            {errors.closeTime && <p className="text-primaryColor text-xs mt-1">{errors.closeTime.message}</p>}
-          </div>
-
-          {/* Details */}
-          <div>
-            <label className="block text-sm text-[#212121] mb-2">Details</label>
-            <input
-              {...register('details', { required: 'Details are required' })}
-              placeholder="Type"
-              
-              className="w-full p-3 border rounded-md text-sm resize-none"
-            />
-            {errors.details && <p className="text-primaryColor text-xs mt-1">{errors.details.message}</p>}
-          </div>
-
-          {/* Booking Link */}
-          <div>
-            <label className="block text-sm text-[#212121] mb-2">Booking Link</label>
-            <input
-              {...register('bookingLink', { required: 'Booking link is required' })}
+              {...register('bookingLink', { required: 'Details link is required' })}
               placeholder="Attach"
               className="w-full p-3 border rounded-md outline-0 text-sm"
             />
@@ -146,9 +93,7 @@ export default function AddRestaurantForm() {
               <p className="text-primaryColor text-xs mt-1">{errors.bookingLink.message}</p>
             )}
           </div>
-
-       
-         
+         </div>
         </div>
       </div>
 
@@ -165,7 +110,7 @@ export default function AddRestaurantForm() {
           type="submit"
           className="px-6 py-3 rounded-md bg-primaryColor text-white hover:bg-red-600"
         >
-          Add Restaurant
+          Add Loation
         </button>
       </div>
     </form>
