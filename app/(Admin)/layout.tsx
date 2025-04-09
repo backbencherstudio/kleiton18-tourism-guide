@@ -1,8 +1,8 @@
 'use client';
+import { Menu } from 'lucide-react';
 import React, { useState } from 'react';
 import Header from './_components/header';
 import Sidebar from './_components/sidebar';
-import { Menu } from 'lucide-react';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
-    <div className="flex min-h-screen relative">
+    <div className=" bg-[#FAFAFA] min-h-screen relative ">
       {/* Mobile Menu Button - Only visible on small screens */}
       <button 
         onClick={openSidebar}
@@ -23,10 +23,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       >
         <Menu className="h-6 w-6 text-white" />
       </button>
-
+  {/* Header */}
+        <div className="w-full sticky top-0 left-0 ">
+          <Header onMenuClick={openSidebar} />
+        </div>
       {/* Sidebar */}
       <div className={`
-        fixed left-0 top-0 h-screen w-[280px] bg-[#07080b] border-r border-[#e9e9ea]/50
+        fixed left-0   w-[280px]  
         transition-transform duration-300 ease-in-out z-40
         lg:translate-x-0 
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -48,13 +51,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         transition-[margin] duration-300 ease-in-out
         lg:ml-[280px]
       `}>
-        {/* Header */}
-        <div className="w-full">
-          <Header onMenuClick={openSidebar} />
-        </div>
+      
 
         {/* Main Content */}
-        <main className="p-4 lg:p-10">
+        <main className=" pr-5">
           {children}
         </main>
       </div>
