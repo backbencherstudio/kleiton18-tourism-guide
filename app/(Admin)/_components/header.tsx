@@ -1,7 +1,8 @@
 'use client'
 import avatar from "@/public/images/up.png";
-import { Search } from "lucide-react";
+import { EllipsisVertical, Menu } from "lucide-react";
 import Image from 'next/image';
+import Link from "next/link";
 import React from 'react';
 
 
@@ -15,70 +16,36 @@ const Header: React.FC<HeaderProps> = () => {
  
 
   return (
-    <div className="w-full h-[70px] relative ">
-      <div className="w-full h-[70px] left-0 top-0 absolute bg-[#07080b] border-b border-[#e9e9ea]/50" />
-      <div className="absolute inset-0 px-10 flex items-center">
+    <div className="max-w-[1920px] px-5 py-4 relative flex justify-between ">
         {/* Mobile menu button */}
-        <button 
-          className="md:hidden p-2" 
-        
+        <div className=" flex items-center">
+       <button 
+          className="hidden p-2 lg:block text-[#4A4C56]" 
         >
           {/* Menu icon */}
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+         <Menu/>
         </button>
-
-        {/* Back Button */}
-        <div 
-          className=" justify-start items-center gap-[7px] cursor-pointer hidden md:block"
-          
-        >
-          
-          <div className="text-white text-base font-medium font-['Montserrat'] leading-relaxed tracking-tight">
-            Back
-          </div>
+        <Link href={'/dashbord'} className='text-[24px] font-medium leading-[140%] text-[#4A4C56]'>
+          <p>Logo</p>
+        </Link>
         </div>
-
-        {/* Search Box */}
-        <div className="mx-auto w-[404px] h-12 px-4 bg-black bg-opacity-10 rounded-lg hidden md:flex outline-1 outline-offset-[-1px] outline-[#a5a5ab] backdrop-blur-[2px] items-center justify-center">
-          <div className="flex items-center gap-2 w-full">
-           <Search/>
-            <input
-              type="text"
-              placeholder="Search by name or email"
-              className="bg-transparent border-none outline-none text-[#a5a5ab] placeholder-[#a5a5ab] w-full"
-            />
-          </div>
-        </div>
-
+        
         {/* Notification and Profile Group */}
         <div className="flex items-center gap-5 justify-end ml-[18%] sm:ml-0">
-          <div className="relative">
-           
-        
-          </div>
-
           <div 
-            className="flex justify-start items-center gap-2 cursor-pointer hover:opacity-90"
-           
-          >
+            className="flex justify-start items-center gap-2 cursor-pointer hover:opacity-90">
             <Image
               src={avatar}
               alt="Admin Avatar"
-              width={40}
-              height={40}
-              className="rounded-full shadow-[2px_2px_4px_0px_rgba(135,7,136,0.50)] shadow-[-2px_-2px_4px_0px_rgba(135,7,136,0.50)] border border-[#a601aa]"
+              width={26}
+              height={26}
+              className="rounded-full  "
             />
-            <div className="text-center justify-center text-white text-base font-semibold font-['Montserrat'] leading-relaxed tracking-tight">
-             admin
+            <div className="text-center justify-center text-[#1D1F2C]  text-base font-semibold leading-relaxed tracking-tight">
+               <EllipsisVertical/>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Add click outside handler */}
-    
     </div>
   );
 };
