@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import HeadingTwo from "../reusable/HeadingTwo";
-import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import HeadingTwo from "../reusable/HeadingTwo";
 
 const RestaurantListing = () => {
   const [data, setData] = useState([]);
@@ -143,14 +143,14 @@ const RestaurantListing = () => {
                       </div>
                       <div className="flex justify-between">
                         <Link
-                          href={restaurant.booking_link}
+                         href='/login'
                           className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                         >
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
                         <Link
-                          href={restaurant.details_link}
+                          href='/login'
                           className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                         >
                           <img src="/images/icons/heart.png" alt="" />
