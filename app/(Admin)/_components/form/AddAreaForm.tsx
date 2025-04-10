@@ -98,7 +98,7 @@ export default function AddAreaForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-3 mt-5">
+      <div className="flex justify-center md:justify-end gap-3 mt-5">
         <button
           type="button"
           onClick={() => reset()}

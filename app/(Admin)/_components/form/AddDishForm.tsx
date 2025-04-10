@@ -114,17 +114,17 @@ export default function AddDishForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-3 mt-5">
+      <div className="flex justify-center md:justify-end gap-3 mt-5">
         <button
           type="button"
           onClick={() => reset()}
-          className="px-6 py-3 rounded-md border bg-borderColor text-[#111]"
+          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md border bg-borderColor text-[#111]"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-6 py-3 rounded-md bg-primaryColor text-white hover:bg-red-600"
+          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
         >
           Add Traditional Dish
         </button>

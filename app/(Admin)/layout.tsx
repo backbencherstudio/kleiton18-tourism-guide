@@ -14,7 +14,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
-    <div className=" lg:bg-[#FAFAFA] min-h-screen relative ">
+    <div className=" lg:bg-[#FAFAFA] 2xl:min-h-screen h-screen relative ">
       {/* Mobile Menu Button - Only visible on small screens */}
       {/* <button 
         onClick={openSidebar}

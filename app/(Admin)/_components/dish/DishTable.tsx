@@ -59,7 +59,7 @@ function DishTable() {
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Traditional Dish List
         </h2>
-        <Link href="/dashboard/dish/add-traditional-dish" className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Traditional Dish</Link>
+        <Link href="/dashboard/dish/add-traditional-dish" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Traditional Dish</Link>
       </div>
 
       <div className="">

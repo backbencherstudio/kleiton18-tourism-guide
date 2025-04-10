@@ -29,7 +29,7 @@ export default function AddHotelForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-6">
+      <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-4 lg:space-y-6">
         <h2 className="text-xl text-[#232323] !font-[Poppins]  font-medium">General Information</h2>
 
         <div className="grid md:grid-cols-2 gap-4">
@@ -139,17 +139,17 @@ export default function AddHotelForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end gap-3 mt-4">
+      <div className="flex justify-center md:justify-end gap-3 mt-4">
         <button
           type="button"
           onClick={() => reset()}
-          className="px-6 py-3 rounded-md border bg-borderColor text-[#111]"
+          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md border bg-borderColor text-[#111]"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-6 py-3 rounded-md bg-primaryColor text-white hover:bg-red-600"
+          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
         >
           Add Hotel
         </button>
