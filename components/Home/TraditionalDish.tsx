@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import HeadingTwo from "../reusable/HeadingTwo";
-import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import HeadingTwo from "../reusable/HeadingTwo";
 
 const TraditionalDish = () => {
   const [data, setData] = useState([]);
@@ -93,14 +93,14 @@ const TraditionalDish = () => {
                   </div>
                   <div className="flex justify-between">
                     <Link
-                      href={dish.booking_link}
+                     href='/login'
                       className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                     >
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
                     <Link
-                      href={dish.details_link}
+                      href='/login'
                       className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                     >
                       <img src="/images/icons/heart.png" alt="" />

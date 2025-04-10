@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import HeadingTwo from "../reusable/HeadingTwo";
-import Link from "next/link";
 import { ArrowRight, Search, Star } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import HeadingTwo from "../reusable/HeadingTwo";
 import { Input } from "../ui/input";
 
 const HotelListings = () => {
@@ -144,14 +144,14 @@ const HotelListings = () => {
                     </div>
                     <div className="mt-4 flex justify-between">
                       <Link
-                        href={hotel.booking_link}
+                       href='/login'
                         className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                       >
                         Book Now
                         <ArrowRight size={18} />
                       </Link>
                       <Link
-                        href={hotel.details_link}
+                       href='/login'
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="" />

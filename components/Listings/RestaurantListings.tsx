@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import HeadingTwo from "../reusable/HeadingTwo";
-import Link from "next/link";
 import { ArrowRight, Search, Star } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import HeadingTwo from "../reusable/HeadingTwo";
 import { Input } from "../ui/input";
 
 const RestaurantListings = () => {
@@ -133,13 +133,13 @@ const RestaurantListings = () => {
 
                     <div className="flex justify-between">
                       <Link
-                        href={restaurant.booking_link}
+                       href='/login'
                         className="flex items-center gap-2 text-[#111111] text-[16px]"
                       >
                         Book Now <ArrowRight size={18} />
                       </Link>
                       <Link
-                        href={restaurant.details_link}
+                       href='/login'
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
