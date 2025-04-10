@@ -54,11 +54,11 @@ function VisitedTable() {
         <div>
             <div className=" flex flex-col justify-between h-full">
                 <div>
-                    <div className="flex justify-between items-center mb-4">
+                    <div className="flex justify-between items-center mb-4  w-[645px] md:w-auto md:pr-0 pr-3">
                         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
                             Visit Area List
                         </h2>
-                        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Location</button>
+                        <Link href="/dashboard/visited/add-traditional-dish" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Location</Link>
                     </div>
 
                     <div className="">
@@ -70,7 +70,7 @@ function VisitedTable() {
                                         <th className="px-4 py-4 font-normal text-xs">Visit Area Name</th>
                                         <th className="px-4 py-4 font-normal text-xs">Image</th>
                                         <th className="px-4 py-4 font-normal text-xs">Location</th>
-                                        <th className="px-4 py-4 font-normal text-xs w-[230px]">Description</th>
+                                        <th className="px-4 py-4 font-normal text-xs lg:w-[230px]">Description</th>
                                         <th className="px-4 py-4 font-normal text-xs">Booking Link</th>
                                         <th className="px-4 py-4 font-normal text-xs">Action</th>
                                     </tr>
@@ -91,7 +91,7 @@ function VisitedTable() {
                                             </td>
                                             <td className="px-4 py-3 text-sm font-normal">{restaurant.location}</td>
 
-                                            <td className="px-4 py-2 w-[230px]">{restaurant.description}</td>
+                                            <td className="px-4 py-2 lg:w-[230px]">{restaurant.description}</td>
 
                                             <td className="px-4 py-2">  <Link
                                                 href={`#`}
@@ -120,7 +120,7 @@ function VisitedTable() {
 
 
                 {/* Footer */}
-                <div className=" relative bottom-0 left-0 w-full">
+                <div className=" w-[645px] md:w-auto md:pr-0 pr-3">
                     <div className="flex justify-between items-center mt-10 text-sm text-gray-600">
                         <span>
                             {skiprestaurant + 1} - {Math.min(skiprestaurant + parPage, restaurants.length)} Result Showing Out of{" "}

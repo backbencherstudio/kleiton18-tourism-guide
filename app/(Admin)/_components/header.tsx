@@ -1,6 +1,6 @@
 'use client'
 import avatar from "@/public/images/up.png";
-import { EllipsisVertical, Menu } from "lucide-react";
+import { EllipsisVertical, Menu, X } from "lucide-react";
 import Image from 'next/image';
 import Link from "next/link";
 import React from 'react';
@@ -9,21 +9,23 @@ import React from 'react';
 interface HeaderProps {
   onNotificationClick?: () => void;
   adminName?: string;
+  sidebarOpen:boolean,
   onMenuClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({onMenuClick ,sidebarOpen}:HeaderProps) => {
  
 
   return (
-    <div className="max-w-[1920px] px-5 py-4 relative flex justify-between ">
+    <div className="max-w-[1920px] bg-[#FAFAFA] px-5 py-3 relative flex justify-between mb-1 z-50">
         {/* Mobile menu button */}
         <div className=" flex items-center">
        <button 
-          className="hidden p-2 lg:block text-[#4A4C56]" 
+       onClick={onMenuClick}
+          className=" p-2  text-[#4A4C56]" 
         >
-          {/* Menu icon */}
-         <Menu/>
+       {sidebarOpen ? <X className=" z-50 "/> :  <Menu/>}
+        
         </button>
         <Link href={'/dashbord'} className='text-[24px] font-medium leading-[140%] text-[#4A4C56]'>
           <p>Logo</p>

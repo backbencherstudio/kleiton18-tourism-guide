@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -59,17 +59,17 @@ function RestaurantTable() {
     <div>
       <div className=" flex flex-col justify-between h-full">
         <div>
-<div className="flex justify-between items-center mb-4">
+<div className="flex justify-between items-center mb-4 w-[950px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Restaurant List
         </h2>
-        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Hotel</button>
+        <Link href="/dashboard/restaurant/add-restaurant" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Hotel</Link>
       </div>
 
       <div className="">
         <div className=" ">
           <table className="min-w-full text-sm text-left">
-            <thead className="sticky top-0 bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs ">
+            <thead className="sticky top-16 bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs ">
               <tr className="!rounded-[16px]">
                 <th className="px-4 py-3 font-normal text-xs">Sl</th>
                 <th className="px-4 py-3 font-normal text-xs">Restaurant Name</th>
@@ -131,7 +131,7 @@ function RestaurantTable() {
       
 
       {/* Footer */}
-      <div className=" relative bottom-0 left-0 w-full">
+      <div className="  w-[950px] md:w-auto md:pr-0 pr-3 mb-6 lg:mb-0">
         <div className="flex justify-between items-center mt-10 text-sm text-gray-600">
         <span>
           {skiprestaurant + 1} - {Math.min(skiprestaurant + parPage, restaurants.length)} Result Showing Out of{" "}

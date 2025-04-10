@@ -29,9 +29,9 @@ const RecentUserTable = () => {
   };
 
   return (
-    <div className=" flex flex-col justify-between h-full">
+    <div className=" flex flex-col justify-between h-full mt-4 lg:mt-0">
         <div>
-<div className="flex justify-between items-center mb-4">
+<div className="flex justify-between items-center mb-4 w-[550px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Recent User List
         </h2>
@@ -41,7 +41,7 @@ const RecentUserTable = () => {
       </div>
 
       <div className="">
-        <div className="max-h-[480px] ">
+        <div className=" ">
           <table className="min-w-full text-sm text-left">
             <thead className="sticky top-0 bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs ">
               <tr className="!rounded-[16px]">
@@ -80,7 +80,7 @@ const RecentUserTable = () => {
       
 
       {/* Footer */}
-      <div className="flex justify-between items-center mt-6 text-sm text-gray-600">
+      <div className="flex justify-between gap-2 items-center mt-6 text-sm text-gray-600 w-[550px] md:w-auto md:pr-0 pr-3 mb-6 lg:mb-0">
         <span>
           {skipuser + 1} - {Math.min(skipuser + parPage, users.length)} Result Showing Out of{" "}
           {users.length} 

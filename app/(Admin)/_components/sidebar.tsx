@@ -29,11 +29,11 @@ const navItems: NavItem[] = [
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
  const pathname = usePathname()
   return (
-    <div className="max-w-[1920px] px-5 mb-5">
+    <div className="max-w-[1920px] lg:px-5 lg:mb-5 h-screen lg:h-auto">
       {/* Overlay for mobile */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 md:hidden bg-black/30" 
+          className="fixed inset-0 z-40 md:hidden " 
           onClick={onClose}
         />
       )}
@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         min-h-[calc(100vh-100px)] 
         bg-white 
          border border-[#E2E8F0] shadow-[0px_-0.3px_5.5px_0px_rgba(0,0,0,0.02)]
-        rounded-[12px] p-5 w-full max-w-[250px]
+        lg:rounded-[12px] p-5 w-full max-w-[250px]
       `}>
         
         {/* Navigation */}
@@ -54,11 +54,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <Link
               key={idx}
               href={item.href}
-              
+              onClick={onClose}
               className={`
                 flex items-center gap-3 px-3 py-3 rounded-lg 
                 transition-colors duration-200 
-                ${item.href == pathname? 'bg-borderColor' : 'hover:bg-borderColor'}
+                ${item.href == pathname ? 'bg-borderColor' : 'hover:bg-borderColor'}
               `}
             >
               <div className="w-[30px] flex justify-center items-center   h-[30px] flex-shrink-0 rounded-[8px] bg-white shadow-[0px_-0.3px_5.5px_rgba(0,0,0,0.04)]">

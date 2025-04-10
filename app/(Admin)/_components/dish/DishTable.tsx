@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -55,11 +55,11 @@ function DishTable() {
     <div>
       <div className=" flex flex-col justify-between h-full">
         <div>
-<div className="flex justify-between items-center mb-4">
+<div className="flex justify-between items-center mb-4 w-[650px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Traditional Dish List
         </h2>
-        <button className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Traditional Dish</button>
+        <Link href="/dashboard/dish/add-traditional-dish" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Traditional Dish</Link>
       </div>
 
       <div className="">
@@ -125,7 +125,7 @@ function DishTable() {
       
 
       {/* Footer */}
-      <div className=" relative bottom-0 left-0 w-full">
+      <div className=" w-[650px] md:w-auto md:pr-0 pr-3 pb-6 lg:mb-0">
         <div className="flex justify-between items-center mt-10 text-sm text-gray-600">
         <span>
           {skiprestaurant + 1} - {Math.min(skiprestaurant + parPage, restaurants.length)} Result Showing Out of{" "}
