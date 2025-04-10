@@ -1,5 +1,4 @@
 'use client';
-import { Menu } from 'lucide-react';
 import React, { useState } from 'react';
 import Header from './_components/header';
 import Sidebar from './_components/sidebar';
@@ -9,28 +8,28 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   const openSidebar = () => setSidebarOpen(true);
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
-    <div className=" bg-[#FAFAFA] min-h-screen relative ">
+    <div className=" lg:bg-[#FAFAFA] min-h-screen relative ">
       {/* Mobile Menu Button - Only visible on small screens */}
-      <button 
+      {/* <button 
         onClick={openSidebar}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-[#07080b]"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md "
       >
         <Menu className="h-6 w-6 text-white" />
-      </button>
+      </button> */}
   {/* Header */}
         <div className="w-full sticky top-0 left-0 ">
-          <Header onMenuClick={openSidebar} />
+          <Header onMenuClick={openSidebar} sidebarOpen={sidebarOpen} />
         </div>
       {/* Sidebar */}
       <div className={`
         fixed left-0   w-[280px]  
-        transition-transform duration-300 ease-in-out z-40
+        transition-transform duration-300 ease-in-out z-20
         lg:translate-x-0 
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
@@ -40,7 +39,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       {/* Overlay for mobile when sidebar is open */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/50  lg:hidden"
           onClick={closeSidebar}
         />
       )}
@@ -54,7 +53,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       
 
         {/* Main Content */}
-        <main className=" pr-5">
+        <main className=" lg:pr-5 px-3">
           {children}
         </main>
       </div>

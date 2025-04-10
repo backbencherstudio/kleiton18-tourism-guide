@@ -28,10 +28,10 @@ function UserTable() {
       };
   return (
     <div>
-        <div className="flex flex-col justify-between  min-h-[calc(100vh-100px)] border border-[#E2E8F0] shadow-[0px_-0.3px_5.5px_0px_rgba(0,0,0,0.02)]
-        rounded-[12px] p-5  bg-white w-full">
+        <div className="flex  flex-col justify-between  md:min-h-screen  lg:min-h-[calc(100vh-100px)] lg:border border-[#E2E8F0] shadow-[0px_-0.3px_5.5px_0px_rgba(0,0,0,0.02)]
+        rounded-[12px] md:p-5  bg-white w-full">
        <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4  w-[550px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
            User List
         </h2>
@@ -41,8 +41,8 @@ function UserTable() {
       </div>
 
       <div className="">
-        <div className="max-h-[480px] ">
-          <table className="min-w-full text-sm text-left">
+        <div className=" ">
+          <table className="min-w-full text-sm text-left border  border-[#E2E8F0] ">
             <thead className="bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs !rounded-[16px]">
               <tr className="">
                 <th className="px-4 py-3 font-normal text-xs">Sl</th>
@@ -80,7 +80,7 @@ function UserTable() {
       {/* Footer */}
       
     </div>
-    <div className="flex justify-between items-center mt-6 text-sm text-gray-600">
+    <div className="flex justify-between items-center mt-6 text-sm text-gray-600 w-[550px] md:w-auto md:pr-0 pr-3 pb-6 lg:pb-0">
         <span>
           {skipuser + 1} - {Math.min(skipuser + parPage, users.length)} Result Showing Out of{" "}
           {users.length} 

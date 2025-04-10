@@ -27,12 +27,12 @@ export default function AddAreaForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-6">
-        <h2 className="text-xl text-[#232323] !font-[Poppins] font-medium">General Information</h2>
+      <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-4 lg:space-y-6">
+        <h2 className="md:text-xl text-lg text-[#232323] !font-[Poppins] font-medium">General Information</h2>
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 grid-cols-2 gap-4 w-full">
           {/* Restaurant Name */}
-          <div>
+          <div className=' col-span-2'>
             <label className="block text-sm text-[#212121] mb-2">Visit Area Name</label>
             <input
               {...register('name', { required: 'Visit name is required' })}
@@ -42,7 +42,7 @@ export default function AddAreaForm() {
             {errors.name && <p className="text-primaryColor text-xs mt-1">{errors.name.message}</p>}
           </div>
           {/* Location */}
-          <div>
+          <div className=' col-span-2'>
             <label className="block text-sm text-[#212121] mb-2">Location</label>
             <input
               {...register('location', { required: 'Location is required' })}
@@ -51,7 +51,7 @@ export default function AddAreaForm() {
             />
             {errors.location && <p className="text-primaryColor text-xs mt-1">{errors.location.message}</p>}
           </div>
-         <div className=' col-span-2 grid grid-cols-3 gap-4'>
+         <div className=' col-span-2 grid lg:grid-cols-3 gap-4'>
  {/* Number of Reviews */}
           <div >
             <label className="block text-sm text-[#212121] mb-2">Description</label>
@@ -102,13 +102,13 @@ export default function AddAreaForm() {
         <button
           type="button"
           onClick={() => reset()}
-          className="px-6 py-3 rounded-md border bg-borderColor text-[#111]"
+          className="lg:px-6 lg:py-3 px-3 py-2 rounded-md border bg-borderColor text-[#111]"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-6 py-3 rounded-md bg-primaryColor text-white hover:bg-red-600"
+          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
         >
           Add Loation
         </button>

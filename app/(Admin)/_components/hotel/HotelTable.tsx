@@ -56,7 +56,7 @@ console.log(perPageHotel);
   };
   return (
     <div className="">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4  w-[760px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">Hotel List</h2>
         <Link href="/dashboard/hotel/add-hotel" className="bg-primaryColor text-baser font-medium text-white px-5 py-3 rounded-[8px] cursor-pointer">Add Hotel</Link>
       </div>
@@ -131,7 +131,7 @@ console.log(perPageHotel);
             </tbody>
           </table>
         </div>
-        <div className="flex justify-between items-center mt-6 text-sm text-gray-600">
+        <div className="flex justify-between items-center mt-6 text-sm text-gray-600 mb-6 lg:mb-0 w-[760px] md:w-auto md:pr-0 pr-3">
         <span>
           {skipuser + 1} - {Math.min(skipuser + parPage, hotels.length)} Result Showing Out of{" "}
           {hotels.length} 
