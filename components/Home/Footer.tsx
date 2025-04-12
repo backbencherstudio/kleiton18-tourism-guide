@@ -19,7 +19,7 @@ const Footer = () => {
               culture of Albania. our Virtual & Technologically Enabled Travel
               Guide ensures a seamless and unforgettable journey.
             </p>
-            <div className="flex items-center gap-3 mt-3">
+            {/* <div className="flex items-center gap-3 mt-3">
               <Link href={"/"}>
                 <img src="/images/icons/Facebook.png" alt="" />
               </Link>
@@ -32,7 +32,7 @@ const Footer = () => {
               <Link href={"/"}>
                 <img src="/images/icons/Linkedin.png" alt="" />
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col items-start gap-5">
             <h4 className="text-white text-[20px] font-medium leading-[150%]">

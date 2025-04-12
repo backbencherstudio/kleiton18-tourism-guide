@@ -33,12 +33,12 @@ const Hero = () => {
                                     />
                                     <div className="absolute right-0 px-8 top-1/2 -translate-y-1/2 z-50">
                                         <Select>
-                                            <SelectTrigger className="w-[66px] border-none p-0 m-0">
+                                            <SelectTrigger className="w-full border-none p-0 m-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:outline-none">
                                                 <SelectValue placeholder="Hotel" />
                                             </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="hotel">Hotel</SelectItem>
-                                                <SelectItem value="restaurant">Hotel</SelectItem>
+                                            <SelectContent className="border-none focus:ring-0 focus-visible:ring-0">
+                                                <SelectItem value="hotel" className="focus:bg-gray-100 focus:text-gray-900">Hotel</SelectItem>
+                                                <SelectItem value="restaurant" className="focus:bg-gray-100 focus:text-gray-900">Restaurant</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-[1px] bg-[#B0B0B0]"></div>
