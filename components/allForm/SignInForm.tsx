@@ -169,7 +169,7 @@ function SignInForm() {
           </span>
         </div>
 
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <button
             type="button"
             className="w-full cursor-pointer flex items-center justify-center gap-2 border border-borderColor rounded-md lg:py-4 py-2 lg:px-4 px-2 lg:text-base text-sm text-[#212121]  transition-colors"
@@ -201,7 +201,7 @@ function SignInForm() {
             <FaApple size={16} />
             Continue with Apple
           </button>
-        </div>
+        </div> */}
       </form>
       {isDialogOpen && <VerificationConfirmModal isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} title="Account Created" description="Your account has been created successfully" />}
     </div>

@@ -94,7 +94,7 @@ function LogInForm() {
                           <span className=" text-sm text-[#252525] font-medium ">Don’t have any account? <Link href="/signup" className="text-primaryColor">Sign Up</Link> </span>
                         </div>
 
-
+{/* 
                         <div className="space-y-3">
                             <button
                                 type="button"
@@ -127,7 +127,7 @@ function LogInForm() {
                                 <FaApple size={16} />
                                 Continue with Apple
                             </button>
-                        </div>
+                        </div> */}
                     </form>
     </div>
   )
