@@ -1,100 +1,119 @@
 "use client"
 
+import { CookieHelper } from "@/helper/cookie.helper"
+import { UserService } from "@/service/user/user.service"
 import { Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { FaApple } from "react-icons/fa"
 type FormValues = {
     email: string
     password: string
 }
-
-
 function LogInForm() {
     const [showPassword, setShowPassword] = useState(false)
+    const [error, setError] = useState("")
+    const router = useRouter()
+    const { login } = UserService
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormValues>()
 
-    const onSubmit = (data: FormValues) => {
+    const onSubmit = async (data: FormValues) => {
         console.log(data)
+        try {
+            const res = await login({ email: data?.email, password: data?.password })
+            const tokenNumber = res.data.token
+            CookieHelper.set({
+                key: "token",
+                value: tokenNumber,
+            });
+            console.log(tokenNumber);
+            console.log("ter-------------", res);
+
+            router.push("/")
+        } catch (error) {
+            if (error.response.status === 400) {
+                setError(error.response.data.message)
+            }
+            console.error("Registration failed:", error);
+            // Optionally show error to user
+        }
         // Handle form submission
     }
-  return (
-    <div>
-       <form onSubmit={handleSubmit(onSubmit)} className="lg:space-y-4 space-y-3">
-                        <div>
-                            <label htmlFor="email" className="block lg:text-base text-sm font-medium text-[#1D1F2C] lg:mb-4 mb-2">
-                                Email
-                            </label>
-                            <input
-                                id="email"
-                                type="email"
-                                className="w-full lg:px-4 px-2 text-neutral-400  lg:py-4 py-2 border border-[#EDEDED] rounded-md  bg-[#FAFAFA]  outline-0 text-sm"
-                                placeholder="Email"
-                                {...register("email", {
-                                    required: "Email is required",
-                                    pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "Invalid email address",
-                                    },
-                                })}
-                            />
-                            {errors.email && <p className="mt-1 lg:text-base text-sm text-red-600">{errors.email.message}</p>}
-                        </div>
+    return (
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)} className="lg:space-y-4 space-y-3">
+                <div>
+                    <label htmlFor="email" className="block lg:text-base text-sm font-medium text-[#1D1F2C] lg:mb-4 mb-2">
+                        Email
+                    </label>
+                    <input
+                        id="email"
+                        type="email"
+                        className="w-full lg:px-4 px-2 text-neutral-400  lg:py-4 py-2 border border-[#EDEDED] rounded-md  bg-[#FAFAFA]  outline-0 text-sm"
+                        placeholder="Email"
+                        {...register("email", {
+                            required: "Email is required",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Invalid email address",
+                            },
+                        })}
+                    />
+                    {errors.email && <p className="mt-1 lg:text-base text-sm text-red-600">{errors.email.message}</p>}
+                </div>
 
-                        <div>
-                            <label htmlFor="password" className="block lg:text-base text-sm font-medium text-[#1D1F2C] lg:mb-4 mb-2">
-                                Password
-                            </label>
-                            <div className="relative">
-                                <input
-                                    id="password"
-                                    type={showPassword ? "text" : "password"}
-                                    className="w-full lg:px-4 px-2  text-neutral-400 lg:py-4 py-2 border border-[#EDEDED] rounded-md  bg-[#FAFAFA]  outline-0 text-sm"
-                                    placeholder="********"
-                                    {...register("password", {
-                                        required: "Password is required",
-                                        minLength: {
-                                            value: 8,
-                                            message: "Password must be at least 8 characters",
-                                        },
-                                    })}
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                >
-                                    {showPassword ? (
-                                        <EyeOff className="lg:h-6 h-4 lg:w-6 w-4 text-gray-400" />
-                                    ) : (
-                                        <Eye className="lg:h-6 h-4 lg:w-6 w-4 text-gray-400" />
-                                    )}
-                                </button>
-                            </div>
-                            {errors.password && <p className="mt-1 lg:text-base text-sm text-red-600">{errors.password.message}</p>}
-                            <div className="flex justify-end lg:my-6 my-2">
-                                <Link href="/forgot-password" className="lg:text-base text-sm text-[#777980] underline ">
-                                    Forgot your Password
-                                </Link>
-                            </div>
-                        </div>
+                <div>
+                    <label htmlFor="password" className="block lg:text-base text-sm font-medium text-[#1D1F2C] lg:mb-4 mb-2">
+                        Password
+                    </label>
+                    <div className="relative">
+                        <input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            className="w-full lg:px-4 px-2  text-neutral-400 lg:py-4 py-2 border border-[#EDEDED] rounded-md  bg-[#FAFAFA]  outline-0 text-sm"
+                            placeholder="********"
+                            {...register("password", {
+                                required: "Password is required",
 
+                            })}
+                        />
                         <button
-                            type="submit"
-                            className="w-full cursor-pointer bg-primaryColor text-white lg:py-4 py-2 lg:px-4 px-2 text-sm lg:text-base rounded-md  transition-colors"
+                            type="button"
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                            onClick={() => setShowPassword(!showPassword)}
                         >
-                           Log In
+                            {showPassword ? (
+                                <EyeOff className="lg:h-6 h-4 lg:w-6 w-4 text-gray-400" />
+                            ) : (
+                                <Eye className="lg:h-6 h-4 lg:w-6 w-4 text-gray-400" />
+                            )}
                         </button>
-                        <div className="text-center">
-                          <span className=" text-sm text-[#252525] font-medium ">Don’t have any account? <Link href="/signup" className="text-primaryColor">Sign Up</Link> </span>
-                        </div>
+                    </div>
+                    {errors.password && <p className="mt-1 lg:text-base text-sm text-red-600">{errors.password.message}</p>}
+                    <div className="flex justify-end lg:my-6 my-2">
+                        <Link href="/forgot-password" className="lg:text-base text-sm text-[#777980] underline ">
+                            Forgot your Password
+                        </Link>
+                    </div>
+                </div>
 
-{/* 
+                <button
+                    type="submit"
+                    className="w-full cursor-pointer bg-primaryColor text-white lg:py-4 py-2 lg:px-4 px-2 text-sm lg:text-base rounded-md  transition-colors"
+                >
+                    Log In
+                </button>
+                <div className="text-center">
+                    <span className=" text-sm text-[#252525] font-medium ">Don’t have any account? <Link href="/signup" className="text-primaryColor">Sign Up</Link> </span>
+                </div>
+
+                {/* 
                         <div className="space-y-3">
                             <button
                                 type="button"
@@ -128,9 +147,9 @@ function LogInForm() {
                                 Continue with Apple
                             </button>
                         </div> */}
-                    </form>
-    </div>
-  )
+            </form>
+        </div>
+    )
 }
 
 export default LogInForm

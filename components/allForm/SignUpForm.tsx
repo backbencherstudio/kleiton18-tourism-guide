@@ -1,10 +1,10 @@
 "use client"
 
+import { UserService } from "@/service/user/user.service"
 import { Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { FaApple } from "react-icons/fa"
 import VerificationConfirmModal from "../reusable/VerificationConfirmModal"
 
 type FormValues = {
@@ -15,25 +15,39 @@ type FormValues = {
   agreeToTerms: boolean
 }
 
-function SignInForm() {
+function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [error, setError]=useState("")
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormValues>()
-
+  const {onRegister}=UserService;
   const password = watch("password")
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
-    // Handle form submission
-    setIsDialogOpen(true)
-
+  const onSubmit = async (data: FormValues) => {
+  try {
+    const send = await onRegister({
+      username: data.fullName,
+      email: data.email,
+      password: data.password,
+    });
+    
+    console.log("res,",send.response);
+    // Optional: If successful, show verification modal
+    setIsDialogOpen(true);
+  } catch (error) {
+    if(error.response.status === 400){
+      setError(error.response.data.message)
+    }
+    console.error("Registration failed:", error);
+    // Optionally show error to user
   }
+}
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="lg:space-y-4 space-y-3">
@@ -86,7 +100,7 @@ function SignInForm() {
               {...register("password", {
                 required: "Password is required",
                 minLength: {
-                  value: 8,
+                  value: 6,
                   message: "Password must be at least 8 characters",
                 },
               })}
@@ -152,7 +166,7 @@ function SignInForm() {
           </label>
         </div>
         {errors.agreeToTerms && <p className="mt-1 text-base text-red-600">{errors.agreeToTerms.message}</p>}
-
+        {error && <p className="text-base text-primaryColor py-2 text-center">{error}</p>}
         <button
           type="submit"
           className="w-full cursor-pointer bg-primaryColor text-white lg:py-4 py-2 lg:px-4 px-2 text-sm lg:text-base rounded-md  transition-colors"
@@ -208,4 +222,4 @@ function SignInForm() {
   )
 }
 
-export default SignInForm
+export default SignUpForm

@@ -13,10 +13,16 @@ export const UserService = {
       email: email,
       password: password,
     };
-    return await Fetch.post("/auth/login", data, config);
+    return await Fetch.post("/users/login", data, config);
+  },
+  forgotEmail: async ({ email }: { email: string }) => {
+    const data = {
+      email: email,
+    };
+    return await Fetch.post("/users/send-otp", data, config);
   },
 
-  register: async ({
+  onRegister: async ({
     username,
     email,
     password,
@@ -26,11 +32,11 @@ export const UserService = {
     password: string;
   }) => {
     const data = {
-      username: username,
+      fullName: username,
       email: email,
       password: password,
     };
-    return await Fetch.post("/auth/register", data, config);
+    return await Fetch.post("/users/register", data, config);
   },
 
   logout: (context = null) => {

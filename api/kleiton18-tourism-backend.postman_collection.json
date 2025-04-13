@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "f221a5a3-5d2c-44e5-a66d-27d2fe11d5c7",
+		"name": "kleiton18-tourism-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39922573",
+		"_collection_link": "https://www.postman.com/web444-4006/workspace/travel/collection/39922573-f221a5a3-5d2c-44e5-a66d-27d2fe11d5c7?action=share&source=collection_link&creator=39922573"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "forgot password",
+					"item": [
+						{
+							"name": "step1: send-otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"tqmhosain@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/users/send-otp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"users",
+										"send-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "step2: verify-otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"tqmhosain@gmail.com\",\r\n     \"otp\": \"3322\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/users/verify-otp",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"users",
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "step3: reset-password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"tqmhosain@gmail.com\",\r\n    \"newPassword\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3002/users/reset-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3002",
+									"path": [
+										"users",
+										"reset-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "register new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"test\",\r\n    \"email\": \"1@gmail.com\",\r\n    \"password\": \"123456\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.4.3:3000/users/register",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"3"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tqmhosain@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.4.3:3000/users/login",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"3"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hotel",
+			"item": [
+				{
+					"name": "add hotel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test name",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "test location",
+									"type": "text"
+								},
+								{
+									"key": "numberOfReview",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "bookingLink",
+									"value": "https://www.figma.com/design/z5SlLrpOZFU8j5FQE6HL7U/kleiton18_FO3D0CAE8541_Tourism-guide-website_ninjadesigner24_-350-copy-?node-id=5218-5632&t=nYEfpUjrZLnxFzEO-0",
+									"type": "text"
+								},
+								{
+									"key": "pool",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "restaurant",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "freeWifi",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/tqmho/Downloads/HbC2nG_NS8mZpRw-FIcHIQ.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/hotel/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"hotel",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete hotel",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/hotel/delete/c5cfe839-c3b3-4d2f-a2a5-0de7785654c6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"hotel",
+								"delete",
+								"c5cfe839-c3b3-4d2f-a2a5-0de7785654c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all hotel",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/hotel/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"hotel",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"item": [
+				{
+					"name": "Restaurant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test name",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "dhaka",
+									"type": "text"
+								},
+								{
+									"key": "numberOfReview",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "7000000000000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/tqmho/Downloads/The Frozen Kingdoms of Pluto.png"
+								},
+								{
+									"key": "openTime",
+									"value": "11: 30 am",
+									"type": "text"
+								},
+								{
+									"key": "closeTime",
+									"value": "10: 30 pm",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "test details",
+									"type": "text"
+								},
+								{
+									"key": "bookingLink",
+									"value": "https://test.com",
+									"type": "text"
+								},
+								{
+									"key": "createdAt",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/restaurant/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurant",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/restaurant/delete/043f3636-2166-47fa-b637-974e8b8b56a2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurant",
+								"delete",
+								"043f3636-2166-47fa-b637-974e8b8b56a2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/restaurant/get?search=test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"restaurant",
+								"get"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
