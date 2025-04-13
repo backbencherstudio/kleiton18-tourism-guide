@@ -24,7 +24,7 @@ function LogInForm() {
     } = useForm<FormValues>()
 
     const onSubmit = async (data: FormValues) => {
-        console.log(data)
+        
         try {
             const res = await login({ email: data?.email, password: data?.password })
             const tokenNumber = res.data.token
@@ -32,9 +32,6 @@ function LogInForm() {
                 key: "token",
                 value: tokenNumber,
             });
-            console.log(tokenNumber);
-            console.log("ter-------------", res);
-
             router.push("/")
         } catch (error) {
             if (error.response.status === 400) {
