@@ -1,14 +1,23 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { Menu } from 'lucide-react';
+"use client"
 import {
   Sheet,
   SheetContent,
   SheetTrigger
 } from '@/components/ui/sheet';
+import { CookieHelper } from '@/helper/cookie.helper';
+import { Menu } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
+  const [token, setToken] = useState<string | null>(null);
+  console.log(token);
+    useEffect(() => {
+    const userToken = CookieHelper.get({ key: "token" });
+    setToken(userToken || null);
+  }, []);
+  
   return (
     <div className="absolute z-50 top-0 left-0 right-0 bg-[#FFFFFF1A] backdrop-blur-xs p-4">
       <div className="max-w-[1320px] mx-auto flex items-center justify-between">
@@ -42,9 +51,19 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex items-center justify-center gap-8">
           <Link href={'/'} className='px-[23px] py-[9px] border border-[#EDEDED] rounded-[8px] text-white text-[16px] font-medium leading-[130%]'>Emergency Contacts</Link>
-          <Link href={'/'} className='rounded-full'>
+          {token ? (
+            <Link href={'#'} className='rounded-full'>
             <Image height={44} width={44} src={'/images/up.png'} alt='user photo' />
           </Link>
+          ) : (
+            <Link
+              href={"/login"}
+              className="px-[23px] bg-primaryColor py-[10px]  rounded-[8px] text-white text-[16px] font-medium leading-[130%]"
+            >
+              Login
+            </Link>
+          )}
+         
         </div>
       </div>
     </div>

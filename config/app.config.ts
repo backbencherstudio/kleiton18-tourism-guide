@@ -1,6 +1,6 @@
 // server base url
 export const URL =
-  process.env.NEXT_PUBLIC_API_ENDPOINT || "http://127.0.0.1:4000";
+  process.env.NEXT_PUBLIC_API_ENDPOINT || "http://192.168.4.3:3000";
 // app config
 export const AppConfig = () => ({
   app: {
@@ -14,6 +14,6 @@ export const AppConfig = () => ({
     },
 
     // api endpoint
-    apiUrl: `${URL}/api`,
+    apiUrl: `${URL}`,
   },
 });

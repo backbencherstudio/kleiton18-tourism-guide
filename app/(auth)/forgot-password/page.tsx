@@ -1,9 +1,11 @@
 "use client"
 
+import { UserService } from "@/service/user/user.service"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -25,14 +27,29 @@ export default function ForgotPassword() {
       email: "",
     },
   })
+  const { forgotEmail } = UserService
   const router = useRouter()
+  const [error, setError] = useState("")
 
   const onSubmit = async (data: FormValues) => {
     // Handle OTP sending logic here
     console.log("Sending OTP to:", data.email)
-    // Simulate API call
-   router.push("/confirm-otp")
+     try {
+                const res = await forgotEmail({ email: data?.email })
+                console.log("otpe-send",res);
+                
+               
+                 router.push("/confirm-otp")
 
+            } catch (error) {
+                if (error.response.status === 400) {
+                    setError(error.response.data.message)
+                }
+                console.error("Registration failed:", error);
+                // Optionally show error to user
+            }
+    // Simulate API call
+  
 
   }
 

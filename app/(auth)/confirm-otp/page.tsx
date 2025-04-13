@@ -1,6 +1,5 @@
 "use client"
 
-import VerificationConfirmModal from "@/components/reusable/VerificationConfirmModal"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
@@ -49,7 +48,7 @@ export default function VerificationPage() {
   const handleVerify = () => {
     if (code.every((digit) => digit !== "")) {
       if (code.join("") === verifyCode.join("")) {
-        setIsDialogOpen(true)
+         router.push("/update-password")
       } else {
         setError(true)
         setTimeLeft(30)
@@ -138,8 +137,8 @@ export default function VerificationPage() {
         </div>
       </div>
 
-      {/* Dialog Box on Success */}
-      {isDialogOpen && <VerificationConfirmModal isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} title="Verification complete" description="Your account has been verified successfully"/>}
+     
+      
     </section>
   )
 }

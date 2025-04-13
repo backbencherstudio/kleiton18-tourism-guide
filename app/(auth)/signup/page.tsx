@@ -1,4 +1,4 @@
-import SignInForm from "@/components/allForm/SignInForm";
+import SignUpForm from "@/components/allForm/SignUpForm";
 
 export default function SignupPage() {
   return (
@@ -12,7 +12,7 @@ export default function SignupPage() {
             </p>
           </div>
           <div className="w-full bg-white rounded-lg p-8 border border-borderColor">
-            <SignInForm/>
+            <SignUpForm/>
           </div>
         </div>
       </div>
