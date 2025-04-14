@@ -1,5 +1,7 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -14,15 +16,13 @@ const RestaurantListing = () => {
   const [loading, setLoading] = useState(true);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
+  const { getAllRestaurant } = UserService;
+  const { token } = useToken();
   useEffect(() => {
-    const controller = new AbortController();
-    const url = "/restaurant.json";
-
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        const result = await response.json();
+        const Restaurant = await getAllRestaurant({ token: "" });
+        const result = Restaurant.data.data;
         setData(result);
       } catch (error: any) {
         if (error.name !== "AbortError") {
@@ -35,7 +35,6 @@ const RestaurantListing = () => {
     };
 
     fetchData();
-    return () => controller.abort();
   }, []);
 
   return (
@@ -87,7 +86,7 @@ const RestaurantListing = () => {
                   <div className="flex flex-col md:flex-row gap-5 h-full p-5 border border-[#E0E0E0] rounded-[12px] bg-[#FAFAFA] overflow-hidden">
                     <div className="w-full md:min-w-[260px] md:max-w-[260px]">
                       <img
-                        src={restaurant.image_link}
+                        src={restaurant.image}
                         alt={restaurant.name}
                         className="w-full h-full object-cover rounded-[8px]"
                       />
@@ -110,7 +109,7 @@ const RestaurantListing = () => {
                             ))}
                             <p className="text-sm text-gray-700">
                               {restaurant.rating} Out of{" "}
-                              {restaurant.total_reviews} Review
+                              {restaurant.numberOfReview} Review
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
@@ -130,27 +129,27 @@ const RestaurantListing = () => {
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/open.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
-                              Open: {restaurant.open_time}
+                              Open: {restaurant.openTime}
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/close.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
-                              Close: {restaurant.close_time}
+                              Close: {restaurant.closeTime}
                             </p>
                           </div>
                         </div>
                       </div>
                       <div className="flex justify-between">
                         <Link
-                         href='/login'
+                          href={token ? restaurant?.bookingLink : "/login"}
                           className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                         >
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
                         <Link
-                          href='/login'
+                          href={token ? restaurant?.bookingLink : "/login"}
                           className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                         >
                           <img src="/images/icons/heart.png" alt="" />
