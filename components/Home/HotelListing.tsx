@@ -11,7 +11,7 @@ const HotelListing = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { getAllHotel } = UserService;
-  const { token } = useToken();
+  const { token }: any = useToken();
 
   // Fetch Hotel Data from API
   useEffect(() => {
@@ -40,7 +40,6 @@ const HotelListing = () => {
 
     fetchData();
   }, []);
-  console.log("filer", data);
 
   return (
     <>

@@ -1,5 +1,6 @@
 "use client";
 
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,15 +11,16 @@ const VisitArea = () => {
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isXL, setIsXL] = useState(false);
-
+  const { getAllVisitArea } = UserService;
+  // const { token } = useToken();
   useEffect(() => {
     const controller = new AbortController();
     const url = "/area.json";
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        const result = await response.json();
+        const Restaurant = await getAllVisitArea({ token: "" });
+        const result = Restaurant.data.data;
         const latestVisit = result
           .sort((a: any, b: any) => b.id - a.id)
           .slice(0, 4);
@@ -46,6 +48,7 @@ const VisitArea = () => {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+  console.log(data);
 
   return (
     <div className="px-4 py-10 md:py-20">
@@ -78,7 +81,7 @@ const VisitArea = () => {
                 <div
                   key={area.id}
                   className={`group relative transition-all duration-300 ease-in-out bg-cover bg-center bg-no-repeat h-[400px] flex flex-col justify-end p-4 ${widthClass}`}
-                  style={{ backgroundImage: `url(${area.image_link})` }}
+                  style={{ backgroundImage: `url(${area.image})` }}
                   onMouseEnter={() => isXL && setHoveredIndex(index)}
                   onMouseLeave={() => isXL && setHoveredIndex(null)}
                 >
@@ -129,13 +132,13 @@ const VisitArea = () => {
 
                     <div className="flex justify-between items-center mt-2">
                       <Link
-                        href='/login'
+                        href="/login"
                         className="flex items-center gap-2 text-[16px] font-normal leading-[130%] text-white"
                       >
                         View Details <ArrowRight size={18} />
                       </Link>
                       <Link
-                       href='/login'
+                        href="/login"
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
                       >
                         <img src="/images/icons/heart.png" alt="Heart" />

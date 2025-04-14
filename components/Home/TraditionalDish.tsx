@@ -93,14 +93,14 @@ const TraditionalDish = () => {
                   </div>
                   <div className="flex justify-between">
                     <Link
-                     href='/login'
+                      href="/login"
                       className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                     >
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
                     <Link
-                      href='/login'
+                      href="/login"
                       className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                     >
                       <img src="/images/icons/heart.png" alt="" />

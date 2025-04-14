@@ -91,6 +91,32 @@ export const UserService = {
 
     return await Fetch.get(`/restaurant/get`, _config);
   },
+  getAlltraditionalDish: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/traditional-dish/get`, _config);
+  },
+  getAllVisitArea: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/visit-area/get`, _config);
+  },
   getUserDetails: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
