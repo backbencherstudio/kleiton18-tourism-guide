@@ -15,6 +15,28 @@ export const UserService = {
     };
     return await Fetch.post("/users/login", data, config);
   },
+  confirmOTP: async ({ email, otp }: { email: string; password: string }) => {
+    const data = {
+      email: email,
+      otp: otp,
+    };
+    return await Fetch.post("/users/verify-otp", data, config);
+  },
+  updatePassword: async ({
+    email,
+    newPassword,
+  }: {
+    email: string;
+    newPassword: string;
+  }) => {
+    console.log(newPassword);
+
+    const data = {
+      email: email,
+      newPassword: newPassword,
+    };
+    return await Fetch.post("/users/reset-password", data, config);
+  },
   forgotEmail: async ({ email }: { email: string }) => {
     const data = {
       email: email,
@@ -43,6 +65,19 @@ export const UserService = {
     CookieHelper.destroy({ key: "token", context });
   },
   // get user details
+  getAllHotel: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + userToken,
+      },
+    };
+
+    return await Fetch.get(`/hotel/get`, _config);
+  },
   getUserDetails: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
