@@ -17,7 +17,7 @@ const RestaurantListing = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const { getAllRestaurant } = UserService;
-  const { token } = useToken();
+  const { token }: any = useToken();
   useEffect(() => {
     const fetchData = async () => {
       try {

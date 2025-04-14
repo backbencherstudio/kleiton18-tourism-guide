@@ -3,10 +3,19 @@
 import { CookieHelper } from "@/helper/cookie.helper";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const TokenContext = createContext<string | null>(null);
+// context accepts an object, not just the token
+type TokenContextType = {
+  token: string | null;
+};
+
+const TokenContext = createContext<TokenContextType | null>(null);
 
 export const useToken = () => {
-  return useContext(TokenContext);
+  const context = useContext(TokenContext);
+  if (!context) {
+    throw new Error("useToken must be used within a TokenProvider");
+  }
+  return context;
 };
 
 export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
@@ -16,12 +25,12 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
     const interval = setInterval(() => {
       const userToken = CookieHelper.get({ key: "token" });
       setToken(userToken || null);
-    }, 1000); // check every 1 second
+    }, 1000);
 
-    return () => clearInterval(interval); // cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <TokenContext.Provider value={token}>{children}</TokenContext.Provider>
+    <TokenContext.Provider value={{ token }}>{children}</TokenContext.Provider>
   );
 };
