@@ -1,22 +1,12 @@
 "use client";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { CookieHelper } from "@/helper/cookie.helper";
+import { useToken } from "@/hooks/useToken";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const [token, setToken] = useState<string | null>(null);
-  console.log(token);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const userToken = CookieHelper.get({ key: "token" });
-      setToken(userToken || null);
-    }, 100); // check every 1 second
-
-    return () => clearInterval(interval); // cleanup
-  }, []);
+  const { token } = useToken();
 
   return (
     <div className="absolute z-50 top-0 left-0 right-0 bg-[#FFFFFF1A] backdrop-blur-xs p-4">

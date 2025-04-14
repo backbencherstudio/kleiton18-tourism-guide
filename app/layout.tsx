@@ -1,5 +1,6 @@
 import LenisWrapper from "@/components/reusable/LenisWrapper";
 import { AppConfig } from "@/config/app.config";
+import { TokenProvider } from "@/hooks/useToken";
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <LenisWrapper>{children}</LenisWrapper>
+        <LenisWrapper>
+          <TokenProvider>{children}</TokenProvider>
+        </LenisWrapper>
       </body>
     </html>
   );
