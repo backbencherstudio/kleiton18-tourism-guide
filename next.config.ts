@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
-    domains: ["46.202.164.243"],
+
+    domains: ["192.168.4.3"],
   },
 };
 

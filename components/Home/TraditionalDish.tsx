@@ -1,5 +1,7 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,16 +10,15 @@ import HeadingTwo from "../reusable/HeadingTwo";
 const TraditionalDish = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const { getAlltraditionalDish } = UserService;
+  const { token }: any = useToken();
   // Fetch Dish Data from API
   useEffect(() => {
-    const controller = new AbortController();
-    const url = "/dish.json";
-
+    const controller = new AbortController()
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        const result = await response.json();
+    const Restaurant = await getAlltraditionalDish({ token: "" });
+        const result = Restaurant.data.data;
 
         // Sort by id DESC (latest first), then slice top 4
         const latestHotels = result
@@ -61,7 +62,7 @@ const TraditionalDish = () => {
                 className="flex flex-col gap-5 rounded-[12px] bg-[#FAFAFA]"
               >
                 <img
-                  src={dish.image_link}
+                  src={dish.image}
                   alt={dish.name}
                   className="w-full min-h-[440px] object-cover rounded-[8px]"
                 />
@@ -79,7 +80,7 @@ const TraditionalDish = () => {
                         />
                       ))}
                       <p className="ms-2 text-[#4A4A4A] text-[14px] font-normal leading-[150%]">
-                        {dish.rating} Out of {dish.total_reviews} Review
+                        {dish.rating} Out of {dish.numberOfReview} Review
                       </p>
                     </div>
                     <div className="w-full flex items-center justify-between">
@@ -93,14 +94,14 @@ const TraditionalDish = () => {
                   </div>
                   <div className="flex justify-between">
                     <Link
-                      href="/login"
+                      href={token ? dish?.bookingLink : "/login"}
                       className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                     >
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
                     <Link
-                      href="/login"
+                       href={token ? dish?.bookingLink : "/login"}
                       className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                     >
                       <img src="/images/icons/heart.png" alt="" />

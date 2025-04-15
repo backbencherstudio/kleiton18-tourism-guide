@@ -28,12 +28,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3002/users/send-otp",
+									"raw": "http://46.202.164.243:3000/users/send-otp",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"46",
+										"202",
+										"164",
+										"243"
 									],
-									"port": "3002",
+									"port": "3000",
 									"path": [
 										"users",
 										"send-otp"
@@ -57,12 +60,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3002/users/verify-otp",
+									"raw": "http://46.202.164.243:3000/users/verify-otp",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"46",
+										"202",
+										"164",
+										"243"
 									],
-									"port": "3002",
+									"port": "3000",
 									"path": [
 										"users",
 										"verify-otp"
@@ -86,12 +92,15 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3002/users/reset-password",
+									"raw": "http://46.202.164.243:3000/users/reset-password",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"46",
+										"202",
+										"164",
+										"243"
 									],
-									"port": "3002",
+									"port": "3000",
 									"path": [
 										"users",
 										"reset-password"
@@ -117,13 +126,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://192.168.4.3:3000/users/register",
+							"raw": "http://46.202.164.243:3000/users/register",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"4",
-								"3"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -149,13 +158,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://192.168.4.3:3000/users/login",
+							"raw": "http://46.202.164.243:3000/users/login",
 							"protocol": "http",
 							"host": [
-								"192",
-								"168",
-								"4",
-								"3"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -233,10 +242,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/hotel/add",
+							"raw": "http://46.202.164.243:3000/hotel/add",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -268,10 +280,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/hotel/delete/c5cfe839-c3b3-4d2f-a2a5-0de7785654c6",
+							"raw": "http://46.202.164.243:3000/hotel/delete/c5cfe839-c3b3-4d2f-a2a5-0de7785654c6",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -302,10 +317,13 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:3000/hotel/get",
+							"raw": "http://46.202.164.243:3000/hotel/get",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -389,10 +407,13 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/restaurant/add",
+							"raw": "http://46.202.164.243:3000/restaurant/add",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -415,10 +436,13 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/restaurant/delete/043f3636-2166-47fa-b637-974e8b8b56a2",
+							"raw": "http://46.202.164.243:3000/restaurant/delete/043f3636-2166-47fa-b637-974e8b8b56a2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -436,10 +460,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/restaurant/get?search=test",
+							"raw": "http://46.202.164.243:3000/restaurant/get?search=test",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"46",
+								"202",
+								"164",
+								"243"
 							],
 							"port": "3000",
 							"path": [
@@ -451,6 +478,324 @@
 									"key": "search",
 									"value": "test"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TraditionalDish",
+			"item": [
+				{
+					"name": "add TraditionalDish",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test name",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100r",
+									"type": "text"
+								},
+								{
+									"key": "numberOfReview",
+									"value": "1000r",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "7000000000000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/tqmho/Downloads/The Frozen Kingdoms of Pluto (1).png"
+								},
+								{
+									"key": "bookingLink",
+									"value": "https://www.youtube.com/",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://46.202.164.243:3000/traditional-dish/add",
+							"protocol": "http",
+							"host": [
+								"46",
+								"202",
+								"164",
+								"243"
+							],
+							"port": "3000",
+							"path": [
+								"traditional-dish",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delite TraditionalDish",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://192.168.4.3:3000/traditional-dish/delete/e3440772-fc08-4b3c-9a6b-f57644bd4773",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"3"
+							],
+							"port": "3000",
+							"path": [
+								"traditional-dish",
+								"delete",
+								"e3440772-fc08-4b3c-9a6b-f57644bd4773"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://192.168.4.3:3000/traditional-dish/get?search=100",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"4",
+								"3"
+							],
+							"port": "3000",
+							"path": [
+								"traditional-dish",
+								"get"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "visit Area",
+			"item": [
+				{
+					"name": "add visit Area",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "visit-area",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "visit-area",
+									"type": "text"
+								},
+								{
+									"key": "numberOfReview",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "7000000000000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/tqmho/Downloads/WhatsApp Image 2025-03-26 at 09.33.58_e3ec68cb.jpg"
+								},
+								{
+									"key": "detailsLink",
+									"value": "https://www.youtube.com/",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test desc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://46.202.164.243:3000/visit-area/add",
+							"protocol": "http",
+							"host": [
+								"46",
+								"202",
+								"164",
+								"243"
+							],
+							"port": "3000",
+							"path": [
+								"visit-area",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete visit Area",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{vault:json-web-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://46.202.164.243:3000/visit-area/delete/d8f8b9db-a95d-4975-b460-1a56da0cafc3",
+							"protocol": "http",
+							"host": [
+								"46",
+								"202",
+								"164",
+								"243"
+							],
+							"port": "3000",
+							"path": [
+								"visit-area",
+								"delete",
+								"d8f8b9db-a95d-4975-b460-1a56da0cafc3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://46.202.164.243:3000/visit-area/get?search=test",
+							"protocol": "http",
+							"host": [
+								"46",
+								"202",
+								"164",
+								"243"
+							],
+							"port": "3000",
+							"path": [
+								"visit-area",
+								"get"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "add favorites",
+			"item": [
+				{
+					"name": "Adds item to user's favorites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2NDM4ZTI2LTI3NzEtNDM0MC04ZGZjLWY3NDE5NTI2ZDYyNCIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzQ0NjAyMTU3LCJleHAiOjE3NDcxOTQxNTd9.sD41l7n22H9IHCPrfyB0CqmITle9TE9E0amfuyGBf8Y",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"entityId\": \"741d720e-1766-4c95-a443-c1fd4f220d1f\",\r\n    \"entityType\": \"HOTEL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://46.202.164.243:3000/favorites/add",
+							"protocol": "http",
+							"host": [
+								"46",
+								"202",
+								"164",
+								"243"
+							],
+							"port": "3000",
+							"path": [
+								"favorites",
+								"add"
 							]
 						}
 					},
