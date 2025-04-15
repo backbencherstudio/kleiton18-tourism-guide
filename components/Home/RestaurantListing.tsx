@@ -21,7 +21,7 @@ const RestaurantListing = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const Restaurant = await getAllRestaurant({ token: "" });
+        const Restaurant = await getAllRestaurant({ token, page: 1, limit: 10 });
         const result = Restaurant.data.data;
         setData(result);
       } catch (error: any) {

@@ -96,13 +96,15 @@ function VisitedTable() {
                                             <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
                                             <td className="px-4 py-3 text-sm font-normal">{restaurant.name}</td>
                                             <td className="px-4 py-3 text-sm font-normal">
+                                              <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
                                                 <Image
                                                     src={restaurant.image}
                                                     alt={restaurant.name}
                                                     width={30}
                                                     height={30}
-                                                    className="rounded-full"
+                                                    className="w-full h-full object-cover"
                                                 />
+                                              </div>
                                             </td>
                                             <td className="px-4 py-3 text-sm font-normal">{restaurant.location}</td>
 

@@ -17,7 +17,7 @@ const { getAlltraditionalDish } = UserService;
     const controller = new AbortController()
     const fetchData = async () => {
       try {
-    const Restaurant = await getAlltraditionalDish({ token: "" });
+    const Restaurant = await getAlltraditionalDish({ token, page: 1, limit: 10 });
         const result = Restaurant.data.data;
 
         // Sort by id DESC (latest first), then slice top 4
