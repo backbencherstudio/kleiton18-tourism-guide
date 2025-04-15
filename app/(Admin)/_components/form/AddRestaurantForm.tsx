@@ -1,5 +1,9 @@
 'use client';
+import { useToken } from '@/hooks/useToken';
+import { UserService } from '@/service/user/user.service';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 type RestaurantFormInputs = {
   name: string;
@@ -12,7 +16,6 @@ type RestaurantFormInputs = {
   image: FileList;
   bookingLink: string;
 };
-
 export default function AddRestaurantForm() {
   const {
     register,
@@ -20,11 +23,37 @@ export default function AddRestaurantForm() {
     reset,
     formState: { errors },
   } = useForm<RestaurantFormInputs>();
+  const { token } = useToken();
+  const [error, setError] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const onSubmit = async (data: RestaurantFormInputs) => {
+    setLoading(true)
+    try {
+      if (!token) {
+        throw new Error("User token not found. Please login again.");
+      }
+      const formData:any = new FormData();
+      formData.append("name", data.name);
+      formData.append("location", data.location);
+      formData.append("numberOfReview", String(data.reviews));
+      formData.append("rating", String(data.rating));
+      formData.append("openTime", data.openTime);
+      formData.append("closeTime", data.closeTime);
+      formData.append("details", data.details);
+      formData.append("bookingLink", data.bookingLink);
+      formData.append("image", data.image[0]); // assuming one file only
 
-  const onSubmit = (data: RestaurantFormInputs) => {
-    console.log('Restaurant Data:', data);
+      const response = await UserService.addRestaurant(formData, token);
+      if(response?.status === 201){
+         toast.success("Added successfully new Restaurant")
+        setLoading(false)
+          reset(formData)
+      }
+      console.log("Restaurant added successfully:", response);
+    } catch (error: any) {
+      setError(error?.message || error);
+    }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-4 lg:space-y-6">
@@ -41,7 +70,6 @@ export default function AddRestaurantForm() {
             />
             {errors.name && <p className="text-primaryColor text-xs mt-1">{errors.name.message}</p>}
           </div>
-
           {/* Location */}
           <div className=''>
             <label className="block text-sm text-[#212121] mb-2">Location</label>
@@ -64,7 +92,6 @@ export default function AddRestaurantForm() {
               />
               {errors.reviews && <p className="text-primaryColor text-xs mt-1">{errors.reviews.message}</p>}
             </div>
-
             {/* Rating */}
             <div>
               <label className="block text-sm text-[#212121] mb-2">Rating</label>
@@ -94,10 +121,7 @@ export default function AddRestaurantForm() {
               </div>
               {errors.image && <p className="text-primaryColor text-xs mt-1">{errors.image.message}</p>}
             </div>
-
           </div>
-
-
           {/* Open Time */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Open Time</label>
@@ -105,23 +129,21 @@ export default function AddRestaurantForm() {
               type="text"
               {...register('openTime', { required: 'Open time is required' })}
               className="w-full p-3 border rounded-md outline-0 text-sm"
-              placeholder='type'
+              placeholder='10: 00 am'
             />
             {errors.openTime && <p className="text-primaryColor text-xs mt-1">{errors.openTime.message}</p>}
           </div>
-
           {/* Close Time */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Close Time</label>
             <input
               type="text"
-              placeholder="Type"
+              placeholder="06: 30 pm"
               {...register('closeTime', { required: 'Close time is required' })}
               className="w-full p-3 border rounded-md outline-0 text-sm"
             />
             {errors.closeTime && <p className="text-primaryColor text-xs mt-1">{errors.closeTime.message}</p>}
           </div>
-
           {/* Details */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Details</label>
@@ -133,7 +155,6 @@ export default function AddRestaurantForm() {
             />
             {errors.details && <p className="text-primaryColor text-xs mt-1">{errors.details.message}</p>}
           </div>
-
           {/* Booking Link */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Booking Link</label>
@@ -146,12 +167,9 @@ export default function AddRestaurantForm() {
               <p className="text-primaryColor text-xs mt-1">{errors.bookingLink.message}</p>
             )}
           </div>
-
-
-
+          {error && <p className=' text-center text-base py-2 text-primaryColor'>{error}</p>}
         </div>
       </div>
-
       {/* Buttons */}
       <div className="flex justify-center md:justify-end gap-3 mt-5">
         <button
@@ -163,9 +181,10 @@ export default function AddRestaurantForm() {
         </button>
         <button
           type="submit"
-          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
+          disabled={loading}
+          className="lg:px-6 lg:py-3 px-3 py-2 cursor-pointer text-base rounded-md bg-primaryColor text-white hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
-          Add Restaurant
+        {loading ? "submitting....":"Add Restaurant" }  
         </button>
       </div>
     </form>

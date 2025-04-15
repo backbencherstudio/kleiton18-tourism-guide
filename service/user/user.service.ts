@@ -43,6 +43,114 @@ export const UserService = {
     };
     return await Fetch.post("/users/send-otp", data, config);
   },
+addHotel: async (formData: any,token:any) => {
+  
+  if (!token) {
+  throw new Error("User token not found. Please login again.");
+}
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': token
+    },
+  };
+  return await Fetch.post("/hotel/add", formData, config);
+},
+// add resturant=============
+addRestaurant: async (formData: any,token:any) => {
+  
+  if (!token) {
+  throw new Error("User token not found. Please login again.");
+}
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': token
+    },
+  };
+  return await Fetch.post("/restaurant/add", formData, config);
+},
+// add TrandingDish =========================
+addTrandingDish: async (formData: any,token:any) => {
+  
+  if (!token) {
+  throw new Error("User token not found. Please login again.");
+}
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': token
+    },
+  };
+  return await Fetch.post("/traditional-dish/add", formData, config);
+},
+// add visited area================
+addVisitedAerea: async (formData: any,token:any) => {
+  
+  if (!token) {
+  throw new Error("User token not found. Please login again.");
+}
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': token
+    },
+  };
+  return await Fetch.post("/visit-area/add", formData, config);
+},
+//================================
+// delete visit area==========
+  deleteVisitArea: async (id, context = null, token: any) => {
+    
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+       'Authorization': token,
+       
+      },
+    };
+
+    return await Fetch.delete(`/visit-area/delete/${id}`, _config);
+  },
+// delete restaurant==========
+  deleteRestaurant: async (id:any, context = null, token: any) => {
+    
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+       'Authorization': token,
+       
+      },
+    };
+
+    return await Fetch.delete(`/restaurant/delete/${id}`, _config);
+  },
+// delete Tranding Dish==========
+  deleteDish: async (id:any, context = null, token: any) => {
+    
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+       'Authorization': token,
+       
+      },
+    };
+    return await Fetch.delete(`/traditional-dish/delete/${id}`, _config);
+  },
+// delete hotel ==========
+  deleteHotel: async (id:any, context = null, token: any) => {
+    
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+       'Authorization': token,
+       
+      },
+    };
+    return await Fetch.delete(`/hotel/delete/${id}`, _config);
+  },
+
+  //=======================
 
   onRegister: async ({
     username,
@@ -78,7 +186,7 @@ export const UserService = {
 
     return await Fetch.get(`/hotel/get`, _config);
   },
-  getAllRestaurant: async ({ token = "", context = null }) => {
+  getAllRestaurant: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
 
@@ -89,7 +197,7 @@ export const UserService = {
       },
     };
 
-    return await Fetch.get(`/restaurant/get`, _config);
+    return await Fetch.get(`/restaurant/get?page=${page}&limit=${limit}`, _config);
   },
   getAlltraditionalDish: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
@@ -117,6 +225,7 @@ export const UserService = {
 
     return await Fetch.get(`/visit-area/get`, _config);
   },
+
   getUserDetails: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
@@ -178,7 +287,8 @@ export const UserService = {
 
     return await Fetch.get(`/user/profile/${username}`, _config);
   },
-
+  
+  
   update: async (
     {
       fname,

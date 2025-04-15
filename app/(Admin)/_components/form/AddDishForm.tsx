@@ -1,5 +1,9 @@
 'use client';
+import { useToken } from '@/hooks/useToken';
+import { UserService } from '@/service/user/user.service';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 type RestaurantFormInputs = {
   name: string;
@@ -20,16 +24,46 @@ export default function AddDishForm() {
     reset,
     formState: { errors },
   } = useForm<RestaurantFormInputs>();
+    const {token} = useToken()
+      const [error, setError] = useState<string>("")
+     const [loading, setLoading] = useState<boolean>(false)
+  const onSubmit = async (data: RestaurantFormInputs) => {
+    setLoading(true)
+  try {
 
-  const onSubmit = (data: RestaurantFormInputs) => {
-    console.log('Restaurant Data:', data);
-  };
+    if (!token) {
+      throw new Error("User token not found. Please login again.");
+    }
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", String(data.price));
+    formData.append("numberOfReview", String(data.reviews));
+    formData.append("rating", String(data.rating));
+    formData.append("openTime", data.openTime);
+    formData.append("closeTime", data.closeTime);
+    formData.append("details", data.details);
+    formData.append("bookingLink", data.bookingLink);
+    formData.append("image", data.image[0]); // single file
+
+    const response = await UserService.addTrandingDish(formData, token);
+    console.log("Dish added successfully:", response);
+ if (response.status === 201) {
+      toast.success("Added successfully new Dish")
+       setLoading(false)
+       reset();
+    }
+     // ✅ clear the form after successful submit
+  } catch (error: any) {
+   setError( error?.message || error);
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-6 rounded-lg bg-white border border-gray-200 space-y-6">
         <h2 className="text-xl text-[#232323] !font-[Poppins] font-medium">General Information</h2>
-
         <div className="grid md:grid-cols-2 gap-4">
           {/* Restaurant Name */}
           <div>
@@ -41,7 +75,6 @@ export default function AddDishForm() {
             />
             {errors.name && <p className="text-primaryColor text-xs mt-1">{errors.name.message}</p>}
           </div>
-
           {/* Location */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Price</label>
@@ -52,7 +85,6 @@ export default function AddDishForm() {
             />
             {errors.price && <p className="text-primaryColor text-xs mt-1">{errors.price.message}</p>}
           </div>
-
  {/* Number of Reviews */}
           <div >
             <label className="block text-sm text-[#212121] mb-2">Number of Review</label>
@@ -94,7 +126,6 @@ export default function AddDishForm() {
             </div>
             {errors.image && <p className="text-primaryColor text-xs mt-1">{errors.image.message}</p>}
           </div>
-
           {/* Booking Link */}
           <div>
             <label className="block text-sm text-[#212121] mb-2">Booking Link</label>
@@ -107,10 +138,8 @@ export default function AddDishForm() {
               <p className="text-primaryColor text-xs mt-1">{errors.bookingLink.message}</p>
             )}
           </div>
-
-       
-         
         </div>
+        {error && <p className=' text-center text-base py-2 text-primaryColor'>{error}</p>}
       </div>
 
       {/* Buttons */}
@@ -124,9 +153,11 @@ export default function AddDishForm() {
         </button>
         <button
           type="submit"
-          className="lg:px-6 lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
+           disabled={loading}
+          className="lg:px-6 cursor-pointer disabled:bg-gray-500 disabled:cursor-not-allowed lg:py-3 px-3 py-2 text-base rounded-md bg-primaryColor text-white hover:bg-red-600"
         >
-          Add Traditional Dish
+           {loading ? "submitting....":" Add Traditional Dish" }  
+         
         </button>
       </div>
     </form>

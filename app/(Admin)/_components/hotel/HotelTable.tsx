@@ -31,15 +31,17 @@ const HotelListTable = ({ allHotel }: any) => {
   };
   const parPage = 5;
   const skipHotel = page * parPage;
-  const countpage = Math.ceil(allHotel.length / parPage);
-  const validHotels = Array.isArray(allHotel.data) ? allHotel.data : [];
 
+
+  const validHotels = Array.isArray(allHotel.data) ? allHotel.data : [];
   const perPageHotel =
-    validHotels.length > 8
+    validHotels.length > 5
       ? validHotels.slice(skipHotel, skipHotel + parPage)
       : validHotels;
   console.log("hotel=========", perPageHotel);
-
+  const countpage = Math.ceil(validHotels.length / parPage);
+  
+    console.log(countpage);
   const handlePrev = () => {
     if (page > 0) setPage((prev) => prev - 1);
   };
@@ -49,7 +51,7 @@ const HotelListTable = ({ allHotel }: any) => {
   };
   return (
     <div className="">
-      <div className="flex justify-between items-center mb-4  w-[760px] md:w-auto md:pr-0 pr-3">
+      <div className="flex justify-between items-center mb-4 pt-4 lg:pt-0 w-[760px] md:w-auto md:pr-0 pr-3">
         <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
           Hotel List
         </h2>
@@ -61,10 +63,10 @@ const HotelListTable = ({ allHotel }: any) => {
         </Link>
       </div>
 
-      <div className=" flex flex-col ">
+      <div className=" flex flex-col md:w-full md:overflow-auto ">
         <div className="  rounded-md ">
-          <table className="min-w-full text-sm table-fixed">
-            <thead className=" bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs text-start">
+          <table className="min-w-full text-sm text-left">
+            <thead className="sticky top-0 bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs ">
               <tr>
                 <th className="px-4 text-start py-4 font-normal text-xs">Sl</th>
                 <th className="px-4 text-start py-4 font-normal text-xs">
@@ -82,7 +84,7 @@ const HotelListTable = ({ allHotel }: any) => {
                 <th className="px-4 text-start py-4 font-normal text-xs">
                   Location
                 </th>
-                <th className="px-4 text-start py-4 font-normal text-xs !w-[120px]">
+                <th className="px-4 text-start py-4 font-normal text-xs md:w-[120px]">
                   Booking Link
                 </th>
                 <th className="px-4 text-start py-4 font-normal text-xs">
@@ -123,7 +125,7 @@ const HotelListTable = ({ allHotel }: any) => {
                   <td className="px-4 py-3 text-sm font-normal">
                     {hotel.location}
                   </td>
-                  <td className="px-4 py-3 text-sm font-normal !w-[120px]">
+                  <td className="px-4 py-3 text-sm font-normal md:w-[120px]">
                     <Link
                       href={`#`}
                       className="  !w-[120px]"
@@ -202,7 +204,7 @@ const HotelListTable = ({ allHotel }: any) => {
             {Math.min(skipHotel + parPage, validHotels.length)} Result Showing
             Out of {validHotels.length}
           </span>
-          {allHotel.length > 8 && (
+          {validHotels.length > 5 && (
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrev}
