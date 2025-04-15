@@ -21,7 +21,7 @@ const HotelListings = () => {
 
     const fetchData = async () => {
       try {
-        const allHotel = await getAllHotel({ token: "" });
+        const allHotel = await getAllHotel({ token, context: null, page : "", limit :"" });
 
         const result = allHotel.data.data;
         setData(result);
