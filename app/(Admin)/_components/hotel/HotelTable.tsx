@@ -273,12 +273,12 @@ const HotelListTable = () => {
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
+              variant="outline" className=" cursor-pointer"
               onClick={() => setDeleteDialogOpen(false)}
             >
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleDelete}>
+            <Button variant="destructive" className=" cursor-pointer" onClick={handleDelete}>
               Delete
             </Button>
           </DialogFooter>

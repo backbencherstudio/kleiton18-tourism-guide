@@ -174,6 +174,20 @@ addVisitedAerea: async (formData: any,token:any) => {
     CookieHelper.destroy({ key: "token", context });
   },
   // get user details
+  getAllUser: async ({ token = "", context = null,page,limit }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+    const userToken = token;
+
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:userToken,
+      },
+    };
+
+    return await Fetch.get(`/users/all?page=${page}&limit=${limit}`, _config);
+  },
+  // get hotel details
   getAllHotel: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
