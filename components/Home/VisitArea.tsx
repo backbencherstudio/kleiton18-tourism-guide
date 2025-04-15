@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import HeadingTwo from "../reusable/HeadingTwo";
+import { useToken } from "@/hooks/useToken";
 
 const VisitArea = () => {
   const [data, setData] = useState([]);
@@ -12,14 +13,15 @@ const VisitArea = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isXL, setIsXL] = useState(false);
   const { getAllVisitArea } = UserService;
-  // const { token } = useToken();
+  const { token } = useToken();
+
   useEffect(() => {
     const controller = new AbortController();
     const url = "/area.json";
 
     const fetchData = async () => {
       try {
-        const Restaurant = await getAllVisitArea({ token: "" });
+        const Restaurant = await getAllVisitArea({ token, page: 1, limit: 10 });
         const result = Restaurant.data.data;
         const latestVisit = result
           .sort((a: any, b: any) => b.id - a.id)
@@ -127,7 +129,7 @@ const VisitArea = () => {
                           : "opacity-100 translate-y-0"
                       }`}
                     >
-                      {area.details}
+                      {area.description}
                     </p>
 
                     <div className="flex justify-between items-center mt-2">
