@@ -174,7 +174,7 @@ addVisitedAerea: async (formData: any,token:any) => {
     CookieHelper.destroy({ key: "token", context });
   },
   // get user details
-  getAllHotel: async ({ token = "", context = null }) => {
+  getAllHotel: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
     const userToken = token;
 
@@ -185,7 +185,7 @@ addVisitedAerea: async (formData: any,token:any) => {
       },
     };
 
-    return await Fetch.get(`/hotel/get`, _config);
+    return await Fetch.get(`/hotel/get?page=${page}&limit=${limit}`, _config);
   },
   getAllRestaurant: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });

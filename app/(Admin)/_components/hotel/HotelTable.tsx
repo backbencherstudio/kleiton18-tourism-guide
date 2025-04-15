@@ -9,46 +9,72 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const HotelListTable = ({ allHotel }: any) => {
-  const [page, setPage] = useState<number>(0);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedHotel, setSelectedHotel] = useState<number | null>(null);
-
-  const handleDeleteClick = (hotelId: number) => {
-    setSelectedHotel(hotelId);
-    setDeleteDialogOpen(true);
-  };
-
-  const handleDelete = () => {
-    // In a real app, you would delete the hotel from your database here
-    console.log(`Deleting hotel with ID: ${selectedHotel}`);
-    setDeleteDialogOpen(false);
-  };
-  const parPage = 5;
-  const skipHotel = page * parPage;
-
-
-  const validHotels = Array.isArray(allHotel.data) ? allHotel.data : [];
-  const perPageHotel =
-    validHotels.length > 5
-      ? validHotels.slice(skipHotel, skipHotel + parPage)
-      : validHotels;
-  console.log("hotel=========", perPageHotel);
-  const countpage = Math.ceil(validHotels.length / parPage);
-  
-    console.log(countpage);
-  const handlePrev = () => {
-    if (page > 0) setPage((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (page < countpage - 1) setPage((prev) => prev + 1);
-  };
+const HotelListTable = () => {
+  const { token } = useToken();
+   const [hotels, setHotels] = useState<any[]>([]);
+   const [dataCount , setDataCount] = useState<any>() 
+   const [page, setPage] = useState(1);
+   const [totalPages, setTotalPages] = useState(1);
+   const [selectHotel, setSelectHotel] = useState<any>(null);
+   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+ 
+ 
+   const limit = 5;
+ 
+   const fetchhotels = async () => {
+     try {
+       const response = await UserService.getAllHotel({ token, context: null, page, limit });
+       setHotels(response?.data.data || []);
+       const total = response?.data.pagination.totalData || 0;
+       setDataCount(response?.data.pagination.totalData);
+ 
+       setTotalPages(Math.ceil(total / limit));
+     } catch (error: any) {
+       toast.error(error?.message || "Failed to load hotels");
+     }
+   };
+ 
+   useEffect(() => {
+     fetchhotels();
+   }, [page]);
+ 
+   const handleDeleteClick = (id: string) => {
+     setSelectHotel(id);
+     setDeleteDialogOpen(true);
+   };
+ 
+   const handleDelete = async () => {
+   try {
+     const res = await UserService.deleteHotel(selectHotel, token);
+     if (res.status === 200 || res.status === 204) {
+       toast.success("Hotel deleted successfully");
+ 
+       // ✅ Filter out the deleted restaurant from local state
+       setHotels((prev) =>
+         prev.filter((restaurant) => restaurant.id !== selectHotel)
+       );
+ 
+       // ✅ Also update the total data count
+       setDataCount((prev: number) => prev - 1);
+     } else {
+       toast.error("Something went wrong while deleting.");
+     }
+   } catch (error: any) {
+     toast.error(error?.message || "Failed to delete Hotel");
+   } finally {
+     setDeleteDialogOpen(false);
+     setSelectHotel(null);
+   }
+ };
+ 
   return (
     <div className="">
       <div className="flex justify-between items-center mb-4 pt-4 lg:pt-0 w-[760px] md:w-auto md:pr-0 pr-3">
@@ -96,12 +122,12 @@ const HotelListTable = ({ allHotel }: any) => {
               </tr>
             </thead>
             <tbody className=" text-[#111]">
-              {perPageHotel.map((hotel, index) => (
+              {hotels.map((hotel, index) => (
                 <tr
                   key={hotel?.id}
                   className="border-b-[0.5px] border-borderColor"
                 >
-                  <td className="px-4 py-3 text-sm font-normal">{index + 1}</td>
+                  <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
                   <td className="px-4 py-3 text-sm font-normal">
                     {hotel.name}
                   </td>
@@ -198,52 +224,41 @@ const HotelListTable = ({ allHotel }: any) => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-between items-center mt-6 text-sm text-gray-600 mb-6 lg:mb-0 w-[760px] md:w-auto md:pr-0 pr-3">
-          <span>
-            {skipHotel + 1} -{" "}
-            {Math.min(skipHotel + parPage, validHotels.length)} Result Showing
-            Out of {validHotels.length}
-          </span>
-          {validHotels.length > 5 && (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handlePrev}
-                className={`px-2 py-1 rounded border cursor-pointer ${
-                  page === 0 ? "opacity-50 bg-gray-300 cursor-not-allowed" : ""
+          <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
+        <span>
+          {(page - 1) * limit + 1} -{" "}
+          {Math.min(page * limit,dataCount  )} Result Showing Out of{" "}
+          {dataCount}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+            className={`px-2 py-1 rounded border ${page === 1 ? "opacity-50 bg-gray-300 cursor-not-allowed" : ""
+              }`}
+          >
+            &#x276E;
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i + 1)}
+              className={`px-3 py-1 rounded border ${page === i + 1 ? "bg-black text-white" : "bg-white text-black"
                 }`}
-                disabled={page === 0}
-              >
-                &#x276E;
-              </button>
-
-              {[...Array(countpage)].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setPage(index)}
-                  className={`px-3 py-1 rounded border cursor-pointer ${
-                    page === index
-                      ? "bg-black text-white"
-                      : "bg-white text-black"
-                  }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-
-              <button
-                onClick={handleNext}
-                className={`px-2 py-1 rounded border cursor-pointer ${
-                  page === countpage - 1
-                    ? "opacity-50  bg-gray-300 cursor-not-allowed"
-                    : ""
-                }`}
-                disabled={page === countpage - 1}
-              >
-                &#x276F;
-              </button>
-            </div>
-          )}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+            className={`px-2 py-1 rounded border ${page === totalPages ? "opacity-50 bg-gray-300 cursor-not-allowed" : ""
+              }`}
+          >
+            &#x276F;
+          </button>
         </div>
+      </div>
       </div>
 
       {/* Delete Confirmation Dialog */}
