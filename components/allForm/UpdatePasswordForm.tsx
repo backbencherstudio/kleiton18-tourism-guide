@@ -4,7 +4,7 @@ import VerificationConfirmModal from "@/components/reusable/VerificationConfirmM
 import { UserService } from "@/service/user/user.service";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 type FormValues = {
@@ -16,8 +16,13 @@ function UpdatePasswordForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [error, setError] = useState("");
-  const userMail = localStorage.getItem("userEmail");
+  const [userMail, setUserMail] = useState<string | null>(null);
   const { updatePassword } = UserService;
+
+  useEffect(() => {
+    setUserMail(localStorage.getItem("userEmail"));
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -38,7 +43,7 @@ function UpdatePasswordForm() {
 
       if (res?.status === 200) {
         setIsDialogOpen(true);
-        localStorage.clear("userEmail");
+        localStorage.clear();
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -132,11 +137,6 @@ function UpdatePasswordForm() {
           )}
         </div>
 
-        {errors.agreeToTerms && (
-          <p className="mt-1 text-base text-red-600">
-            {errors.agreeToTerms.message}
-          </p>
-        )}
         {error && (
           <div className="text-base text-primaryColor py-2 text-center">
             {error}
