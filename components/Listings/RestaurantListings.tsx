@@ -145,12 +145,22 @@ function formatNumber(num: number): string {
                       >
                         Book Now <ArrowRight size={18} />
                       </Link>
-                      <Link
-                            href={token ? restaurant?.bookingLink : "/login"}
+                      <div>
+                        {
+                          token ? <button
+                           
+                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                      >
+                        <img src="/images/icons/heart.png" alt="heart" />
+                      </button> : <Link
+                            href={ "/login"}
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
                       </Link>
+                        }
+                      </div>
+                      
                     </div>
                   </div>
                 </div>
