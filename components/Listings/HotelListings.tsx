@@ -1,5 +1,7 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,15 +12,18 @@ const HotelListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [locationSearch, setLocationSearch] = useState("");
-
+ const { getAllHotel } = UserService;
+      const { token }: any = useToken();
   useEffect(() => {
+   
     const controller = new AbortController();
     const url = "/hotel.json";
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        const result = await response.json();
+        const allHotel = await getAllHotel({ token: "" });
+
+        const result = allHotel.data.data;
         setData(result);
       } catch (error: any) {
         if (error.name !== "AbortError") {
@@ -72,12 +77,12 @@ const HotelListings = () => {
               <p>No hotels match your filter.</p>
             ) : (
               filteredHotels.map((hotel) => (
-                <div
+               <div
                   key={hotel.id}
                   className="flex flex-col gap-5 border border-[#E0E0E0] p-4 rounded-[12px] bg-[#FAFAFA]"
                 >
                   <img
-                    src={hotel.image_link}
+                    src={hotel.image}
                     alt={hotel.name}
                     className="w-full h-[220px] object-cover rounded-[8px]"
                   />
@@ -95,7 +100,7 @@ const HotelListings = () => {
                           />
                         ))}
                         <p className="ms-2 text-[#4A4A4A] text-[14px] font-normal leading-[150%]">
-                          {hotel.rating} Out of {hotel.total_reviews} Review
+                          {hotel.rating} Out of {hotel.numberOfReview} Review
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
@@ -109,7 +114,7 @@ const HotelListings = () => {
                       </h3>
                     </div>
                     <div className="grid grid-cols-2 gap-3 mb-4">
-                      {hotel.amenities?.spa && (
+                      {hotel.spa && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/spa.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -117,7 +122,7 @@ const HotelListings = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities?.pool && (
+                      {hotel.pool && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/wifi.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -125,7 +130,7 @@ const HotelListings = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities?.free_wifi && (
+                      {hotel.freeWifi && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/wifi.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -133,7 +138,7 @@ const HotelListings = () => {
                           </p>
                         </div>
                       )}
-                      {hotel.amenities?.restaurant && (
+                      {hotel.restaurant && (
                         <div className="flex items-center gap-2">
                           <img src="/images/icons/restaurant.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -144,17 +149,17 @@ const HotelListings = () => {
                     </div>
                     <div className="mt-4 flex justify-between">
                       <Link
-                       href='/login'
+                        href={token ? hotel?.bookingLink : "/login"}
                         className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                       >
                         Book Now
                         <ArrowRight size={18} />
                       </Link>
                       <Link
-                       href='/login'
+                        href={token ? hotel?.bookingLink : "/login"}
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
-                        <img src="/images/icons/heart.png" alt="" />
+                        <img src="/images/icons/heart.png" alt="heart" />
                       </Link>
                     </div>
                   </div>

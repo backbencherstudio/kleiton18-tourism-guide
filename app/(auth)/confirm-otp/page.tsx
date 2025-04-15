@@ -1,20 +1,21 @@
 "use client";
 
 import { UserService } from "@/service/user/user.service";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 export default function VerificationPage() {
-  const [code, setCode] = useState<string>(["", "", "", ""]);
+  const [code, setCode] = useState(["", "", "", ""]);
   // Simulated OTP
   const [timeLeft, setTimeLeft] = useState<number>(60);
   const [error, setError] = useState<string>("");
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
   const { confirmOTP, forgotEmail } = UserService;
   const userMail = localStorage.getItem("userEmail");
-  const typeCode = code.join("").toString();
+  const typeCode:string= code.join("").toString();
 
   // Countdown timer
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function VerificationPage() {
     const newCode = [...code];
     newCode[index] = value;
     setCode(newCode);
-    setError(false);
+    
 
     if (value && index < 3) inputRefs.current[index + 1]?.focus();
   };
@@ -52,8 +53,13 @@ export default function VerificationPage() {
   };
 
   const handleVerify = async () => {
+    const otp = code.join("");
+  if (!userMail || otp.length !== 4) {
+    setError("Please enter a valid 4-digit OTP.");
+    return;
+  }
     try {
-      const res = await confirmOTP({ email: userMail, otp: typeCode });
+      const res = await confirmOTP({ email: userMail, otp });
       if (res?.status === 200) {
         router.push("/update-password");
       }

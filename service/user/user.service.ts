@@ -15,7 +15,7 @@ export const UserService = {
     };
     return await Fetch.post("/users/login", data, config);
   },
-  confirmOTP: async ({ email, otp }: { email: string; password: string }) => {
+  confirmOTP: async ({ email, otp }: { email: string; otp: string }) => {
     const data = {
       email: email,
       otp: otp,

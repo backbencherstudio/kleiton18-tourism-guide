@@ -1,5 +1,7 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,15 +12,16 @@ const RestaurantListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [locationSearch, setLocationSearch] = useState("");
-
+  const { getAllRestaurant } = UserService;
+  const { token }: any = useToken();
   useEffect(() => {
     const controller = new AbortController();
-    const url = "/restaurant.json";
+
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        const result = await response.json();
+        const Restaurant = await getAllRestaurant({ token: "" });
+        const result = Restaurant.data.data;
         setData(result);
       } catch (error: any) {
         if (error.name !== "AbortError") {
@@ -37,7 +40,11 @@ const RestaurantListings = () => {
   const filteredRestaurants = data.filter((item) =>
     item.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
-
+function formatNumber(num: number): string {
+  if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return num.toString();
+}
   return (
     <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
       <div className="flex flex-col gap-12">
@@ -76,7 +83,7 @@ const RestaurantListings = () => {
                   className="flex flex-col gap-4 border border-[#E0E0E0] p-4 rounded-[12px] bg-[#FAFAFA]"
                 >
                   <img
-                    src={restaurant.image_link}
+                    src={restaurant.image}
                     alt={restaurant.name}
                     className="w-full h-[220px] object-cover rounded-[8px]"
                   />
@@ -96,7 +103,7 @@ const RestaurantListings = () => {
                         />
                       ))}
                       <p className="text-sm text-gray-700">
-                        {restaurant.rating} out of {restaurant.total_reviews}{" "}
+                        {formatNumber(restaurant.rating)} out of {formatNumber(restaurant.numberOfReview)}{" "}
                         reviews
                       </p>
                     </div>
@@ -120,26 +127,26 @@ const RestaurantListings = () => {
                       <div className="flex items-center gap-2">
                         <img src="/images/icons/open.png" alt="open" />
                         <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
-                          Open: {restaurant.open_time}
+                          Open: {restaurant.openTime}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
                         <img src="/images/icons/close.png" alt="close" />
                         <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
-                          Close: {restaurant.close_time}
+                          Close: {restaurant.closeTime}
                         </p>
                       </div>
                     </div>
 
                     <div className="flex justify-between">
                       <Link
-                       href='/login'
+                           href={token ? restaurant?.bookingLink : "/login"}
                         className="flex items-center gap-2 text-[#111111] text-[16px]"
                       >
                         Book Now <ArrowRight size={18} />
                       </Link>
                       <Link
-                       href='/login'
+                            href={token ? restaurant?.bookingLink : "/login"}
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
