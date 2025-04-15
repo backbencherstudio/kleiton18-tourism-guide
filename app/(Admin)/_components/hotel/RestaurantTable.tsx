@@ -20,20 +20,21 @@ import { toast } from "react-toastify";
 function RestaurantTable() {
   const { token } = useToken();
   const [restaurants, setRestaurants] = useState<any[]>([]);
+  const [dataCount , setDataCount] = useState<any>() 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedRestaurant, setSelectedRestaurant] = useState<any>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
 
-  const limit = 10;
+  const limit = 5;
 
   const fetchRestaurants = async () => {
     try {
       const response = await UserService.getAllRestaurant({ token, context: null, page, limit });
       setRestaurants(response?.data.data || []);
       const total = response?.data.pagination.totalData || 0;
-      console.log(response?.data.pagination.totalData);
+      setDataCount(response?.data.pagination.totalData);
 
       setTotalPages(Math.ceil(total / limit));
     } catch (error: any) {
@@ -50,11 +51,29 @@ function RestaurantTable() {
     setDeleteDialogOpen(true);
   };
 
-  const handleDelete = () => {
-    console.log("Deleting ID:", selectedRestaurant);
-    // Actual delete API call should go here
+  const handleDelete = async () => {
+  try {
+    const res = await UserService.deleteRestaurant(selectedRestaurant, token);
+    if (res.status === 200 || res.status === 204) {
+      toast.success("Restaurant deleted successfully");
+
+      // ✅ Filter out the deleted restaurant from local state
+      setRestaurants((prev) =>
+        prev.filter((restaurant) => restaurant.id !== selectedRestaurant)
+      );
+
+      // ✅ Also update the total data count
+      setDataCount((prev: number) => prev - 1);
+    } else {
+      toast.error("Something went wrong while deleting.");
+    }
+  } catch (error: any) {
+    toast.error(error?.message || "Failed to delete restaurant");
+  } finally {
     setDeleteDialogOpen(false);
-  };
+    setSelectedRestaurant(null);
+  }
+};
 
   return (
     <div className="flex flex-col justify-between h-full">
@@ -90,7 +109,7 @@ function RestaurantTable() {
           <tbody className=" text-[#111]">
             {restaurants.map((restaurant, index) => (
               <tr key={index} className="border-b-[0.5px] border-borderColor">
-                <td className="px-4 py-3 text-sm font-normal">{index + 1}</td>
+                <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
                 <td className="px-4 py-3 text-sm font-normal">{restaurant.name}</td>
                 <td className="px-4 py-3 text-sm font-normal">
                   <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
@@ -136,8 +155,8 @@ function RestaurantTable() {
       <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
           {(page - 1) * limit + 1} -{" "}
-          {Math.min(page * limit, restaurants.length * totalPages)} Result Showing Out of{" "}
-          {restaurants.length * totalPages}
+          {Math.min(page * limit,dataCount  )} Result Showing Out of{" "}
+          {dataCount}
         </span>
         <div className="flex items-center gap-2">
           <button
