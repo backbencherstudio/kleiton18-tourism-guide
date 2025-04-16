@@ -109,7 +109,7 @@ const HotelListings = () => {
                           {hotel.location}
                         </p>
                       </div>
-                      <h3 className="text-[24px] leading-[140%] font-medium">
+                      <h3 className="min-h-[67px] text-[24px] leading-[140%] font-medium">
                         {hotel.name}
                       </h3>
                     </div>

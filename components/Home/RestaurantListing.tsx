@@ -84,7 +84,7 @@ const RestaurantListing = () => {
               data.map((restaurant) => (
                 <SwiperSlide key={restaurant.id} className="w-full">
                   <div className="flex flex-col md:flex-row gap-5 h-full p-5 border border-[#E0E0E0] rounded-[12px] bg-[#FAFAFA] overflow-hidden">
-                    <div className="w-full md:min-w-[260px] md:max-w-[260px]">
+                    <div className="w-full md:min-w-[260px] md:max-w-[260px] h-[275px]">
                       <img
                         src={restaurant.image}
                         alt={restaurant.name}

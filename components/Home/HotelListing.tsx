@@ -91,7 +91,7 @@ const HotelListing = () => {
                           {hotel.location}
                         </p>
                       </div>
-                      <h3 className="text-[24px] leading-[140%] font-medium">
+                      <h3 className="min-h-[67px] text-[24px] leading-[140%] font-medium">
                         {hotel.name}
                       </h3>
                     </div>
@@ -106,7 +106,7 @@ const HotelListing = () => {
                       )}
                       {hotel.pool && (
                         <div className="flex items-center gap-2">
-                          <img src="/images/icons/wifi.png" alt="" />
+                          <img src="/images/icons/pool.png" alt="" />
                           <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
                             Pool
                           </p>
