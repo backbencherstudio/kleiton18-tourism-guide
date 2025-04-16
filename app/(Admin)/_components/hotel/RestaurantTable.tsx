@@ -25,11 +25,12 @@ function RestaurantTable() {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedRestaurant, setSelectedRestaurant] = useState<any>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
+  const [loading,setLoading]=useState<boolean>(false)
 
   const limit = 5;
 
   const fetchRestaurants = async () => {
+    setLoading(true)
     try {
       const response = await UserService.getAllRestaurant({ token, context: null, page, limit });
       setRestaurants(response?.data.data || []);
@@ -37,6 +38,7 @@ function RestaurantTable() {
       setDataCount(response?.data.pagination.totalData);
 
       setTotalPages(Math.ceil(total / limit));
+       setLoading(false)
     } catch (error: any) {
       toast.error(error?.message || "Failed to load restaurants");
     }
@@ -147,6 +149,7 @@ function RestaurantTable() {
             ))}
           </tbody>
         </table>
+          {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
       </div>
       {/* Pagination */}
       <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">

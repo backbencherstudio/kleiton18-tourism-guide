@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
 
-    domains: ["192.168.4.3"],
+    domains: ["approved-level-hobbies-efforts.trycloudflare.com"],
   },
 };
 

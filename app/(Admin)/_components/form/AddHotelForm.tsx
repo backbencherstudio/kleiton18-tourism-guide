@@ -18,7 +18,7 @@ type HotelFormInputs = {
 
 const amenitiesOptions = [
   { image: "/images/icons/pool.png", title: "Pool", value:"pool" },
-  { image: "/images/icons/restaurant.png", title: "Restaurant" , value: "sestaurant" },
+  { image: "/images/icons/restaurant.png", title: "Restaurant" , value: "restaurant" },
   { image: "/images/icons/wifi.png", title: "Free Wifi", value: "freeWifi" },
   { image: "/images/icons/spa.png", title: "Spa" , value: "spa" }
 ];

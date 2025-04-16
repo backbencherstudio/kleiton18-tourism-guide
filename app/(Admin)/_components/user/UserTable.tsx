@@ -1,5 +1,6 @@
 "use client";
 import { useToken } from "@/hooks/useToken";
+import userImage from "@/public/images/icons/user.webp";
 import { UserService } from "@/service/user/user.service";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -11,22 +12,24 @@ function UserTable() {
   const [dataCount, setDataCount] = useState<any>()
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading,setLoading]=useState<boolean>(false)
 
-
-  const limit = 5;
+  const limit = 10;
 
   const fetchUsers = async () => {
+    setLoading(true)
     if (!token) {
       toast.error("No token found");
       return;
     }
-
+    
     try {
       const response = await UserService.getAllUser({ token, page, limit });
       setUsers(response?.data.data || []);
-      const total = response?.data.pagination.totalData || 0;
+      const total = response?.data.pagination.total || 0;
       setDataCount(total);
       setTotalPages(Math.ceil(total / limit));
+      setLoading(false)
     } catch (error: any) {
       toast.error(error?.message || "Failed to load users");
       console.log(error.message);
@@ -58,11 +61,12 @@ function UserTable() {
 
           <div className="">
             <div className=" ">
-              <table className="min-w-full text-sm text-left border  border-[#E2E8F0] ">
+              
+              <table className="min-w-full text-sm text-left border border-[#E2E8F0] ">
                 <thead className="bg-[#FAFAFA] text-[#4A4A4A] font-normal text-xs !rounded-[16px]">
                   <tr className="">
                     <th className="px-4 py-3 font-normal text-xs">Sl</th>
-                    <th className="px-4 py-3 font-normal text-xs">User ID</th>
+                  
                     <th className="px-4 py-3 font-normal text-xs">User Name</th>
                     <th className="px-4 py-3 font-normal text-xs">Image</th>
                     <th className="px-4 py-3 font-normal text-xs">Email</th>
@@ -70,19 +74,22 @@ function UserTable() {
                   </tr>
                 </thead>
                 <tbody className=" text-[#111]">
+                  
                   {users.map((user, index) => (
                     <tr key={index} className="border-b-[0.5px] border-borderColor">
                       <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
-                      <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
-                      <td className="px-4 py-3 text-sm font-normal">{user.name}</td>
+                     
+                      <td className="px-4 py-3 text-sm font-normal">{user.fullName}</td>
                       <td className="px-4 py-3 text-sm font-normal">
+                         <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
                         <Image
-                          src={user.image}
-                          alt={user.name}
+                          src={user.image ||userImage}
+                          alt={user.fullName || "userImage"}
                           width={30}
                           height={30}
-                          className="rounded-full"
+                          className="rounded-full w-full h-full"
                         />
+                        </div>
                       </td>
                       <td className="px-4 py-2">{user.email}</td>
                       <td className="px-4 py-2">  {new Date(user.createdAt).toLocaleDateString("en-US", {
@@ -96,7 +103,8 @@ function UserTable() {
               </table>
             </div>
           </div>
-
+         
+              {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
           {/* Footer */}
 
         </div>

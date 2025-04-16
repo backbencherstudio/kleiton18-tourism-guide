@@ -1,8 +1,72 @@
-import { dashbordSummaryCards } from '@/demoApi/dashbordTotalList'
-import Image from 'next/image'
-import Link from 'next/link'
+"use client"
+import { useDataFetch } from '@/hooks/useDataFetch';
+import Image from 'next/image';
+import Link from 'next/link';
 
 function DashbordHeader() {
+const { count: userCount, } = useDataFetch({
+  url: "/users/all",
+  page: 1,
+  limit: 10,
+});
+const { count: hotelCount } = useDataFetch({
+  url: "/hotel/get",
+  page: 1,
+  limit: 10,
+});
+const { count: dishCount } = useDataFetch({
+  url: "traditional-dish/get",
+  page: 1,
+  limit: 10,
+});
+const { count: restaurantCount } = useDataFetch({
+  url: "/restaurant/get",
+  page: 1,
+  limit: 10,
+});
+const { count: areaCount } = useDataFetch({
+  url: "/visit-area/get",
+  page: 1,
+  limit: 10,
+});
+
+  const dashbordSummaryCards = [
+  {
+    icon: '/images/dashboard/user.png',
+    title: 'User',
+    subtitle: 'Total User',
+    href: '/dashboard/user',
+    value: userCount,
+  },
+  {
+    icon: '/images/dashboard/hotel.png',
+    title: 'Hotel',
+    href: '/dashboard/hotel',
+    subtitle: 'Listed Hotel',
+    value: hotelCount,
+  },
+  {
+    icon: '/images/dashboard/restaurant.png',
+    title: 'Restaurant',
+    subtitle: 'Restaurant',
+    value: restaurantCount,
+    href: '/dashboard/restaurant'
+  },
+  {
+    icon: '/images/dashboard/dish.png',
+    title: 'Dish',
+    subtitle: 'Total Dish',
+    value:dishCount,
+    href: '/dashboard/dish'
+  },
+  {
+    icon: '/images/dashboard/location.png',
+    title: 'Area',
+    subtitle: 'Total Area',
+    value: areaCount,
+    href: '/dashboard/visited'
+  },
+];
   return (
     <div>
          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-4">
