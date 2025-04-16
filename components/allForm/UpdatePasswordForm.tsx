@@ -4,7 +4,7 @@ import VerificationConfirmModal from "@/components/reusable/VerificationConfirmM
 import { UserService } from "@/service/user/user.service";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 type FormValues = {

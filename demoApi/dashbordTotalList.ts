@@ -1,10 +1,19 @@
-export const dashbordSummaryCards = [
+"use client"
+
+import { useDataFetch } from "@/hooks/useDataFetch";
+
+  const { count: userCount, loading, error } = useDataFetch({
+    serviceMethod: "getAllUser",
+  
+  });
+
+const dashbordSummaryCards = [
   {
     icon: '/images/dashboard/user.png',
     title: 'User',
     subtitle: 'Total User',
     href: '/dashboard/user',
-    value: 880,
+    value: userCount,
   },
   {
     icon: '/images/dashboard/hotel.png',

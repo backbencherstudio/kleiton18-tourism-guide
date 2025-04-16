@@ -25,11 +25,12 @@ function RestaurantTable() {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedRestaurant, setSelectedRestaurant] = useState<any>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
+  const [loading,setLoading]=useState<boolean>(false)
 
   const limit = 5;
 
   const fetchRestaurants = async () => {
+    setLoading(true)
     try {
       const response = await UserService.getAllRestaurant({ token, context: null, page, limit });
       setRestaurants(response?.data.data || []);
@@ -37,6 +38,7 @@ function RestaurantTable() {
       setDataCount(response?.data.pagination.totalData);
 
       setTotalPages(Math.ceil(total / limit));
+       setLoading(false)
     } catch (error: any) {
       toast.error(error?.message || "Failed to load restaurants");
     }
@@ -123,7 +125,6 @@ function RestaurantTable() {
                   </div>
                 </td>
                 <td className="px-4 py-3 text-sm font-normal">{restaurant.numberOfReview}</td>
-
                 <td className="px-4 py-2">{restaurant.rating}</td>
                 <td className="px-4 py-2">{restaurant.openTime}</td>
                 <td className="px-4 py-2">{restaurant.closeTime}</td>
@@ -139,7 +140,6 @@ function RestaurantTable() {
                 <td className="px-4 py-2">{restaurant?.details}</td>
                 <td className="px-4 py-3 text-sm font-normal">
                   <div className="flex items-center space-x-2">
-
                     <button className="text-red-500 cursor-pointer hover:text-red-700" onClick={() => handleDeleteClick(restaurant.id)}>
                       <Trash2 size={18} />
                     </button>
@@ -149,8 +149,8 @@ function RestaurantTable() {
             ))}
           </tbody>
         </table>
+          {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
       </div>
-
       {/* Pagination */}
       <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
@@ -187,7 +187,6 @@ function RestaurantTable() {
           </button>
         </div>
       </div>
-
       {/* Delete Confirmation Dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogContent>

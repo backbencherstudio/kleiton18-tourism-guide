@@ -13,7 +13,6 @@ export const AppConfig = () => ({
       description: "app",
       keywords: "app",
     },
-
     // api endpoint
     apiUrl: `${URL}`,
   },
