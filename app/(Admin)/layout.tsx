@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Header from './_components/header';
+import ProtectedPageWrapper from './_components/ProtectedPageWrapper';
 import Sidebar from './_components/sidebar';
 
 interface AdminLayoutProps {
@@ -14,6 +15,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
+    <ProtectedPageWrapper>
     <div className=" lg:bg-[#FAFAFA] 2xl:min-h-screen h-screen relative ">
       {/* Mobile Menu Button - Only visible on small screens */}
       {/* <button 
@@ -58,6 +60,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         </main>
       </div>
     </div>
+    </ProtectedPageWrapper>
   );
 };
 

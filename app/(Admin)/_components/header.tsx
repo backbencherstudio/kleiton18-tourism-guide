@@ -1,5 +1,5 @@
 'use client'
-import avatar from "@/public/images/up.png";
+import avatar from "@/public/images/icons/user.webp";
 import { EllipsisVertical, Menu, X } from "lucide-react";
 import Image from 'next/image';
 import Link from "next/link";

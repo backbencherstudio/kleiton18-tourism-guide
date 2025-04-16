@@ -40,11 +40,11 @@ const RestaurantListings = () => {
   const filteredRestaurants = data.filter((item) =>
     item.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
-function formatNumber(num: number): string {
+ function formatNumber(num: number): string {
   if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
   if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
   return num.toString();
-}
+} 
   return (
     <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
       <div className="flex flex-col gap-12">

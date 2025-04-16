@@ -25,11 +25,12 @@ const HotelListTable = () => {
    const [totalPages, setTotalPages] = useState(1);
    const [selectHotel, setSelectHotel] = useState<any>(null);
    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
- 
+   const [loading,setLoading]=useState<boolean>(false)
  
    const limit = 5;
  
    const fetchhotels = async () => {
+    setLoading(true)
      try {
        const response = await UserService.getAllHotel({ token, context: null, page, limit });
        setHotels(response?.data.data || []);
@@ -37,6 +38,7 @@ const HotelListTable = () => {
        setDataCount(response?.data.pagination.totalData);
  
        setTotalPages(Math.ceil(total / limit));
+       setLoading(false)
      } catch (error: any) {
        toast.error(error?.message || "Failed to load hotels");
      }
@@ -224,6 +226,7 @@ const HotelListTable = () => {
             </tbody>
           </table>
         </div>
+         {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
           <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
           {(page - 1) * limit + 1} -{" "}
