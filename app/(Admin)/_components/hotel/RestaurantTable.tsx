@@ -123,7 +123,6 @@ function RestaurantTable() {
                   </div>
                 </td>
                 <td className="px-4 py-3 text-sm font-normal">{restaurant.numberOfReview}</td>
-
                 <td className="px-4 py-2">{restaurant.rating}</td>
                 <td className="px-4 py-2">{restaurant.openTime}</td>
                 <td className="px-4 py-2">{restaurant.closeTime}</td>
@@ -139,7 +138,6 @@ function RestaurantTable() {
                 <td className="px-4 py-2">{restaurant?.details}</td>
                 <td className="px-4 py-3 text-sm font-normal">
                   <div className="flex items-center space-x-2">
-
                     <button className="text-red-500 cursor-pointer hover:text-red-700" onClick={() => handleDeleteClick(restaurant.id)}>
                       <Trash2 size={18} />
                     </button>
@@ -150,7 +148,6 @@ function RestaurantTable() {
           </tbody>
         </table>
       </div>
-
       {/* Pagination */}
       <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
@@ -187,7 +184,6 @@ function RestaurantTable() {
           </button>
         </div>
       </div>
-
       {/* Delete Confirmation Dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogContent>

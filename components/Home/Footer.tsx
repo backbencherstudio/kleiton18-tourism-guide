@@ -97,21 +97,27 @@ const Footer = () => {
             <div className="flex flex-col items-start gap-4">
               <div className="flex items-center gap-4 text-[#D2D2D5] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
                 <p className="flex items-center justify-between min-w-[170px]">
-                  Hospital <span>-</span>
+                  Ambulance <span>-</span>
                 </p>
-                <Link href={"/"}>247643-545456</Link>
+                <Link href={"/"}>127</Link>
               </div>
               <div className="flex items-center gap-4 text-[#D2D2D5] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
                 <p className="flex items-center justify-between min-w-[170px]">
                   Police <span>-</span>
                 </p>
-                <Link href={"/"}>247643-545456</Link>
+                <Link href={"/"}>129</Link>
               </div>
               <div className="flex items-center gap-4 text-[#D2D2D5] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
                 <p className="flex items-center justify-between min-w-[170px]">
-                  Tourist assistance <span>-</span>
+                  Fire brigade <span>-</span>
                 </p>
-                <Link href={"/"}>247643-545456</Link>
+                <Link href={"/"}>128</Link>
+              </div>
+              <div className="flex items-center gap-4 text-[#D2D2D5] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
+                <p className="flex items-center justify-between min-w-[170px]">
+                  Emergency at sea <span>-</span>
+                </p>
+                <Link href={"/"}>125</Link>
               </div>
             </div>
           </div>

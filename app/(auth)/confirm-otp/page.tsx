@@ -10,12 +10,16 @@ export default function VerificationPage() {
   // Simulated OTP
   const [timeLeft, setTimeLeft] = useState<number>(60);
   const [error, setError] = useState<string>("");
+  const [userMail, setUserMail] = useState<string | null>(null);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
   const { confirmOTP, forgotEmail } = UserService;
-  const userMail = localStorage.getItem("userEmail");
   const typeCode:string= code.join("").toString();
+
+  useEffect(() => {
+    setUserMail(localStorage.getItem("userEmail"));
+  }, []);
 
   // Countdown timer
   useEffect(() => {
@@ -134,7 +138,7 @@ export default function VerificationPage() {
 
           {error && (
             <p className="text-red-500 text-sm text-center mb-3">
-              OTP doesn’t match. Please try again.
+              OTP doesn't match. Please try again.
             </p>
           )}
 
