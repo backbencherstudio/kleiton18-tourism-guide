@@ -118,12 +118,12 @@ const RestaurantListing = () => {
                               {restaurant.location}
                             </p>
                           </div>
-                          <h3 className="text-[22px] lg:text-[32px] leading-[140%] font-medium">
+                          <h3 className="min-h-[90px] flex items-center  text-[22px] lg:text-[32px] leading-[140%] font-medium">
                             {restaurant.name}
                           </h3>
                         </div>
                         <p className="text-[16px] leading-[160%] text-[#4A4A4A] line-clamp-2">
-                          {restaurant.details}
+                          {restaurant.description}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
