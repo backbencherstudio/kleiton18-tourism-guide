@@ -5,6 +5,7 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
@@ -36,7 +37,20 @@ const RestaurantListing = () => {
 
     fetchData();
   }, []);
-
+const handleFavorite =async(id:any)=>{
+  const data ={
+    entityId: id,
+  entityType: "RESTAURANT",
+  }
+  try {
+     const response = await UserService.addFavorite(data ,token )
+     if(response.status === 201){
+       toast.success("Added to favorites!");
+     }
+  } catch (error:any) {
+     toast.error( error?.message || error);
+  }   
+}
   return (
     <div className="max-w-[1352px] px-4 pt-10 pb-20 md:pb-32 md:pt-20 mx-auto">
       <div className="flex flex-col gap-11">
@@ -148,12 +162,12 @@ const RestaurantListing = () => {
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
-                        <Link
-                          href={token ? restaurant?.bookingLink : "/login"}
-                          className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                        <button
+                         onClick={()=>handleFavorite(restaurant?.id)}
+                          className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                         >
                           <img src="/images/icons/heart.png" alt="" />
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

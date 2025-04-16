@@ -36,21 +36,18 @@ const HotelListing = () => {
     fetchData();
   }, []);
 const handleFavorite =async(id:any)=>{
-  console.log(id);
-  
   const data ={
     entityId: id,
   entityType: "HOTEL",
   }
   try {
      const response = await UserService.addFavorite(data ,token )
-     console.log("response=========", response);
+     if(response.status === 201){
+       toast.success("Added to favorites!");
+     }
   } catch (error:any) {
-    console.log(error);
-    
      toast.error( error?.message || error);
-  }
-     
+  }   
 }
   return (
     <>
@@ -150,7 +147,7 @@ const handleFavorite =async(id:any)=>{
                       </Link>
                       <button
                        onClick={()=>handleFavorite(hotel?.id)}
-                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                        className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
                       </button>

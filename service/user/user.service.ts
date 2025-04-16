@@ -106,7 +106,7 @@ addFavorite: async (data: any,token:any) => {
 }
   const config = {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
       'Authorization': token
     },
   };
