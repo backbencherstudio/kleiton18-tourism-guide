@@ -25,7 +25,8 @@ const RecentUserTable = () => {
     
     try {
       const response = await UserService.getAllUser({ token, page, limit });
-      setUsers(response?.data.data || []);
+      const sort = response?.data.data 
+      setUsers(sort.reverse()|| []);
       const total = response?.data.pagination.total || 0;
       setDataCount(total);
       setTotalPages(Math.ceil(total / limit));

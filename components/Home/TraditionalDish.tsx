@@ -5,6 +5,7 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 
 const TraditionalDish = () => {
@@ -38,7 +39,22 @@ const { getAlltraditionalDish } = UserService;
     fetchData();
     return () => controller.abort();
   }, []);
-
+const handleFavorite =async(id:any)=>{
+  const data ={
+    entityId: id,
+  entityType: "DISH",
+  }
+  try {
+     const response = await UserService.addFavorite(data ,token )
+     if(response.status === 201){
+       toast.success("Added to favorites!");
+     }
+  } catch (error:any) {
+    
+    
+    toast.error(  error.response.data.message || error?.message);
+  }   
+}
   return (
     <div className="bg-[#FAFAFA] px-4 py-10 md:py-20">
       <div className="max-w-[1320px]  mx-auto flex flex-col gap-11">
@@ -100,12 +116,12 @@ const { getAlltraditionalDish } = UserService;
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
-                    <Link
-                       href={token ? dish?.bookingLink : "/login"}
-                      className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                    <button
+                       onClick={()=>handleFavorite(dish?.id)}
+                      className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                     >
                       <img src="/images/icons/heart.png" alt="" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

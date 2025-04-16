@@ -1,11 +1,12 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
 import { UserService } from "@/service/user/user.service";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
-import { useToken } from "@/hooks/useToken";
 
 const VisitArea = () => {
   const [data, setData] = useState([]);
@@ -50,7 +51,20 @@ const VisitArea = () => {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
-  console.log(data);
+ const handleFavorite =async(id:any)=>{
+   const data ={
+     entityId: id,
+   entityType: "VISIT_AREA",
+   }
+   try {
+      const response = await UserService.addFavorite(data ,token )
+      if(response.status === 201){
+        toast.success("Added to favorites!");
+      }
+   } catch (error:any) {
+      toast.error(  error.response.data.message || error?.message);
+   }   
+ }
 
   return (
     <div className="px-4 py-10 md:py-20">
@@ -129,22 +143,22 @@ const VisitArea = () => {
                           : "opacity-100 translate-y-0"
                       }`}
                     >
-                      {area.description}
+                      {area?.description}
                     </p>
 
                     <div className="flex justify-between items-center mt-2">
                       <Link
-                        href="/login"
+                        href={token ? area?.detailsLink : "/login"}
                         className="flex items-center gap-2 text-[16px] font-normal leading-[130%] text-white"
                       >
                         View Details <ArrowRight size={18} />
                       </Link>
-                      <Link
-                        href="/login"
-                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                      <button
+                         onClick={()=>handleFavorite(area?.id)} 
+                        className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
                       >
                         <img src="/images/icons/heart.png" alt="Heart" />
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

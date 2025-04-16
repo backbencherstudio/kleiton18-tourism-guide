@@ -98,6 +98,20 @@ addVisitedAerea: async (formData: any,token:any) => {
   };
   return await Fetch.post("/visit-area/add", formData, config);
 },
+// add fevorite area================
+addFavorite: async (data: any,token:any) => {
+  
+  if (!token) {
+  throw new Error("User token not found. Please login again.");
+}
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+  };
+  return await Fetch.post("/favorites/add/", data, config);
+},
 //================================
 // delete visit area==========
   deleteVisitArea: async (id:any,  token: any) => {
