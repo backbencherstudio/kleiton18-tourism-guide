@@ -1,5 +1,6 @@
 "use client"
 import { useDataFetch } from '@/hooks/useDataFetch';
+import { formatNumber } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,7 +16,7 @@ const { count: hotelCount } = useDataFetch({
   limit: 10,
 });
 const { count: dishCount } = useDataFetch({
-  url: "traditional-dish/get",
+  url: "/traditional-dish/get",
   page: 1,
   limit: 10,
 });
@@ -86,7 +87,7 @@ const { count: areaCount } = useDataFetch({
           </div>
           <div className=' flex justify-between items-center w-full'>
             <p className="md:text-base text-xs text-[#4A4A4A]">{item.subtitle}</p>
-            <p className=' text-[#1D1F2C] text-lg lg:text-2xl font-medium'> ({item.value})</p>
+            <p className=' text-[#1D1F2C] text-lg lg:text-2xl font-medium'> ({formatNumber(item.value) })</p>
           </div>
           
         </Link>

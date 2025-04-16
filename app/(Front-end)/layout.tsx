@@ -1,3 +1,4 @@
+import ProtectFrontendPart from "@/components/alert/ProtectFrontendPart";
 
 
 export default function FrontEndLayout({
@@ -7,7 +8,10 @@ export default function FrontEndLayout({
 }) {
   return (
     <div >
+      <ProtectFrontendPart>
+
       {children}
+      </ProtectFrontendPart>
     </div>
   );
 }

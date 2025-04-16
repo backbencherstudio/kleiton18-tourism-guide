@@ -25,11 +25,12 @@ function DishTable() {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedDish, setSelectedDish] = useState<any>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
+   const [loading,setLoading]=useState<boolean>(false)
   const limit = 10;
 console.log(dishs);
 
   const fetchDishs = async () => {
+    setLoading(true)
     try {
       const response = await UserService.getAlltraditionalDish({ token, context: null, page, limit });
       setDishs(response?.data.data || []);
@@ -37,6 +38,7 @@ console.log(dishs);
       console.log(total);
       setDataCount(total);
       setTotalPages(Math.ceil(total / limit));
+      setLoading(false)
     } catch (error: any) {
       toast.error(error?.message || "Failed to load dishes");
     }
@@ -134,7 +136,7 @@ console.log(dishs);
           </tbody>
         </table>
       </div>
-
+ {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
        <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
           {(page - 1) * limit + 1} -{" "}
