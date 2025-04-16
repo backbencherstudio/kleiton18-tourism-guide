@@ -12,10 +12,10 @@ type FormValues = {
   confirmPassword: string;
 };
 function UpdatePasswordForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const userMail = localStorage.getItem("userEmail");
   const { updatePassword } = UserService;
   const {
@@ -38,7 +38,7 @@ function UpdatePasswordForm() {
 
       if (res?.status === 200) {
         setIsDialogOpen(true);
-        localStorage.clear("userEmail");
+       
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -132,11 +132,7 @@ function UpdatePasswordForm() {
           )}
         </div>
 
-        {errors.agreeToTerms && (
-          <p className="mt-1 text-base text-red-600">
-            {errors.agreeToTerms.message}
-          </p>
-        )}
+       
         {error && (
           <div className="text-base text-primaryColor py-2 text-center">
             {error}
