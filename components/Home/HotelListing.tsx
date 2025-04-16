@@ -1,10 +1,10 @@
 "use client";
-
 import { useToken } from "@/hooks/useToken";
 import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 
 const HotelListing = () => {
@@ -15,14 +15,10 @@ const HotelListing = () => {
 
   // Fetch Hotel Data from API
   useEffect(() => {
-    const url = "/hotel.json";
-
     const fetchData = async () => {
       try {
         const allHotel = await getAllHotel({ token, page: 1, limit: 10 });
-
         const result = allHotel.data.data;
-
         // Sort by id DESC (latest first), then slice top 4
         const latestHotels = result
           .sort((a: any, b: any) => b.id - a.id)
@@ -37,10 +33,27 @@ const HotelListing = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
-
+const handleFavorite =async(id:any)=>{
+  console.log(id);
+  
+  const data ={
+    entityId: id,
+  entityType: "HOTEL",
+  }
+  try {
+     const response = await UserService.addFavorite(data ,token )
+     console.log("response=========", response);
+  } catch (error:any) {
+    console.log(error);
+    
+     toast.error( error?.message || error);
+  }
+     
+    
+     
+}
   return (
     <>
       <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
@@ -137,12 +150,12 @@ const HotelListing = () => {
                         Book Now
                         <ArrowRight size={18} />
                       </Link>
-                      <Link
-                        href={token ? hotel?.bookingLink : "/login"}
+                      <button
+                       onClick={()=>handleFavorite(hotel?.id)}
                         className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

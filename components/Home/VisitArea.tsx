@@ -1,11 +1,11 @@
 "use client";
 
+import { useToken } from "@/hooks/useToken";
 import { UserService } from "@/service/user/user.service";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import HeadingTwo from "../reusable/HeadingTwo";
-import { useToken } from "@/hooks/useToken";
 
 const VisitArea = () => {
   const [data, setData] = useState([]);
@@ -50,7 +50,7 @@ const VisitArea = () => {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
-  console.log(data);
+ 
 
   return (
     <div className="px-4 py-10 md:py-20">
