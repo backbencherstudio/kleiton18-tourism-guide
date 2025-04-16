@@ -130,7 +130,8 @@ function RestaurantTable() {
                 <td className="px-4 py-2">{restaurant.closeTime}</td>
                 <td className="px-4 py-2">{restaurant.location}</td>
                 <td className="px-4 py-2">  <Link
-                  href={restaurant.bookingLink}
+                  
+                   href={`${restaurant.bookingLink}`}
                   className="  "
                   target="_blank"
                   rel="noopener noreferrer"

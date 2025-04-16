@@ -118,7 +118,7 @@ console.log(dishs);
                 <td className="px-4 py-3">{dish.numberOfReview}</td>
                 <td className="px-4 py-3">{dish.rating}</td>
                 <td className="px-4 py-3">
-                  <Link href={dish.bookingLink} target="_blank" rel="noopener noreferrer">
+                  <Link href={`${dish.bookingLink}`} target="_blank" rel="noopener noreferrer">
                     {dish.bookingLink}
                   </Link>
                 </td>

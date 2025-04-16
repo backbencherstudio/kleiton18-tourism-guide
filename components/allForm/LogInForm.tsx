@@ -12,7 +12,7 @@ type FormValues = {
   email: string;
   password: string;
 };
-function LogInForm() {
+function LogInForm({admin}:any) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,6 +33,9 @@ function LogInForm() {
         key: "token",
         value: tokenNumber,
       });
+      if (admin) {
+        router.push("/dashboard")
+      }
       router.push("/");
       setLoading(false);
     } catch (error) {

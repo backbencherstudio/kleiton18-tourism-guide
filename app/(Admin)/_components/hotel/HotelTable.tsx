@@ -155,7 +155,7 @@ const HotelListTable = () => {
                   </td>
                   <td className="px-4 py-3 text-sm font-normal md:w-[120px]">
                     <Link
-                      href={`#`}
+                      href={`${hotel?.bookingLink}`}
                       className="  !w-[120px]"
                       target="_blank"
                       rel="noopener noreferrer"

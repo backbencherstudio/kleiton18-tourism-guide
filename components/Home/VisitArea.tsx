@@ -62,9 +62,7 @@ const VisitArea = () => {
         toast.success("Added to favorites!");
       }
    } catch (error:any) {
-     console.log(error);
-     
-      toast.error( error?.message || error);
+      toast.error(  error.response.data.message || error?.message);
    }   
  }
 

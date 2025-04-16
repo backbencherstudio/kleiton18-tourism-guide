@@ -5,6 +5,7 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 import { Input } from "../ui/input";
 
@@ -42,7 +43,20 @@ const HotelListings = () => {
   const filteredHotels = data.filter((hotel) =>
     hotel.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
-
+const handleFavorite =async(id:any)=>{
+  const data ={
+    entityId: id,
+  entityType: "HOTEL",
+  }
+  try {
+     const response = await UserService.addFavorite(data ,token )
+     if(response.status === 201){
+       toast.success("Added to favorites!");
+     }
+  } catch (error:any) {
+    toast.error(  error.response.data.message || error?.message);
+  }   
+}
   return (
     <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
       <div className="flex flex-col gap-12">
@@ -155,12 +169,12 @@ const HotelListings = () => {
                         Book Now
                         <ArrowRight size={18} />
                       </Link>
-                      <Link
-                        href={token ? hotel?.bookingLink : "/login"}
-                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                      <button
+                       onClick={()=>handleFavorite(hotel.id)} 
+                        className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
                       >
                         <img src="/images/icons/heart.png" alt="heart" />
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

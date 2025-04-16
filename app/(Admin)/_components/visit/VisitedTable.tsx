@@ -94,38 +94,38 @@ function VisitedTable() {
                   </tr>
                 </thead>
                 <tbody className=" text-[#111]">
-                  {visited.map((restaurant, index) => (
+                  {visited.map((visit, index) => (
                     <tr key={index} className="border-b-[0.5px] border-borderColor">
                       <td className="px-4 py-3 text-sm font-normal">{(page - 1) * limit + index + 1}</td>
-                      <td className="px-4 py-3 text-sm font-normal">{restaurant.name}</td>
+                      <td className="px-4 py-3 text-sm font-normal">{visit.name}</td>
                       <td className="px-4 py-3 text-sm font-normal">
                         <div className="w-[30px] h-[30px] rounded-full overflow-hidden">
                           <Image
-                            src={restaurant.image}
-                            alt={restaurant.name}
+                            src={visit.image}
+                            alt={visit.name}
                             width={30}
                             height={30}
                             className="w-full h-full object-cover"
                           />
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm font-normal">{restaurant.location}</td>
+                      <td className="px-4 py-3 text-sm font-normal">{visit.location}</td>
 
-                      <td className="px-4 py-2 lg:w-[230px]">{restaurant.description}</td>
+                      <td className="px-4 py-2 lg:w-[230px]">{visit.description}</td>
 
                       <td className="px-4 py-2">  <Link
-                        href={`#`}
+                        href={`${visit.detailsLink}`}
                         className="  "
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {restaurant.detailsLink}
+                        {visit.detailsLink}
                       </Link></td>
 
                       <td className="px-4 py-3 text-sm font-normal">
                         <div className="flex items-center space-x-2">
 
-                          <button className="text-red-500 cursor-pointer hover:text-red-700" onClick={() => handleDeleteClick(restaurant.id)}>
+                          <button className="text-red-500 cursor-pointer hover:text-red-700" onClick={() => handleDeleteClick(visit.id)}>
                             <Trash2 size={18} />
                           </button>
                         </div>
