@@ -14,7 +14,7 @@ function DishCard({ dish, onUnFav }: any) {
                     alt={dish.name}
                     className="w-full min-h-[440px] object-cover rounded-[8px]"
                 />
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 px-4 pb-4">
                     <div className="flex flex-col items-start gap-1">
                         <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (

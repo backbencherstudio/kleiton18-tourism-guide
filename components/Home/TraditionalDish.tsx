@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
 
 const TraditionalDish = () => {
   const [data, setData] = useState([]);
@@ -91,7 +92,7 @@ const TraditionalDish = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {loading ? (
-            <p>Loading dishs...</p>
+            <Loading />
           ) : (
             data.map((dish) => (
               <div

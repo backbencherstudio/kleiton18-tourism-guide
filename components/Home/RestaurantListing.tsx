@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
 
 const RestaurantListing = () => {
   const [data, setData] = useState([]);
@@ -115,7 +116,7 @@ const RestaurantListing = () => {
             className="pb-16 w-full"
           >
             {loading ? (
-              <p>Loading restaurants...</p>
+             <Loading/>
             ) : (
               data.map((restaurant) => (
                 <SwiperSlide key={restaurant.id} className="w-full">

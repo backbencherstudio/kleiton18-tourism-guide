@@ -15,6 +15,13 @@ export const UserService = {
     };
     return await Fetch.post("/users/login", data, config);
   },
+  AdminLogin: async ({ email, password }: { email: string; password: string }) => {
+    const data = {
+      email: email,
+      password: password,
+    };
+    return await Fetch.post("/users/admin/login", data, config);
+  },
   confirmOTP: async ({ email, otp }: { email: string; otp: string }) => {
     const data = {
       email: email,

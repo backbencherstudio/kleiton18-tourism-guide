@@ -16,7 +16,7 @@ function AdminLoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { login } = UserService;
+  const { AdminLogin } = UserService;
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ function AdminLoginForm() {
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
     try {
-      const res = await login({ email: data?.email, password: data?.password });
+      const res = await AdminLogin({ email: data?.email, password: data?.password });
       const tokenNumber = res.data.token;
       CookieHelper.set({
         key: "token",
