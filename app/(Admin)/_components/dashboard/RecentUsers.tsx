@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/reusable/Loading";
 import { useToken } from "@/hooks/useToken";
 import userImage from "@/public/images/icons/user.webp";
 import { UserService } from "@/service/user/user.service";
@@ -100,7 +101,9 @@ const RecentUserTable = () => {
             </div>
           </div>
         </div>
-       {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
+      {loading && (
+  <Loading/>
+)}
 
       {/* Footer */}
     <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">

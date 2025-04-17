@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
 const HotelListing = () => {
    const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +86,7 @@ const HotelListing = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {loading ? (
-              <p>Loading hotels...</p>
+             <Loading />
             ) : (
               data.map((hotel) => (
                 <div

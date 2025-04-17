@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
 
 const VisitArea = () => {
   const [data, setData] = useState([]);
@@ -104,7 +105,7 @@ const VisitArea = () => {
 
         <div className="flex flex-wrap justify-center rounded-[8px] overflow-hidden">
           {loading ? (
-            <p>Loading areas...</p>
+           <Loading/>
           ) : (
             data.map((area, index) => {
               const isHovered = hoveredIndex === index;

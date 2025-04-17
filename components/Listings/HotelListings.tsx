@@ -8,29 +8,32 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 const HotelListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [locationSearch, setLocationSearch] = useState("");
- const { getAllHotels } = UserService;
-      const { token }: any = useToken();
-  useEffect(() => {
-   
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const { token }: any = useToken();
+  const limit = 20;
+ useEffect(() => {
     const controller = new AbortController();
-    const url = "/hotel.json";
-
     const fetchData = async () => {
+      setLoading(true);
       try {
-          const allHotel = await getAllHotels({ token });
-          console.log(allHotel);
-          
-        const result = allHotel.data.data;
+        const response = await UserService.getAllHotel({ token, page, limit });
+        const result = response.data.data;
+        const total = response?.data.pagination?.totalData || 0;
+
         setData(result);
+        setTotalPages(Math.ceil(total / limit));
       } catch (error: any) {
         if (error.name !== "AbortError") {
-          console.error("Error fetching hotel data:", error);
+          console.error("Error fetching restaurant data:", error);
           setData([]);
         }
       } finally {
@@ -40,8 +43,7 @@ const HotelListings = () => {
 
     fetchData();
     return () => controller.abort();
-  }, []);
-
+  }, [page, token]);
   const filteredHotels = data.filter((hotel) =>
     hotel.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
@@ -109,7 +111,7 @@ const HotelListings = () => {
 
           <div className="w-full lg:w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
-              <p>Loading hotels...</p>
+              <Loading/>
             ) : filteredHotels.length === 0 ? (
               <p>No hotels match your filter.</p>
             ) : (
@@ -224,8 +226,32 @@ const HotelListings = () => {
               ))
             )}
           </div>
+          
         </div>
+          {/* Pagination Controls */}
+           
       </div>
+       {!loading && totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-10">
+                <Button
+                   className="text-white bg-primaryColor cursor-pointer"
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={page === 1}
+                >
+                  Previous
+                </Button>
+                <p className="text-sm text-gray-600">
+                  Page {page} of {totalPages}
+                </p>
+                <Button
+                   className="text-white bg-primaryColor cursor-pointer"
+                  onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={page === totalPages}
+                >
+                  Next
+                </Button>
+              </div>
+            )}
     </div>
   );
 };
