@@ -1,7 +1,7 @@
 // server base url
 export const URL =
   process.env.NEXT_PUBLIC_API_ENDPOINT ||
-  "https://approved-level-hobbies-efforts.trycloudflare.com";
+  "http://192.168.4.3:3000";
 // app config
 export const AppConfig = () => ({
   app: {

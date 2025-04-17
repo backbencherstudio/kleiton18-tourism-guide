@@ -1,5 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToken } from "@/hooks/useToken";
+import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,24 +13,24 @@ const FavoritesListing = () => {
   const [dishes, setDishes] = useState([]);
   const [area, setArea] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {token}:any = useToken()
 
+  
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
-        const hotelRes = await fetch("/hotel.json");
-        const restaurantRes = await fetch("/restaurant.json");
-        const dishRes = await fetch("/dish.json");
-        const areas = await fetch("/area.json");
-
-        const hotelsData = await hotelRes.json();
-        const restaurantsData = await restaurantRes.json();
-        const dishesData = await dishRes.json();
-        const areaData = await areas.json();
-
-        setHotels(hotelsData);
-        setRestaurants(restaurantsData);
-        setDishes(dishesData);
-        setArea(areaData);
+        if (token ) {
+           const resulte= await UserService.getAllFavorite({token})
+          console.log("log",resulte);
+           setHotels(resulte.data.data.hotel);
+        setRestaurants(resulte.data.data.restaurant);
+        setDishes(resulte.data.data.dish);
+        setArea(resulte.data.data.visit_area);
+        }
+        
+        
+       
       } catch (error) {
         console.error("Error fetching favorite data:", error);
       } finally {
@@ -82,7 +84,7 @@ const FavoritesListing = () => {
                     className="flex flex-col gap-5 border border-[#E0E0E0] p-4 rounded-[12px] bg-[#FAFAFA]"
                   >
                     <img
-                      src={hotel.image_link}
+                      src={hotel.image}
                       alt={hotel.name}
                       className="w-full h-[220px] object-cover rounded-[8px]"
                     />
@@ -102,7 +104,7 @@ const FavoritesListing = () => {
                             />
                           ))}
                           <p className="ms-2 text-[#4A4A4A] text-[14px] font-normal leading-[150%]">
-                            {hotel.rating} Out of {hotel.total_reviews} Review
+                            {hotel.rating} Out of {hotel.numberOfReview} Review
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
@@ -116,7 +118,7 @@ const FavoritesListing = () => {
                         </h3>
                       </div>
                       <div className="grid grid-cols-2 gap-3 mb-4">
-                        {hotel.amenities?.spa && (
+                        {hotel?.spa && (
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/spa.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -124,7 +126,7 @@ const FavoritesListing = () => {
                             </p>
                           </div>
                         )}
-                        {hotel.amenities?.pool && (
+                        {hotel?.pool && (
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/wifi.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -132,7 +134,7 @@ const FavoritesListing = () => {
                             </p>
                           </div>
                         )}
-                        {hotel.amenities?.free_wifi && (
+                        {hotel?.freeWifi && (
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/wifi.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -140,7 +142,7 @@ const FavoritesListing = () => {
                             </p>
                           </div>
                         )}
-                        {hotel.amenities?.restaurant && (
+                        {hotel?.restaurant && (
                           <div className="flex items-center gap-2">
                             <img src="/images/icons/restaurant.png" alt="" />
                             <p className="text-[14px] text-[#4A4A4A] leading-[150%]">
@@ -157,12 +159,12 @@ const FavoritesListing = () => {
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
-                        <Link
-                         href='/login'
-                          className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                        >
-                          <img src="/images/icons/heart.png" alt="" />
-                        </Link>
+                          <button
+                           
+                            className="w-[30px] cursor-pointer h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="Heart" />
+                          </button>
                       </div>
                     </div>
                   </div>
@@ -182,7 +184,7 @@ const FavoritesListing = () => {
                     className="flex flex-col gap-4 border border-[#E0E0E0] p-4 rounded-[12px] bg-[#FAFAFA]"
                   >
                     <img
-                      src={restaurant.image_link}
+                      src={restaurant.image}
                       alt={restaurant.name}
                       className="w-full h-[220px] object-cover rounded-[8px]"
                     />
@@ -201,7 +203,7 @@ const FavoritesListing = () => {
                           />
                         ))}
                         <p className="text-sm text-gray-700">
-                          {restaurant.rating} out of {restaurant.total_reviews}{" "}
+                          {restaurant.rating} out of {restaurant.numberOfReview}{" "}
                           reviews
                         </p>
                       </div>
@@ -233,17 +235,17 @@ const FavoritesListing = () => {
                       </div>
                       <div className="flex justify-between">
                         <Link
-                          href={restaurant.booking_link}
+                          href={restaurant.bookingLink}
                           className="flex items-center gap-2 text-[#111111] text-[16px]"
                         >
                           Book Now <ArrowRight size={18} />
                         </Link>
-                        <Link
-                          href={restaurant.details_link}
-                          className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                        >
-                          <img src="/images/icons/heart.png" alt="heart" />
-                        </Link>
+                          <button
+                           
+                            className="w-[30px] cursor-pointer h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="Heart" />
+                          </button>
                       </div>
                     </div>
                   </div>
@@ -263,7 +265,7 @@ const FavoritesListing = () => {
                     className="flex flex-col gap-5 rounded-[12px] bg-[#FAFAFA]"
                   >
                     <img
-                      src={dish.image_link}
+                      src={dish.image}
                       alt={dish.name}
                       className="w-full min-h-[440px] object-cover rounded-[8px]"
                     />
@@ -281,7 +283,7 @@ const FavoritesListing = () => {
                             />
                           ))}
                           <p className="ms-2 text-[#4A4A4A] text-[14px] font-normal leading-[150%]">
-                            {dish.rating} Out of {dish.total_reviews} Review
+                            {dish.rating} Out of {dish.numberOfReview} Review
                           </p>
                         </div>
                         <div className="w-full flex items-center justify-between">
@@ -295,18 +297,18 @@ const FavoritesListing = () => {
                       </div>
                       <div className="flex justify-between">
                         <Link
-                          href={dish.booking_link}
+                          href={dish.bookingLink}
                           className="flex items-center gap-2 text-[#111111] text-[18px] font-normal leading-[130%]"
                         >
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
-                        <Link
-                          href={dish.details_link}
-                          className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                        >
-                          <img src="/images/icons/heart.png" alt="" />
-                        </Link>
+                          <button
+                           
+                            className="w-[30px] cursor-pointer h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="Heart" />
+                          </button>
                       </div>
                     </div>
                   </div>
@@ -325,7 +327,7 @@ const FavoritesListing = () => {
                     <div
                       key={area.id}
                       className={`group relative transition-all duration-300 ease-in-out bg-cover bg-center bg-no-repeat h-[400px] flex flex-col justify-end p-4`}
-                      style={{ backgroundImage: `url(${area.image_link})` }}
+                      style={{ backgroundImage: `url(${area.image})` }}
                     >
                       <div className="absolute inset-0 bg-black/50 z-0" />
 
@@ -356,17 +358,17 @@ const FavoritesListing = () => {
 
                         <div className="flex justify-between items-center mt-2">
                           <Link
-                            href={area.details_link}
+                            href={area.detailsLink}
                             className="flex items-center gap-2 text-[16px] font-normal leading-[130%] text-white"
                           >
                             View Details <ArrowRight size={18} />
                           </Link>
-                          <Link
-                            href={area.details_link}
-                            className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
+                          <button
+                           
+                            className="w-[30px] cursor-pointer h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
                           >
                             <img src="/images/icons/heart.png" alt="Heart" />
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     </div>

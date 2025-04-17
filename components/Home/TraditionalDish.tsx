@@ -116,12 +116,19 @@ const handleFavorite =async(id:any)=>{
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
-                    <button
-                       onClick={()=>handleFavorite(dish?.id)}
-                      className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                    >
-                      <img src="/images/icons/heart.png" alt="" />
-                    </button>
+                    {
+                          token ? <button
+                            onClick={() => handleFavorite(dish?.id)}
+                            className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="heart" />
+                          </button> : 
+                          <Link href="/login"
+                            className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="heart" />
+                          </Link>
+                        }
                   </div>
                 </div>
               </div>

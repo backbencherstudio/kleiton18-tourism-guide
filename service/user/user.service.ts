@@ -254,6 +254,21 @@ addFavorite: async (data: any,token:any) => {
 
     return await Fetch.get(`/visit-area/get?page=${page}&limit=${limit}`, _config);
   },
+  // get fevorite =====================
+  getAllFavorite: async ({ token = "", context = null,}) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+   
+  console.log("fev------------",token);
+  
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    };
+
+    return await Fetch.get(`/favorites/list`, _config);
+  },
 
   getUserDetails: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });

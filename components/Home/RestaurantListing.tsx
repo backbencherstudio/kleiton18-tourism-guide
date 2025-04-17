@@ -37,20 +37,20 @@ const RestaurantListing = () => {
 
     fetchData();
   }, []);
-const handleFavorite =async(id:any)=>{
-  const data ={
-    entityId: id,
-  entityType: "RESTAURANT",
+  const handleFavorite = async (id: any) => {
+    const data = {
+      entityId: id,
+      entityType: "RESTAURANT",
+    }
+    try {
+      const response = await UserService.addFavorite(data, token)
+      if (response.status === 201) {
+        toast.success("Added to favorites!");
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message || error?.message);
+    }
   }
-  try {
-     const response = await UserService.addFavorite(data ,token )
-     if(response.status === 201){
-       toast.success("Added to favorites!");
-     }
-  } catch (error:any) {
-    toast.error(  error.response.data.message || error?.message);
-  }   
-}
   return (
     <div className="max-w-[1352px] px-4 pt-10 pb-20 md:pb-32 md:pt-20 mx-auto">
       <div className="flex flex-col gap-11">
@@ -162,12 +162,19 @@ const handleFavorite =async(id:any)=>{
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
-                        <button
-                         onClick={()=>handleFavorite(restaurant?.id)}
-                          className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                        >
-                          <img src="/images/icons/heart.png" alt="" />
-                        </button>
+                        {
+                          token ? <button
+                            onClick={() => handleFavorite(restaurant?.id)}
+                            className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="heart" />
+                          </button> : 
+                          <Link href="/login"
+                            className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                          >
+                            <img src="/images/icons/heart.png" alt="heart" />
+                          </Link>
+                        }
                       </div>
                     </div>
                   </div>
