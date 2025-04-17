@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick, sidebarOpen }: HeaderProps
   const router = useRouter()
   const handleLogout = () => {
     CookieHelper.destroy({ key: "token" }); // ✅ Correct usage
-    router.push("/login"); // Optional redirect
+    router.push("/admin/login"); // Optional redirect
   };
   return (
     <div className="max-w-[1920px] bg-[#FAFAFA] px-5 py-3 relative flex justify-between mb-1 z-50">

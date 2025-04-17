@@ -4,11 +4,11 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
 
-    domains: ["approved-level-hobbies-efforts.trycloudflare.com","192.168.4.3:3000"],
+    domains: ["approved-level-hobbies-efforts.trycloudflare.com","192.168.4.3"],
       remotePatterns: [
       {
         protocol: 'http',
-        hostname: '192.168.4.3:3000',
+        hostname: '192.168.4.3',
        
       },
     ],
