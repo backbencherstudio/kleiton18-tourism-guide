@@ -224,6 +224,19 @@ addFavorite: async (data: any,token:any) => {
 
     return await Fetch.get(`/hotel/get?page=${page}&limit=${limit}`, _config);
   },
+  // get hotel details
+  getAllHotels: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+
+    const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    };
+
+    return await Fetch.get(`/hotel/get`, _config);
+  },
   getAllRestaurant: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
       const _config = {
@@ -233,6 +246,17 @@ addFavorite: async (data: any,token:any) => {
     },}
 
     return await Fetch.get(`/restaurant/get?page=${page}&limit=${limit}`, _config);
+  },
+  // all resturants=============
+  getAllRestaurants: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+      const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
+
+    return await Fetch.get(`/restaurant/get`, _config);
   },
   getAlltraditionalDish: async ({ token = "", context = null,page , limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });

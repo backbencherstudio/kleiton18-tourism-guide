@@ -30,7 +30,7 @@ export default function ProtectFrontendPart({ children }: { children: React.Reac
     ];
 
     if (token) {
-        console.log("log.............",token);
+       
       if (publicRoutes.includes(pathname)) {
         router.replace("/"); // or "/" or any private route
         return;
