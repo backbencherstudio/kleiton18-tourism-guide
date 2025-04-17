@@ -20,7 +20,7 @@ export default function ProtectedPageWrapper({ children }: { children: React.Rea
   useEffect(() => {
     const token = getCookieToken();
     if (!token) {
-      router.replace("/login");
+      router.replace("/admin/login");
       return;
     }
     setChecking(false);
@@ -29,7 +29,7 @@ export default function ProtectedPageWrapper({ children }: { children: React.Rea
     const interval = setInterval(() => {
       const token = getCookieToken();
       if (!token) {
-        router.replace("/login");
+        router.replace("/admin/login");
       }
     }, 1000);
 

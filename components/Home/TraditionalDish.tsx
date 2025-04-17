@@ -5,30 +5,31 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 
 const TraditionalDish = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-const { getAlltraditionalDish } = UserService;
+  const { getAlltraditionalDish } = UserService;
   const { token }: any = useToken();
   // Fetch Dish Data from API
   useEffect(() => {
     const controller = new AbortController()
     const fetchData = async () => {
       try {
-    const Restaurant = await getAlltraditionalDish({ token, page: 1, limit: 10 });
+        const Restaurant = await getAlltraditionalDish({ token, page: 1, limit: 10 });
         const result = Restaurant.data.data;
 
         // Sort by id DESC (latest first), then slice top 4
-        const latestHotels = result
+        const latestdishs = result
           .sort((a: any, b: any) => b.id - a.id)
           .slice(0, 3);
-        setData(latestHotels);
+        setData(latestdishs);
       } catch (error: any) {
         if (error.name !== "AbortError") {
-          console.error("Error fetching hotel data:", error);
+          console.error("Error fetching dish data:", error);
           setData([]);
         }
       } finally {
@@ -39,22 +40,42 @@ const { getAlltraditionalDish } = UserService;
     fetchData();
     return () => controller.abort();
   }, []);
-const handleFavorite =async(id:any)=>{
-  const data ={
-    entityId: id,
-  entityType: "DISH",
-  }
-  try {
-     const response = await UserService.addFavorite(data ,token )
-     if(response.status === 201){
-       toast.success("Added to favorites!");
-     }
-  } catch (error:any) {
-    
-    
-    toast.error(  error.response.data.message || error?.message);
-  }   
-}
+
+  const handleFavorite = async (id: number) => {
+    const dataToSend = {
+      entityId: id,
+      entityType: "DISH",
+    };
+    try {
+      const response = await UserService.addFavorite(dataToSend, token);
+      if (response.status === 201) {
+        toast.success("Added to favorites!");
+        setData((prev) =>
+          prev.map((dish) =>
+            dish.id === id ? { ...dish, isFavorite: true } : dish
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
+
+  const handleRemoveFavorite = async (id: number) => {
+    try {
+      const response = await UserService.deleteFavorite(id, "DISH", token);
+      if (response.status === 200) {
+        toast.success("Removed from favorites!");
+        setData((prev) =>
+          prev.map((dish) =>
+            dish.id === id ? { ...dish, isFavorite: false } : dish
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
   return (
     <div className="bg-[#FAFAFA] px-4 py-10 md:py-20">
       <div className="max-w-[1320px]  mx-auto flex flex-col gap-11">
@@ -70,7 +91,7 @@ const handleFavorite =async(id:any)=>{
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {loading ? (
-            <p>Loading hotels...</p>
+            <p>Loading dishs...</p>
           ) : (
             data.map((dish) => (
               <div
@@ -116,12 +137,29 @@ const handleFavorite =async(id:any)=>{
                       Book Now
                       <ArrowRight size={18} />
                     </Link>
-                    <button
-                       onClick={()=>handleFavorite(dish?.id)}
-                      className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                    >
-                      <img src="/images/icons/heart.png" alt="" />
-                    </button>
+                    {
+                      token ?
+                        (dish?.isFavorite ?
+                          (<button
+                            onClick={() => handleRemoveFavorite(dish?.id)}
+                            className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                          >
+                            <FaHeart className=" text-yellow-400" />
+                          </button>)
+                          :
+                          (<button
+                            onClick={() => handleFavorite(dish?.id)}
+                            className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                          >
+                            <FaHeart className="text-[#737373]" />
+                          </button>))
+                        :
+                        <Link href="/login"
+                          className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                        >
+                          <FaHeart className="text-[#737373]" />
+                        </Link>
+                    }
                   </div>
                 </div>
               </div>

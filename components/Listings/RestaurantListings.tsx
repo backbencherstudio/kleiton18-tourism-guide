@@ -5,6 +5,8 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
+import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 import { Input } from "../ui/input";
 
@@ -12,7 +14,7 @@ const RestaurantListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [locationSearch, setLocationSearch] = useState("");
-  const { getAllRestaurant } = UserService;
+  const { getAllRestaurants } = UserService;
   const { token }: any = useToken();
   useEffect(() => {
     const controller = new AbortController();
@@ -20,7 +22,7 @@ const RestaurantListings = () => {
 
     const fetchData = async () => {
       try {
-        const Restaurant = await getAllRestaurant({ token, page: 1, limit: 10 });
+        const Restaurant = await getAllRestaurants({ token });
         const result = Restaurant.data.data;
         setData(result);
       } catch (error: any) {
@@ -40,11 +42,46 @@ const RestaurantListings = () => {
   const filteredRestaurants = data.filter((item) =>
     item.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
- function formatNumber(num: number): string {
-  if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
-  if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
-  return num.toString();
-} 
+  function formatNumber(num: number): string {
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return num.toString();
+  }
+  const handleFavorite = async (id: number) => {
+    const dataToSend = {
+      entityId: id,
+      entityType: "RESTAURANT",
+    };
+    try {
+      const response = await UserService.addFavorite(dataToSend, token);
+      if (response.status === 201) {
+        toast.success("Added to favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: true } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
+
+  const handleRemoveFavorite = async (id: number) => {
+    try {
+      const response = await UserService.deleteFavorite(id, "RESTAURANT", token);
+      if (response.status === 200) {
+        toast.success("Removed from favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: false } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
   return (
     <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
       <div className="flex flex-col gap-12">
@@ -140,27 +177,40 @@ const RestaurantListings = () => {
 
                     <div className="flex justify-between">
                       <Link
-                           href={token ? restaurant?.bookingLink : "/login"}
+                        href={token ? restaurant?.bookingLink : "/login"}
                         className="flex items-center gap-2 text-[#111111] text-[16px]"
                       >
                         Book Now <ArrowRight size={18} />
                       </Link>
                       <div>
                         {
-                          token ? <button
-                           
-                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                      >
-                        <img src="/images/icons/heart.png" alt="heart" />
-                      </button> : <Link
-                            href={ "/login"}
-                        className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                      >
-                        <img src="/images/icons/heart.png" alt="heart" />
-                      </Link>
+                          token ?
+
+                            (restaurant?.isFavorite ?
+                              (<button
+                                onClick={() => handleRemoveFavorite(restaurant?.id)}
+                                className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                              >
+                                <FaHeart className=" text-yellow-400" />
+
+                              </button>)
+                              :
+                              (<button
+                                onClick={() => handleFavorite(restaurant?.id)}
+                                className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                              >
+                                <FaHeart className="text-[#737373]" />
+                              </button>))
+                            :
+                            <Link
+                              href={"/login"}
+                              className="w-[30px] h-[30px] flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                            >
+                              <img src="/images/icons/heart.png" alt="heart" />
+                            </Link>
                         }
                       </div>
-                      
+
                     </div>
                   </div>
                 </div>

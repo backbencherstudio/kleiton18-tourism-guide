@@ -1,6 +1,5 @@
 "use client";
 
-import { CookieHelper } from "@/helper/cookie.helper";
 import { createContext, useContext, useEffect, useState } from "react";
 
 // context accepts an object, not just the token
@@ -21,16 +20,32 @@ export const useToken = () => {
 export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
 
+  const getCookieToken = () => {
+    if (typeof document === "undefined") return null;
+
+    const cookieString = document.cookie
+      .split("; ")
+      .find((cookie) => cookie.startsWith("token="));
+    
+    return cookieString?.split("=")[1] || null;
+  };
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      const userToken = CookieHelper.get({ key: "token" });
-      setToken(userToken || null);
-    }, 1000);
+    const updateToken = () => {
+      const cookieToken = getCookieToken();
+      setToken(cookieToken);
+    };
+
+    updateToken(); // Run once on mount
+
+    const interval = setInterval(updateToken, 1000); // Check every second
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <TokenContext.Provider value={{ token }}>{children}</TokenContext.Provider>
+    <TokenContext.Provider value={{ token }}>
+      {children}
+    </TokenContext.Provider>
   );
 };

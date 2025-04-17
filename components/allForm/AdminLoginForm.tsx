@@ -3,7 +3,6 @@
 import { CookieHelper } from "@/helper/cookie.helper";
 import { UserService } from "@/service/user/user.service";
 import { Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -12,7 +11,7 @@ type FormValues = {
   email: string;
   password: string;
 };
-function LogInForm() {
+function AdminLoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,8 +32,10 @@ function LogInForm() {
         key: "token",
         value: tokenNumber,
       });
-      
-      router.push("/");
+    
+        router.push("/dashboard")
+    
+     
       setLoading(false);
     } catch (error) {
       if (error.response.status === 400) {
@@ -86,7 +87,7 @@ function LogInForm() {
           >
             Password
           </label>
-          <div className="relative">
+          <div className="relative ">
             <input
               id="password"
               type={showPassword ? "text" : "password"}
@@ -113,14 +114,7 @@ function LogInForm() {
               {errors.password.message}
             </p>
           )}
-          <div className="flex justify-end lg:my-6 my-2">
-            <Link
-              href="/forgot-password"
-              className="lg:text-base text-sm text-[#777980] underline "
-            >
-              Forgot your Password
-            </Link>
-          </div>
+         
         </div>
         {error && (
           <div className="text-base text-primaryColor py-2 text-center">
@@ -129,16 +123,14 @@ function LogInForm() {
         )}
         <button
           type="submit"
-          className="w-full cursor-pointer bg-primaryColor text-white lg:py-4 py-2 lg:px-4 px-2 text-sm lg:text-base rounded-md  transition-colors"
+          className="w-full  cursor-pointer bg-primaryColor text-white lg:py-4 py-2 lg:px-4 px-2 text-sm lg:text-base rounded-md  transition-colors"
         >
           {loading ? " Log In...." : " Log In"}
         </button>
         <div className="text-center">
           <span className=" text-sm text-[#252525] font-medium ">
             Don’t have any account?{" "}
-            <Link href={"/signup"} className="text-primaryColor">
-              Sign Up
-            </Link>{" "}
+           
           </span>
         </div>
 
@@ -181,4 +173,4 @@ function LogInForm() {
   );
 }
 
-export default LogInForm;
+export default AdminLoginForm;

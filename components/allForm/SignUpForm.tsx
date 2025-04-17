@@ -15,7 +15,7 @@ type FormValues = {
   agreeToTerms: boolean
 }
 
-function SignUpForm() {
+function SignUpForm({admin}:any) {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -177,7 +177,7 @@ function SignUpForm() {
         <div className="text-center">
           <span className="text-sm text-[#252525] font-medium">
             Already a member?{" "}
-            <Link href="/login" className="text-primaryColor">
+            <Link href={`${admin ? "/admin/login":"/login"}`} className="text-primaryColor">
               Log In
             </Link>
           </span>

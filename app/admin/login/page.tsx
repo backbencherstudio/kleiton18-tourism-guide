@@ -1,4 +1,4 @@
-import LogInForm from "@/components/allForm/LogInForm";
+import AdminLoginForm from "@/components/allForm/AdminLoginForm";
 
 export default function SignupForm() {
     
@@ -11,7 +11,7 @@ export default function SignupForm() {
                     <p className="lg:text-base text-sm leading-[160%] text-[#4A4C56] font-[Poppins] mt-1 tracking-wider">Log in now and personalized your tour </p>
                 </div>
                 <div className="w-full  bg-white rounded-lg p-8 border border-borderColor">
-                   <LogInForm admin={true}/>
+                   <AdminLoginForm />
                 </div>
             </div>
 

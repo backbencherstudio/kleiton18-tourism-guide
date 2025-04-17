@@ -5,6 +5,7 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
 
@@ -51,20 +52,42 @@ const VisitArea = () => {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
- const handleFavorite =async(id:any)=>{
-   const data ={
-     entityId: id,
-   entityType: "VISIT_AREA",
-   }
-   try {
-      const response = await UserService.addFavorite(data ,token )
-      if(response.status === 201){
+
+   const handleFavorite = async (id: number) => {
+    const dataToSend = {
+      entityId: id,
+      entityType: "VISIT_AREA",
+    };
+    try {
+      const response = await UserService.addFavorite(dataToSend, token);
+      if (response.status === 201) {
         toast.success("Added to favorites!");
+        setData((prev) =>
+          prev.map((area) =>
+            area.id === id ? { ...area, isFavorite: true } : area
+          )
+        );
       }
-   } catch (error:any) {
-      toast.error(  error.response.data.message || error?.message);
-   }   
- }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
+
+  const handleRemoveFavorite = async (id: number) => {
+    try {
+      const response = await UserService.deleteFavorite(id, "VISIT_AREA", token);
+      if (response.status === 200) {
+        toast.success("Removed from favorites!");
+        setData((prev) =>
+          prev.map((area) =>
+            area.id === id ? { ...area, isFavorite: false } : area
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
 
   return (
     <div className="px-4 py-10 md:py-20">
@@ -105,13 +128,12 @@ const VisitArea = () => {
 
                   <div className="relative z-10 w-full flex flex-col gap-3">
                     <div
-                      className={`flex items-center gap-2 transform transition-all duration-300 ease-in-out ${
-                        showHover
+                      className={`flex items-center gap-2 transform transition-all duration-300 ease-in-out ${showHover
                           ? "opacity-100 translate-y-0"
                           : isXL
-                          ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
-                          : "opacity-100 translate-y-0"
-                      }`}
+                            ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                            : "opacity-100 translate-y-0"
+                        }`}
                     >
                       <img
                         src="/images/icons/locationwhite.png"
@@ -123,25 +145,23 @@ const VisitArea = () => {
                     </div>
 
                     <h3
-                      className={`text-white text-[24px] font-medium leading-[140%] transform transition-all duration-300 ease-in-out ${
-                        showHover
+                      className={`text-white text-[24px] font-medium leading-[140%] transform transition-all duration-300 ease-in-out ${showHover
                           ? "translate-y-0"
                           : isXL
-                          ? "translate-y-[80px] group-hover:translate-y-0"
-                          : "translate-y-0"
-                      }`}
+                            ? "translate-y-[80px] group-hover:translate-y-0"
+                            : "translate-y-0"
+                        }`}
                     >
                       {area.name}
                     </h3>
 
                     <p
-                      className={`text-white text-[14px] leading-[160%] tracking-[0.5px] transform transition-all duration-300 ease-in-out ${
-                        showHover
+                      className={`text-white text-[14px] leading-[160%] tracking-[0.5px] transform transition-all duration-300 ease-in-out ${showHover
                           ? "opacity-100 translate-y-0"
                           : isXL
-                          ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
-                          : "opacity-100 translate-y-0"
-                      }`}
+                            ? "opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0"
+                            : "opacity-100 translate-y-0"
+                        }`}
                     >
                       {area?.description}
                     </p>
@@ -153,12 +173,29 @@ const VisitArea = () => {
                       >
                         View Details <ArrowRight size={18} />
                       </Link>
-                      <button
-                         onClick={()=>handleFavorite(area?.id)} 
-                        className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[6px]"
-                      >
-                        <img src="/images/icons/heart.png" alt="Heart" />
-                      </button>
+                      {
+                        token ?
+                          (area?.isFavorite ?
+                            (<button
+                              onClick={() => handleRemoveFavorite(area?.id)}
+                              className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                            >
+                              <FaHeart className=" text-yellow-400" />
+                            </button>)
+                            :
+                            (<button
+                              onClick={() => handleFavorite(area?.id)}
+                              className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                            >
+                              <FaHeart className="text-[#737373]" />
+                            </button>))
+                          :
+                          <Link href="/login"
+                            className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                          >
+                            <FaHeart className="text-[#737373]" />
+                          </Link>
+                      }
                     </div>
                   </div>
                 </div>
