@@ -1,16 +1,17 @@
+
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
 
 // context accepts an object, not just the token
-type TokenContextType = {
+type AdminTokenContextType = {
   token: string | null;
 };
 
-const TokenContext = createContext<TokenContextType | null>(null);
+const AdminTokenContext = createContext<AdminTokenContextType | null>(null);
 
-export const useToken = () => {
-  const context = useContext(TokenContext);
+export const useAdminToken = () => {
+  const context = useContext(AdminTokenContext);
   if (!context) {
     throw new Error("useToken must be used within a TokenProvider");
   }
@@ -25,7 +26,7 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 
     const cookieString = document.cookie
       .split("; ")
-      .find((cookie) => cookie.startsWith("token="));
+      .find((cookie) => cookie.startsWith("adminToken="));
     
     return cookieString?.split("=")[1] || null;
   };
@@ -44,8 +45,8 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <TokenContext.Provider value={{ token }}>
+    <AdminTokenContext.Provider value={{ token }}>
       {children}
-    </TokenContext.Provider>
+    </AdminTokenContext.Provider>
   );
 };

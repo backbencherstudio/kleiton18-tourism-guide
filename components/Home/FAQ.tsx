@@ -19,13 +19,14 @@ const FAQ = () => {
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-[#111111] text-[16px] lg:text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pb-8">
-                  What are some must-visit places in Albania?
+                  Is albania safe for tourists?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
-                  Albania is home to incredible destinations, including [Popular
-                  Place 1], [Popular Place 2], and [Popular Place 3]. Whether
-                  you love historical sites, nature, or vibrant city life,
-                  there’s something for everyone to explore.
+                  Crime rates are low, especially towards foreigners, and locals
+                  are known for their hospitality. Petty theft can happen,
+                  mainly in crowded areas, so normal precautions apply. Roads in
+                  rural areas may be challenging, but major cities and tourist
+                  spots are secure.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
@@ -34,32 +35,38 @@ const FAQ = () => {
                   know?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
-                  Albania is home to incredible destinations, including [Popular
-                  Place 1], [Popular Place 2], and [Popular Place 3]. Whether
-                  you love historical sites, nature, or vibrant city life,
-                  there’s something for everyone to explore.
+                  Albania values hospitality, with guests often offered food,
+                  drink, and gifts. Elders are respected, and religious
+                  diversity is prominent. Traditional customs, like the “Kanun”
+                  code in rural areas, influence social behavior. Celebrations,
+                  especially weddings, feature lively dances and music,
+                  showcasing Albania’s deep-rooted community and cultural
+                  spirit.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
                 <AccordionTrigger className="text-[#111111] text-[16px] lg:text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pt-12 pb-8">
-                  Is Albania safe for tourists?
+                  What is the best time of year to visit?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
-                  Albania is home to incredible destinations, including [Popular
-                  Place 1], [Popular Place 2], and [Popular Place 3]. Whether
-                  you love historical sites, nature, or vibrant city life,
-                  there’s something for everyone to explore.
+                  The best time to visit Albania is during spring (April to
+                  June) and early autumn (September to October). These months
+                  offer pleasant weather, fewer tourists, and vibrant
+                  landscapes. Summer (July and August) is ideal for beach
+                  lovers, though it can be crowded along the coast.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
                 <AccordionTrigger className="text-[#111111] text-[16px] lg:text-[20px] font-medium leading-[150%] no-underline hover:no-underline cursor-pointer pt-12">
-                  What is the best time of year to visit?
+                  What are some must-visit places in Albania?
                 </AccordionTrigger>
                 <AccordionContent className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.5px]">
-                  Albania is home to incredible destinations, including [Popular
-                  Place 1], [Popular Place 2], and [Popular Place 3]. Whether
-                  you love historical sites, nature, or vibrant city life,
-                  there’s something for everyone to explore.
+                  Must-visit places in Albania include the UNESCO-listed cities
+                  of Berat and Gjirokastër, the stunning beaches of Ksamil, the
+                  ancient ruins of Butrint, the picturesque Albanian Riviera,
+                  Theth and the Accursed Mountains for hiking, and Shkodër with
+                  its historical Rozafa Castle and Lake Shkodër for nature
+                  lovers.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

@@ -1,5 +1,6 @@
 "use client"
 
+import Loading from "@/components/reusable/Loading";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,7 +26,7 @@ function VisitedTable() {
   const [totalPages, setTotalPages] = useState(1);
   const [selectVisitArea, setSelectVisitArea] = useState<any>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-   const [loading,setLoading]=useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const limit = 10;//limit par page
   const fetchVisited = async () => {
     setLoading(true)
@@ -76,7 +77,7 @@ function VisitedTable() {
             <h2 className="text-2xl font-medium text-[#232323] !font-[Poppins]">
               Visit Area List
             </h2>
-            <Link href="/dashboard/visited/add-traditional-dish" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Location</Link>
+            <Link href="/dashboard/visited/add-visited-area" className="bg-primaryColor  font-medium text-white lg:px-5 lg:py-3 px-3 py-2 text-base rounded-[8px] cursor-pointer">Add Location</Link>
           </div>
 
           <div className="">
@@ -137,8 +138,10 @@ function VisitedTable() {
             </div>
           </div>
         </div>
- {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
-       
+        {loading && (
+          <Loading />
+        )}
+
         {/* Footer */}
 
         <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">

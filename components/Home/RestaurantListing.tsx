@@ -5,12 +5,14 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
 
 const RestaurantListing = () => {
   const [data, setData] = useState([]);
@@ -37,20 +39,41 @@ const RestaurantListing = () => {
 
     fetchData();
   }, []);
-const handleFavorite =async(id:any)=>{
-  const data ={
-    entityId: id,
-  entityType: "RESTAURANT",
-  }
-  try {
-     const response = await UserService.addFavorite(data ,token )
-     if(response.status === 201){
-       toast.success("Added to favorites!");
-     }
-  } catch (error:any) {
-    toast.error(  error.response.data.message || error?.message);
-  }   
-}
+  const handleFavorite = async (id: number) => {
+    const dataToSend = {
+      entityId: id,
+      entityType: "RESTAURANT",
+    };
+    try {
+      const response = await UserService.addFavorite(dataToSend, token);
+      if (response.status === 201) {
+        toast.success("Added to favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: true } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
+
+  const handleRemoveFavorite = async (id: number) => {
+    try {
+      const response = await UserService.deleteFavorite(id, "RESTAURANT", token);
+      if (response.status === 200) {
+        toast.success("Removed from favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: false } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
   return (
     <div className="max-w-[1352px] px-4 pt-10 pb-20 md:pb-32 md:pt-20 mx-auto">
       <div className="flex flex-col gap-11">
@@ -93,7 +116,7 @@ const handleFavorite =async(id:any)=>{
             className="pb-16 w-full"
           >
             {loading ? (
-              <p>Loading restaurants...</p>
+             <Loading/>
             ) : (
               data.map((restaurant) => (
                 <SwiperSlide key={restaurant.id} className="w-full">
@@ -162,12 +185,30 @@ const handleFavorite =async(id:any)=>{
                           Book Now
                           <ArrowRight size={18} />
                         </Link>
-                        <button
-                         onClick={()=>handleFavorite(restaurant?.id)}
-                          className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                        >
-                          <img src="/images/icons/heart.png" alt="" />
-                        </button>
+                        {
+                          token ?
+                            (restaurant?.isFavorite ?
+                              (<button
+                                onClick={() => handleRemoveFavorite(restaurant?.id)}
+                                className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                              >
+                                <FaHeart className=" text-yellow-400" />
+
+                              </button>)
+                              :
+                              (<button
+                                onClick={() => handleFavorite(restaurant?.id)}
+                                className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                              >
+                                <FaHeart className="text-[#737373]" />
+                              </button>))
+                            :
+                            <Link href="/login"
+                              className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                            >
+                              <FaHeart className="text-[#737373]" />
+                            </Link>
+                        }
                       </div>
                     </div>
                   </div>

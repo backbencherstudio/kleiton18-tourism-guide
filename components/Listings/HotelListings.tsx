@@ -5,30 +5,35 @@ import { UserService } from "@/service/user/user.service";
 import { ArrowRight, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 import HeadingTwo from "../reusable/HeadingTwo";
+import Loading from "../reusable/Loading";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 const HotelListings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [locationSearch, setLocationSearch] = useState("");
- const { getAllHotel } = UserService;
-      const { token }: any = useToken();
-  useEffect(() => {
-   
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const { token }: any = useToken();
+  const limit = 20;
+ useEffect(() => {
     const controller = new AbortController();
-    const url = "/hotel.json";
-
     const fetchData = async () => {
+      setLoading(true);
       try {
-          const allHotel = await getAllHotel({ token, page: 1, limit: 10 });
+        const response = await UserService.getAllHotel({ token, page, limit });
+        const result = response.data.data;
+        const total = response?.data.pagination?.totalData || 0;
 
-        const result = allHotel.data.data;
         setData(result);
+        setTotalPages(Math.ceil(total / limit));
       } catch (error: any) {
         if (error.name !== "AbortError") {
-          console.error("Error fetching hotel data:", error);
+          console.error("Error fetching restaurant data:", error);
           setData([]);
         }
       } finally {
@@ -38,25 +43,45 @@ const HotelListings = () => {
 
     fetchData();
     return () => controller.abort();
-  }, []);
-
+  }, [page, token]);
   const filteredHotels = data.filter((hotel) =>
     hotel.location.toLowerCase().includes(locationSearch.toLowerCase())
   );
-const handleFavorite =async(id:any)=>{
-  const data ={
-    entityId: id,
-  entityType: "HOTEL",
-  }
-  try {
-     const response = await UserService.addFavorite(data ,token )
-     if(response.status === 201){
-       toast.success("Added to favorites!");
-     }
-  } catch (error:any) {
-    toast.error(  error.response.data.message || error?.message);
-  }   
-}
+ const handleFavorite = async (id: number) => {
+    const dataToSend = {
+      entityId: id,
+      entityType: "HOTEL",
+    };
+    try {
+      const response = await UserService.addFavorite(dataToSend, token);
+      if (response.status === 201) {
+        toast.success("Added to favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: true } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
+
+  const handleRemoveFavorite = async (id: number) => {
+    try {
+      const response = await UserService.deleteFavorite(id, "HOTEL", token);
+      if (response.status === 200) {
+        toast.success("Removed from favorites!");
+        setData((prev) =>
+          prev.map((hotel) =>
+            hotel.id === id ? { ...hotel, isFavorite: false } : hotel
+          )
+        );
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || error?.message);
+    }
+  };
   return (
     <div className="max-w-[1352px] px-4 py-10 md:py-20 mx-auto">
       <div className="flex flex-col gap-12">
@@ -86,7 +111,7 @@ const handleFavorite =async(id:any)=>{
 
           <div className="w-full lg:w-[74.7%] grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
-              <p>Loading hotels...</p>
+              <Loading/>
             ) : filteredHotels.length === 0 ? (
               <p>No hotels match your filter.</p>
             ) : (
@@ -169,20 +194,64 @@ const handleFavorite =async(id:any)=>{
                         Book Now
                         <ArrowRight size={18} />
                       </Link>
-                      <button
-                       onClick={()=>handleFavorite(hotel.id)} 
-                        className="w-[30px] h-[30px] flex cursor-pointer items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
-                      >
-                        <img src="/images/icons/heart.png" alt="heart" />
-                      </button>
+                     {
+                        token ?
+                          (hotel?.isFavorite ?
+                            (<button
+                              onClick={() => handleRemoveFavorite(hotel?.id)}
+                              className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                            >
+                             <FaHeart className=" text-yellow-400"/>
+
+                            </button> )
+                            : 
+                            (<button
+                              onClick={() => handleFavorite(hotel?.id)}
+                              className={"w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"}
+                            >
+                               <FaHeart className="text-[#737373]"/>
+                            </button>)) 
+                            : 
+                            (<Link href="/login"
+
+                              className="w-[30px] h-[30px] cursor-pointer flex items-center justify-center rounded-[8px] bg-white shadow p-[7px]"
+                            >
+                             <FaHeart  className="text-[#737373]"/>
+                          </Link>)
+                      }
+
                     </div>
                   </div>
                 </div>
               ))
             )}
           </div>
+          
         </div>
+          {/* Pagination Controls */}
+           
       </div>
+       {!loading && totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-10">
+                <Button
+                   className="text-white bg-primaryColor cursor-pointer"
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={page === 1}
+                >
+                  Previous
+                </Button>
+                <p className="text-sm text-gray-600">
+                  Page {page} of {totalPages}
+                </p>
+                <Button
+                   className="text-white bg-primaryColor cursor-pointer"
+                  onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={page === totalPages}
+                >
+                  Next
+                </Button>
+              </div>
+            )}
     </div>
   );
 };
