@@ -3,8 +3,7 @@
 import { useDataFetch } from "@/hooks/useDataFetch";
 
   const { count: userCount, loading, error } = useDataFetch({
-    serviceMethod: "getAllUser",
-  
+    url: "/users/all",
   });
 
 const dashbordSummaryCards = [
