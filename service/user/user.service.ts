@@ -15,6 +15,13 @@ export const UserService = {
     };
     return await Fetch.post("/users/login", data, config);
   },
+  AdminLogin: async ({ email, password }: { email: string; password: string }) => {
+    const data = {
+      email: email,
+      password: password,
+    };
+    return await Fetch.post("/users/admin/login", data, config);
+  },
   confirmOTP: async ({ email, otp }: { email: string; otp: string }) => {
     const data = {
       email: email,
@@ -164,6 +171,18 @@ addFavorite: async (data: any,token:any) => {
     };
     return await Fetch.delete(`/hotel/delete/${id}`, _config);
   },
+// delete unfavorite ==========
+  deleteFavorite: async (id:any,type:any, token: any) => {
+    
+    const _config = {
+      headers: {
+        "Content-Type": "application/json",
+       'Authorization': token,
+       
+      },
+    };
+    return await Fetch.delete(`/favorites/remove/${id}/${type}`, _config);
+  },
 
   //=======================
 
@@ -190,69 +209,93 @@ addFavorite: async (data: any,token:any) => {
   // get user details
   getAllUser: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
 
     const _config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:userToken,
-      },
-    };
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
 
     return await Fetch.get(`/users/all?page=${page}&limit=${limit}`, _config);
   },
   // get hotel details
   getAllHotel: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
 
     const _config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userToken,
-      },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
     };
 
     return await Fetch.get(`/hotel/get?page=${page}&limit=${limit}`, _config);
   },
-  getAllRestaurant: async ({ token = "", context = null,page,limit }) => {
+  // get hotel details
+  getAllHotels: async ({ token = "", context = null }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
 
     const _config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userToken,
-      },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
     };
+
+    return await Fetch.get(`/hotel/get`, _config);
+  },
+  getAllRestaurant: async ({ token = "", context = null,page,limit }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+      const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
 
     return await Fetch.get(`/restaurant/get?page=${page}&limit=${limit}`, _config);
   },
+  // all resturants=============
+  getAllRestaurants: async ({ token = "", context = null }) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+      const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
+
+    return await Fetch.get(`/restaurant/get`, _config);
+  },
   getAlltraditionalDish: async ({ token = "", context = null,page , limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
-
-    const _config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + userToken,
-      },
-    };
-
+     const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
     return await Fetch.get(`/traditional-dish/get?page=${page}&limit=${limit}`, _config);
   },
   getAllVisitArea: async ({ token = "", context = null,page,limit }) => {
     // const userToken = CookieHelper.get({ key: "token", context });
-    const userToken = token;
+     const _config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },}
 
+    return await Fetch.get(`/visit-area/get?page=${page}&limit=${limit}`, _config);
+  },
+  // get fevorite =====================
+  getAllFavorite: async ({ token = "", context = null,}) => {
+    // const userToken = CookieHelper.get({ key: "token", context });
+  
     const _config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + userToken,
+        Authorization: token,
       },
     };
 
-    return await Fetch.get(`/visit-area/get?page=${page}&limit=${limit}`, _config);
+    return await Fetch.get(`/favorites/list`, _config);
   },
 
   getUserDetails: async ({ token = "", context = null }) => {

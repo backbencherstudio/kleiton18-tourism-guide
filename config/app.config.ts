@@ -1,7 +1,7 @@
 // server base url
 export const URL =
   process.env.NEXT_PUBLIC_API_ENDPOINT ||
-  "https://approved-level-hobbies-efforts.trycloudflare.com";
+  "https://subscribers-received-lyrics-mens.trycloudflare.com";
 // app config
 export const AppConfig = () => ({
   app: {

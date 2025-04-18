@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/reusable/Loading";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -136,7 +137,9 @@ console.log(dishs);
           </tbody>
         </table>
       </div>
- {loading && <p className=" text-center flex justify-center items-center text-base mt-10">Loading..........</p>}
+{loading && (
+  <Loading/>
+)}
        <div className="w-full flex justify-between items-center mt-6 text-sm text-gray-600">
         <span>
           {(page - 1) * limit + 1} -{" "}
