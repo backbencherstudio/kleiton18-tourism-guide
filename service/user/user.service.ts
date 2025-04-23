@@ -213,7 +213,7 @@ addFavorite: async (data: any,token:any) => {
     const _config = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token
+      'Authorization': token 
     },}
 
     return await Fetch.get(`/users/all?page=${page}&limit=${limit}`, _config);
