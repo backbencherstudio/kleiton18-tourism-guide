@@ -137,7 +137,7 @@ const HotelListTable = () => {
                   <td className="px-4 py-3 text-sm font-normal">
                     <div className="relative w-10 h-10 overflow-hidden rounded-full bg-gray-100">
                       <Image
-                        src={hotel.image || "/placeholder.svg"}
+                        src={hotel.image }
                         alt={hotel.name}
                         fill
                         sizes="32px"

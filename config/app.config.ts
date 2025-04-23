@@ -1,7 +1,6 @@
 // server base url
 export const URL =
-  process.env.NEXT_PUBLIC_API_ENDPOINT ||
-  "https://subscribers-received-lyrics-mens.trycloudflare.com";
+  process.env.NEXT_PUBLIC_API_ENDPOINT || "http://192.168.4.3:3000";
 // app config
 export const AppConfig = () => ({
   app: {
